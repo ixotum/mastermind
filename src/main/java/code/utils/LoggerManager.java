@@ -12,8 +12,18 @@ import java.util.logging.*;
  * Created by ixotum on 6/29/15.
  */
 public class LoggerManager {
-    public static Logger getLogger() {
-        Logger logger = Logger.getLogger(Defines.APP_NAME);
+    private static Logger logger;
+
+    public static Logger getLoggerInstance() {
+        if (logger == null) {
+            initLogger();
+        }
+
+        return logger;
+    }
+
+    private static void initLogger() {
+        logger = Logger.getLogger(Defines.APP_NAME);
         logger.setUseParentHandlers(false);
 
         CustomFormatter formatter = new CustomFormatter();
@@ -21,8 +31,6 @@ public class LoggerManager {
 //        FileHandler handler = new FileHandler("file.log");
         handler.setFormatter(formatter);
         logger.addHandler(handler);
-
-        return logger;
     }
 
     private static class CustomFormatter extends Formatter {

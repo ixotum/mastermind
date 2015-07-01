@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class MainScreenController implements Initializable {
-    private final Logger logger = LoggerManager.getLogger();
+    private final Logger logger = LoggerManager.getLoggerInstance();
 
     public void initialize(URL location, ResourceBundle resources) {
         checkForUpdates();
@@ -16,5 +16,9 @@ public class MainScreenController implements Initializable {
 
     private void checkForUpdates() {
         logger.info("checking for updates...");
+        UpdateManager updateManager = new UpdateManager();
+        if (updateManager.isNewVersionAvailable()) {
+
+        }
     }
 }
