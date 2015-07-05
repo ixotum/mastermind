@@ -4,6 +4,10 @@ import code.ftp.FtpManager;
 import code.ftp.FtpSettings;
 import code.utils.LoggerManager;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -85,6 +89,59 @@ public class UpdateManager {
         ftpSettings.setPassword(Defines.FTP_PASSWORD);
 
         ftpManager = new FtpManager(ftpSettings);
+    }
+
+    public String getNewVersion() {
+        return newVersionNumber;
+    }
+
+    public void updateToNewest() {
+        if (Defines.APP_VERSION.equals(newVersionNumber)) {
+            return;
+        }
+
+        if (ftpManager == null) {
+            initFtpManager();
+        }
+
+        if (!ftpManager.connect()) {
+            return;
+        }
+
+        String localPath = retrieveFile(ftpManager, newVersionNumber, Defines.APP_DIR_PATH);
+        ftpManager.disconnect();
+
+        if (localPath == null) {
+            return;
+        }
+
+        overWriteOldAndRestartApp(localPath);
+    }
+
+    private static void overWriteOldAndRestartApp(String localPath) {
+        final ProcessBuilder builder = new ProcessBuilder("./update_app.sh");
+        try {
+            builder.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.exit(0);
+    }
+
+    private static String retrieveFile(FtpManager ftpManager, String versionNumber, String appDirPath) {
+        String fileName = Defines.APP_NAME + "-" + versionNumber + "." + Defines.APP_ARCH_EXTENSION;
+        String localPath = appDirPath + fileName;
+
+        try {
+            OutputStream outputStream = new FileOutputStream(localPath);
+            ftpManager.retrieveFile(fileName, outputStream);
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return localPath;
     }
 
     private static class VersionApp {

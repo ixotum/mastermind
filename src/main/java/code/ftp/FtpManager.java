@@ -1,11 +1,13 @@
 package code.ftp;
 
 import code.utils.LoggerManager;
+import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -96,5 +98,17 @@ public class FtpManager {
         }
 
         return correspondedList;
+    }
+
+    public void retrieveFile(String remoteFileName, OutputStream outputStream) {
+        try {
+            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+            if (ftpClient.retrieveFile(remoteFileName, outputStream)) {
+                logger.info("Remote file " + remoteFileName + " is downloaded.");
+            }
+        } catch (IOException e) {
+            logger.severe("Error downloading file " + remoteFileName);
+            e.printStackTrace();
+        }
     }
 }
