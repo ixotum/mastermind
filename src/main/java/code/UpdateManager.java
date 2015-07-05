@@ -33,7 +33,7 @@ public class UpdateManager {
         }
 
         String newestVer = getNewestVersion(foundFiles);
-        if (isSecondNewerThanFirst(Defines.APP_VERSION, newestVer)) {
+        if (isSecondVersionNewerThanFirst(Defines.APP_VERSION, newestVer)) {
             newVersionNumber = newestVer;
             return true;
         }
@@ -47,7 +47,7 @@ public class UpdateManager {
         for (String fileName : fileList) {
             String checkVersion = getAppVersion(fileName);
 
-            if (isSecondNewerThanFirst(newerVersion, checkVersion)) {
+            if (isSecondVersionNewerThanFirst(newerVersion, checkVersion)) {
                 newerVersion = checkVersion;
             }
         }
@@ -55,7 +55,7 @@ public class UpdateManager {
         return newerVersion;
     }
 
-    private static boolean isSecondNewerThanFirst(String firstVer, String secondVer) {
+    private static boolean isSecondVersionNewerThanFirst(String firstVer, String secondVer) {
         VersionApp firstVersion = new VersionApp(firstVer);
         VersionApp secondVersion = new VersionApp(secondVer);
 
