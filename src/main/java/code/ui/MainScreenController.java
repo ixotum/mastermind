@@ -3,6 +3,8 @@ package code.ui;
 import code.Defines;
 import code.UpdateManager;
 import code.utils.LoggerManager;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -21,6 +23,7 @@ import java.util.logging.Logger;
 
 public class MainScreenController implements Initializable {
     private final Logger logger = LoggerManager.getLoggerInstance();
+    private Stage parentStage;
 
     public void initialize(URL location, ResourceBundle resources) {
         checkForUpdates();
@@ -50,5 +53,33 @@ public class MainScreenController implements Initializable {
         if (result.get() == ButtonType.OK) {
             updateManager.updateToNewest();
         }
+    }
+
+    @FXML
+    public void onClickNewOrder(ActionEvent actionEvent) {
+        logger.info("Creating new order");
+        createNewOrderScreen();
+    }
+
+    private void createNewOrderScreen() {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/new_order_screen.fxml"));
+        Pane pane = null;
+        try {
+            pane = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Scene scene = new Scene(pane);
+        Stage stage = new Stage();
+        stage.resizableProperty().setValue(Boolean.FALSE);
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(parentStage);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void setParentStage(Stage stage) {
+        parentStage = stage;
     }
 }

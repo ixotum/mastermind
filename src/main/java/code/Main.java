@@ -1,10 +1,12 @@
 package code;
 
+import code.ui.MainScreenController;
 import code.utils.LoggerManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
@@ -20,9 +22,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/main_screen.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/main_screen.fxml"));
+        Pane pane = fxmlLoader.load();
+        MainScreenController mainScreenController = fxmlLoader.getController();
+        mainScreenController.setParentStage(primaryStage);
+        Scene scene = new Scene(pane);
         primaryStage.setTitle(Defines.APP_FULL_NAME);
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
