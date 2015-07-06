@@ -19,20 +19,23 @@ import java.util.logging.Logger;
  */
 public class NewOrderScreenController implements Initializable {
     final Logger logger = LoggerManager.getLoggerInstance();
+    private SettingsJDBCTemplate settingsJDBCTemplate;
 
     @FXML
-    public Label labelId;
+    public Label labelOrderId;
 
     public void onClickSaveOrderButton(ActionEvent actionEvent) {
-        logger.info("Saving order number: ");
+        int orderId = Integer.parseInt(labelOrderId.getText());
+        logger.info("Saving order with number: " + orderId);
+        settingsJDBCTemplate.saveLastOrderId(orderId);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext(Defines.BEANS_CONFIG);
-        SettingsJDBCTemplate settingsJDBCTemplate = (SettingsJDBCTemplate) applicationContext.getBean("settingsJDBCTemplateId");
+        settingsJDBCTemplate = (SettingsJDBCTemplate) applicationContext.getBean("settingsJDBCTemplateId");
         int lastOrderId = settingsJDBCTemplate.readLastOrderId();
         ++lastOrderId;
-        labelId.setText(labelId.getText() + lastOrderId);
+        labelOrderId.setText(String.valueOf(lastOrderId));
     }
 }

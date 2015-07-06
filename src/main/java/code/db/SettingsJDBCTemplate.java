@@ -28,4 +28,9 @@ public class SettingsJDBCTemplate {
     public DataSource getDataSource() {
         return jdbcTemplate.getDataSource();
     }
+
+    public void saveLastOrderId(int lastOrderId) {
+        String sql = (lastOrderId == 1) ? "INSERT INTO SETTINGS(LAST_ORDER_ID) VALUES (?)" : "UPDATE SETTINGS SET LAST_ORDER_ID=?";
+        jdbcTemplate.update(sql, lastOrderId);
+    }
 }
