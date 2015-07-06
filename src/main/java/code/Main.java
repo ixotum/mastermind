@@ -1,5 +1,6 @@
 package code;
 
+import code.db.SettingsJDBCTemplate;
 import code.ui.MainScreenController;
 import code.utils.LoggerManager;
 import javafx.application.Application;
@@ -8,7 +9,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.flywaydb.core.Flyway;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
 
+import javax.sql.DataSource;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -35,7 +42,17 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         processArguments(args);
+        checkMigration();
         launch(args);
+    }
+
+    private static void checkMigration() {
+        Flyway flyway = new Flyway();
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(Defines.BEANS_CONFIG);
+        SettingsJDBCTemplate settingsJDBCTemplate = (SettingsJDBCTemplate) applicationContext.getBean("settingsJDBCTemplateId");
+        DataSource dataSource = settingsJDBCTemplate.getDataSource();
+        flyway.setDataSource(dataSource);
+        flyway.migrate();
     }
 
     private static void processArguments(String[] args) {

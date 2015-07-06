@@ -36,7 +36,7 @@ public class MainScreenController implements Initializable {
             logger.info("new version was found");
             showUpdateQuestionPopup(updateManager);
         } else {
-            logger.info("new version not was found");
+            logger.info("new version not found");
         }
     }
 

@@ -1,5 +1,9 @@
 package code;
 
+import org.springframework.context.ApplicationContext;
+
+import java.io.File;
+
 /**
  * Created by ixotum on 6/28/15.
  */
@@ -18,6 +22,7 @@ public class Defines {
     public static final String UPDATE_APP_TITLE = "Application Updating";
     public static final String UPDATE_HEADER_TEXT = "New version of " + APP_NAME + " available";
     public static final String UPDATE_CONTENT_TEXT = "Would you like to update?";
+    public static final String BEANS_CONFIG = "Beans.xml";
 
     public enum ApplicationMode {GENERAL, VERSION}
 }

@@ -4,10 +4,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.ui.NewOrderScreenController">
    <children>
-      <Label text="id: " />
+      <Label fx:id="labelId" text="id: " />
       <Button fx:id="buttonSaveOrder" mnemonicParsing="false" onAction="#onClickSaveOrderButton" text="save" />
    </children>
 </VBox>
