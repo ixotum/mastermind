@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -22,13 +23,13 @@ import java.util.logging.Logger;
 public class NewOrderScreenController implements Initializable {
     private final Logger logger = LoggerManager.getLoggerInstance();
     private final ApplicationContext applicationContext = new ClassPathXmlApplicationContext(Defines.BEANS_CONFIG);
-
     private SettingsJDBCTemplate settingsJDBCTemplate;
+    private Stage stage;
 
     @FXML
     public Label labelOrderId;
 
-    public void onClickSaveOrderButton(ActionEvent actionEvent) {
+    public void onClickNewOrderDoneButton(ActionEvent actionEvent) {
         int orderId = Integer.parseInt(labelOrderId.getText());
         logger.info("Saving order with number: " + orderId);
         settingsJDBCTemplate.saveLastOrderId(orderId);
@@ -36,6 +37,8 @@ public class NewOrderScreenController implements Initializable {
         OrdersJDBCTemplate ordersJDBCTemplate = (OrdersJDBCTemplate) applicationContext.getBean("ordersJDBCTemplateId");
         OrderDB orderDB = new OrderDB(orderId);
         ordersJDBCTemplate.saveNewOrder(orderDB);
+
+        stage.hide();
     }
 
     @Override
@@ -44,5 +47,16 @@ public class NewOrderScreenController implements Initializable {
         int lastOrderId = settingsJDBCTemplate.readLastOrderId();
         ++lastOrderId;
         labelOrderId.setText(String.valueOf(lastOrderId));
+    }
+
+    @FXML
+    public void onClickCancelButton(ActionEvent actionEvent) {
+        logger.info("Cancel saving order");
+        stage.hide();
+
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }

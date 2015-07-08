@@ -76,6 +76,8 @@ public class MainScreenController implements Initializable {
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(parentStage);
         stage.setScene(scene);
+        NewOrderScreenController newOrderScreenController = fxmlLoader.getController();
+        newOrderScreenController.setStage(stage);
         stage.show();
     }
 
