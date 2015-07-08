@@ -9,11 +9,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,10 +24,25 @@ import java.util.logging.Logger;
 
 public class MainScreenController implements Initializable {
     private final Logger logger = LoggerManager.getLoggerInstance();
+
+    @FXML
+    public GridPane gridOrders;
+
     private Stage parentStage;
 
     public void initialize(URL location, ResourceBundle resources) {
         checkForUpdates();
+        initGridOrders(gridOrders);
+    }
+
+    private static void initGridOrders(GridPane gridOrders) {
+        gridOrders.getChildren().clear();
+        for (int i = 0; i < 4; ++i) {
+            for (int j = 0; j < 4; ++j) {
+                OrderCardController orderCardController = new OrderCardController();
+                gridOrders.add(orderCardController, i, j);
+            }
+        }
     }
 
     private void checkForUpdates() {
