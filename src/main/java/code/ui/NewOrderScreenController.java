@@ -1,6 +1,8 @@
 package code.ui;
 
 import code.Defines;
+import code.db.OrderDB;
+import code.db.OrdersJDBCTemplate;
 import code.db.SettingsJDBCTemplate;
 import code.utils.LoggerManager;
 import javafx.event.ActionEvent;
@@ -18,7 +20,9 @@ import java.util.logging.Logger;
  * Created by ixotum on 7/5/15.
  */
 public class NewOrderScreenController implements Initializable {
-    final Logger logger = LoggerManager.getLoggerInstance();
+    private final Logger logger = LoggerManager.getLoggerInstance();
+    private final ApplicationContext applicationContext = new ClassPathXmlApplicationContext(Defines.BEANS_CONFIG);
+
     private SettingsJDBCTemplate settingsJDBCTemplate;
 
     @FXML
@@ -28,11 +32,14 @@ public class NewOrderScreenController implements Initializable {
         int orderId = Integer.parseInt(labelOrderId.getText());
         logger.info("Saving order with number: " + orderId);
         settingsJDBCTemplate.saveLastOrderId(orderId);
+
+        OrdersJDBCTemplate ordersJDBCTemplate = (OrdersJDBCTemplate) applicationContext.getBean("ordersJDBCTemplateId");
+        OrderDB orderDB = new OrderDB(orderId);
+        ordersJDBCTemplate.saveNewOrder(orderDB);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(Defines.BEANS_CONFIG);
         settingsJDBCTemplate = (SettingsJDBCTemplate) applicationContext.getBean("settingsJDBCTemplateId");
         int lastOrderId = settingsJDBCTemplate.readLastOrderId();
         ++lastOrderId;

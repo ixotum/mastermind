@@ -5,12 +5,16 @@
 
     <bean id="dbSettings" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.h2.Driver" />
-        <property name="url" value="jdbc:h2:file:./mm" />
+        <property name="url" value="jdbc:h2:file:./mastermind" />
         <property name="username" value="master" />
         <property name="password" value="123" />
     </bean>
 
     <bean id="settingsJDBCTemplateId" class="code.db.SettingsJDBCTemplate">
+        <property name="dataSource" ref="dbSettings" />
+    </bean>
+
+    <bean id="ordersJDBCTemplateId" class="code.db.OrdersJDBCTemplate">
         <property name="dataSource" ref="dbSettings" />
     </bean>
 

@@ -1,5 +1,5 @@
 out
 .idea
 target
-mm.mv.db
-mm.trace.db
+mastermind.mv.db
+mastermind.trace.db
