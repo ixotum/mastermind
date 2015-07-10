@@ -2,6 +2,8 @@ package code.ui;
 
 import code.Defines;
 import code.UpdateManager;
+import code.db.OrderDB;
+import code.db.OrdersJDBCTemplate;
 import code.utils.LoggerManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +15,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,28 +37,43 @@ public class MainScreenController implements Initializable {
 
     public void initialize(URL location, ResourceBundle resources) {
         checkForUpdates();
-        initGridOrders(gridOrders);
+        initGridOrders();
     }
 
-    private void initGridOrders(GridPane gridOrders) {
-        gridOrders.widthProperty().addListener((observable, oldValue, newValue) -> gridWidthChanged(gridOrders, newValue));
+    private void initGridOrders() {
+        gridOrders.widthProperty().addListener((observable, oldValue, newValue) -> gridWidthChanged(newValue));
     }
 
-    private void gridWidthChanged(GridPane gridOrders, Number newGridWidth) {
-        final OrderCardController etalonOrderCard = new OrderCardController();
-        final double etalonWidth = etalonOrderCard.getCardWidth();
-        final int countInRow = (int) (newGridWidth.intValue() / etalonWidth);
+    private void gridWidthChanged(Number newGridWidth) {
+        final OrderCardController standardOrderCard = new OrderCardController();
+        final double standardWidth = standardOrderCard.getCardWidth();
+        final int countInRow = (int) (newGridWidth.intValue() / standardWidth);
 
-        List<OrderCardController> cardList = new ArrayList<>();
-        for (int i = 0; i < 4; ++i) {
-            OrderCardController orderCardController = new OrderCardController();
-            cardList.add(orderCardController);
-        }
+        List<OrderCardController> cardList = createOrderCardsFromDB();
 
         if (previousCountInRow != countInRow) {
             fillGrid(gridOrders, cardList, countInRow);
             previousCountInRow = countInRow;
         }
+    }
+
+    private static List<OrderCardController> createOrderCardsFromDB() {
+        List<OrderDB> orderDBList = readAllOrdersFromDB();
+        List<OrderCardController> orderCardList = new ArrayList<>();
+
+        for (OrderDB orderDB : orderDBList) {
+            OrderCardController orderCard = new OrderCardController();
+            orderCard.setOrderId(orderDB.getOrderId());
+            orderCardList.add(orderCard);
+        }
+
+        return orderCardList;
+    }
+
+    private static List<OrderDB> readAllOrdersFromDB() {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(Defines.BEANS_CONFIG);
+        OrdersJDBCTemplate ordersJDBCTemplate = (OrdersJDBCTemplate) applicationContext.getBean("ordersJDBCTemplateId");
+        return ordersJDBCTemplate.readAllOrders();
     }
 
     private static void fillGrid(GridPane gridOrders, List<OrderCardController> cardList, int countInRow) {

@@ -2,6 +2,7 @@ package code.ui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -13,6 +14,8 @@ import java.io.IOException;
 public class OrderCardController extends VBox {
     @FXML
     public AnchorPane mainAnchor;
+    @FXML
+    public Label labelOrderId;
 
     public OrderCardController() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/order_card.fxml"));
@@ -27,9 +30,14 @@ public class OrderCardController extends VBox {
 
     @FXML
     public void onOrderCardClick() {
+        System.out.println("++");
     }
 
     public double getCardWidth() {
         return mainAnchor.getPrefWidth();
+    }
+
+    public void setOrderId(int orderId) {
+        labelOrderId.setText(String.valueOf(orderId));
     }
 }

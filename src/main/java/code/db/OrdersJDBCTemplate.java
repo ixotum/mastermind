@@ -3,6 +3,7 @@ package code.db;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 /**
  * Created by ixotum on 7/7/15
@@ -18,5 +19,10 @@ public class OrdersJDBCTemplate {
         String sql = "INSERT INTO ORDERS(ORDER_ID) " +
                 "VALUES (?)";
         jdbcTemplate.update(sql, orderDB.getOrderId());
+    }
+
+    public List<OrderDB> readAllOrders() {
+        String sql = "SELECT * FROM ORDERS";
+        return jdbcTemplate.query(sql, new OrderDBMapper());
     }
 }
