@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -12,6 +13,9 @@ import java.io.IOException;
  * Created by ixotum on 7/8/15.
  */
 public class OrderCardController extends VBox {
+    @FXML
+    public AnchorPane mainAnchor;
+
     public OrderCardController() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/order_card.fxml"));
         fxmlLoader.setRoot(this);
@@ -25,5 +29,9 @@ public class OrderCardController extends VBox {
 
     @FXML
     public void onOrderCardClick(ActionEvent actionEvent) {
+    }
+
+    public double getCardWidth() {
+        return mainAnchor.getPrefWidth();
     }
 }
