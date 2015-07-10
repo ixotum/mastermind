@@ -1,7 +1,7 @@
 package code.ftp;
 
 /**
- * Created by ixotum on 6/29/15.
+ * Created by ixotum on 6/29/15
  */
 public class FtpSettings {
     private String host;

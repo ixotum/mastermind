@@ -4,7 +4,6 @@ import code.ftp.FtpManager;
 import code.ftp.FtpSettings;
 import code.utils.LoggerManager;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -12,7 +11,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * Created by ixotum on 6/29/15.
+ * Created by ixotum on 6/29/15
  */
 public class UpdateManager {
     private final Logger logger = LoggerManager.getLoggerInstance();
@@ -115,10 +114,10 @@ public class UpdateManager {
             return;
         }
 
-        overWriteOldAndRestartApp(localPath);
+        overWriteOldAndRestartApp();
     }
 
-    private static void overWriteOldAndRestartApp(String localPath) {
+    private static void overWriteOldAndRestartApp() {
         final ProcessBuilder builder = new ProcessBuilder("./update_app.sh");
         try {
             builder.start();

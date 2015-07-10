@@ -5,7 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 
 /**
- * Created by ixotum on 7/7/15.
+ * Created by ixotum on 7/7/15
  */
 public class OrdersJDBCTemplate {
     private JdbcTemplate jdbcTemplate;

@@ -1,11 +1,7 @@
 package code;
 
-import org.springframework.context.ApplicationContext;
-
-import java.io.File;
-
 /**
- * Created by ixotum on 6/28/15.
+ * Created by ixotum on 6/28/15
  */
 public class Defines {
     public static final String APP_NAME = "mastermind";

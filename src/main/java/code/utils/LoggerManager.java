@@ -2,14 +2,13 @@ package code.utils;
 
 import code.Defines;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.*;
 
 /**
- * Created by ixotum on 6/29/15.
+ * Created by ixotum on 6/29/15
  */
 public class LoggerManager {
     private static Logger logger;

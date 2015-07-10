@@ -1,7 +1,7 @@
 package code.db;
 
 /**
- * Created by ixotum on 7/7/15.
+ * Created by ixotum on 7/7/15
  */
 public class OrderDB {
     private final int orderId;

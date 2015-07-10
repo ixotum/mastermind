@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * Created by ixotum on 6/29/15.
+ * Created by ixotum on 6/29/15
  */
 public class FtpManager {
     private final Logger logger = LoggerManager.getLoggerInstance();
@@ -81,9 +81,7 @@ public class FtpManager {
             return null;
         }
 
-        List<String> foundFiles = findFilesByTemplate(fileList, fileTemplate);
-
-        return foundFiles;
+        return findFilesByTemplate(fileList, fileTemplate);
     }
 
     private List<String> findFilesByTemplate(FTPFile[] fileList, String fileTemplate) {

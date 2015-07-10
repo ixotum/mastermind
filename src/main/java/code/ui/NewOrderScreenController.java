@@ -5,7 +5,6 @@ import code.db.OrderDB;
 import code.db.OrdersJDBCTemplate;
 import code.db.SettingsJDBCTemplate;
 import code.utils.LoggerManager;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -18,7 +17,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 /**
- * Created by ixotum on 7/5/15.
+ * Created by ixotum on 7/5/15
  */
 public class NewOrderScreenController implements Initializable {
     private final Logger logger = LoggerManager.getLoggerInstance();
@@ -29,7 +28,7 @@ public class NewOrderScreenController implements Initializable {
     @FXML
     public Label labelOrderId;
 
-    public void onClickNewOrderDoneButton(ActionEvent actionEvent) {
+    public void onClickNewOrderDoneButton() {
         int orderId = Integer.parseInt(labelOrderId.getText());
         logger.info("Saving order with number: " + orderId);
         settingsJDBCTemplate.saveLastOrderId(orderId);
@@ -50,7 +49,7 @@ public class NewOrderScreenController implements Initializable {
     }
 
     @FXML
-    public void onClickCancelButton(ActionEvent actionEvent) {
+    public void onClickCancelButton() {
         logger.info("Cancel saving order");
         stage.hide();
 

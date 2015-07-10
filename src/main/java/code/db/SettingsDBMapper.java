@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Created by ixotum on 7/6/15.
+ * Created by ixotum on 7/6/15
  */
 public class SettingsDBMapper implements RowMapper {
     @Override

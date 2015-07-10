@@ -1,16 +1,14 @@
 package code.ui;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
 /**
- * Created by ixotum on 7/8/15.
+ * Created by ixotum on 7/8/15
  */
 public class OrderCardController extends VBox {
     @FXML
@@ -28,7 +26,7 @@ public class OrderCardController extends VBox {
     }
 
     @FXML
-    public void onOrderCardClick(ActionEvent actionEvent) {
+    public void onOrderCardClick() {
     }
 
     public double getCardWidth() {

@@ -5,17 +5,14 @@ import code.ui.MainScreenController;
 import code.utils.LoggerManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.flywaydb.core.Flyway;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -67,15 +64,13 @@ public class Main extends Application {
     }
 
     private static void writeAppFullNameToFile() {
-        PrintWriter printWriter = null;
         try {
-            printWriter = new PrintWriter(Defines.VERSION_FILE_NAME);
+            PrintWriter printWriter = new PrintWriter(Defines.VERSION_FILE_NAME);
+            printWriter.write(Defines.APP_FULL_NAME);
+            printWriter.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-        printWriter.write(Defines.APP_FULL_NAME);
-        printWriter.close();
 
         logger.info("App full name saved to file: " + Defines.APP_FULL_NAME);
     }

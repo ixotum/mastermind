@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 
 /**
- * Created by ixotum on 7/5/15.
+ * Created by ixotum on 7/5/15
  */
 public class SettingsJDBCTemplate {
     private JdbcTemplate jdbcTemplate;

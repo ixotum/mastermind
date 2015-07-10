@@ -1,7 +1,7 @@
 package code.db;
 
 /**
- * Created by ixotum on 7/6/15.
+ * Created by ixotum on 7/6/15
  */
 public class SettingsDB {
     private int last_order_id;
