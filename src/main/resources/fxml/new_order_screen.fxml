@@ -5,42 +5,22 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
+<?import code.ui.OrderComponentController?>
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.ui.NewOrderScreenController">
-   <children>
-      <HBox alignment="TOP_CENTER">
-         <children>
-            <Label text="Order #" />
-            <Label fx:id="labelOrderId" text="-1" />
-         </children>
-         <VBox.margin>
-            <Insets top="12.0" />
-         </VBox.margin>
-      </HBox>
-      <HBox>
-         <children>
-            <Label text="Name" />
-            <TextField fx:id="textFieldName">
-               <HBox.margin>
-                  <Insets left="12.0" />
-               </HBox.margin>
-            </TextField>
-         </children>
-         <VBox.margin>
-            <Insets left="12.0" right="12.0" top="12.0" />
-         </VBox.margin>
-      </HBox>
-      <HBox alignment="TOP_CENTER">
-         <children>
-            <Button mnemonicParsing="false" onAction="#onClickCancelButton" text="Cancel" />
-            <Button mnemonicParsing="false" onAction="#onClickNewOrderDoneButton" text="Done">
-               <HBox.margin>
-                  <Insets left="25.0" />
-               </HBox.margin>
-            </Button>
-         </children>
-         <VBox.margin>
-            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
-         </VBox.margin>
-      </HBox>
-   </children>
+    <children>
+        <OrderComponentController fx:id="orderComponent"/>
+        <HBox alignment="TOP_CENTER">
+            <children>
+                <Button mnemonicParsing="false" onAction="#onClickCancelButton" text="Cancel" />
+                <Button mnemonicParsing="false" onAction="#onClickNewOrderDoneButton" text="Done">
+                    <HBox.margin>
+                        <Insets left="25.0" />
+                    </HBox.margin>
+                </Button>
+            </children>
+            <VBox.margin>
+                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+            </VBox.margin>
+        </HBox>
+    </children>
 </VBox>

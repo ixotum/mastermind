@@ -27,10 +27,11 @@ public class NewOrderScreenController implements Initializable {
     private SettingsJDBCTemplate settingsJDBCTemplate;
     private Stage stage;
 
-    @FXML
     public Label labelOrderId;
-    @FXML
     public TextField textFieldName;
+
+    @FXML
+    public OrderComponentController orderComponent;
 
     public void onClickNewOrderDoneButton() {
         int orderId = Integer.parseInt(labelOrderId.getText());
@@ -52,6 +53,9 @@ public class NewOrderScreenController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        labelOrderId = orderComponent.getLabelOrderId();
+        textFieldName = orderComponent.getTextFieldName();
+
         settingsJDBCTemplate = (SettingsJDBCTemplate) applicationContext.getBean("settingsJDBCTemplateId");
         int lastOrderId = settingsJDBCTemplate.readLastOrderId();
         ++lastOrderId;
