@@ -4,13 +4,17 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
+<?import java.net.URL?>
 <fx:root type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <AnchorPane fx:id="mainAnchor" prefHeight="100.0" prefWidth="100.0">
-         <children>
-            <Label fx:id="labelOrderId" text="Label" />
-            <Button mnemonicParsing="false" onAction="#onOrderCardClick" opacity="0.0" text="Button" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-         </children>
-      </AnchorPane>
-   </children>
+    <children>
+        <AnchorPane fx:id="mainAnchor" prefHeight="100.0" prefWidth="100.0" styleClass="anchor">
+            <children>
+                <Label fx:id="labelOrderId" text="Label" />
+                <Button mnemonicParsing="false" onAction="#onOrderCardClick" opacity="0.0" text="Button" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            </children>
+        </AnchorPane>
+    </children>
+    <stylesheets>
+        <URL value="@/styles/order_card.css"/>
+    </stylesheets>
 </fx:root>

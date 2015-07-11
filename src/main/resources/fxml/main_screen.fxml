@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -10,7 +11,7 @@
             <Button fx:id="buttonNewOrder" mnemonicParsing="false" onAction="#onClickNewOrder" text="New Order" />
             <VBox HBox.hgrow="ALWAYS">
                <children>
-                  <GridPane fx:id="gridOrders" hgap="1" vgap="1" VBox.vgrow="ALWAYS">
+                  <GridPane fx:id="gridOrders" hgap="1.0" vgap="1.0" VBox.vgrow="ALWAYS">
                   </GridPane>
                </children>
             </VBox>
