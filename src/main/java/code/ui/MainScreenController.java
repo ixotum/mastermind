@@ -41,15 +41,14 @@ public class MainScreenController implements Initializable {
     }
 
     private void initGridOrders() {
-        gridOrders.widthProperty().addListener((observable, oldValue, newValue) -> gridWidthChanged(newValue));
+        List<OrderCardController> cardList = createOrderCardsFromDB();
+        gridOrders.widthProperty().addListener((observable, oldValue, newValue) -> gridWidthChanged(newValue, cardList));
     }
 
-    private void gridWidthChanged(Number newGridWidth) {
+    private void gridWidthChanged(Number newGridWidth, List<OrderCardController> cardList) {
         final OrderCardController standardOrderCard = new OrderCardController();
         final double standardWidth = standardOrderCard.getCardWidth();
         final int countInRow = (int) (newGridWidth.intValue() / standardWidth);
-
-        List<OrderCardController> cardList = createOrderCardsFromDB();
 
         if (previousCountInRow != countInRow) {
             fillGrid(gridOrders, cardList, countInRow);
