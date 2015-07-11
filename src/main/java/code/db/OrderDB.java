@@ -5,6 +5,7 @@ package code.db;
  */
 public class OrderDB {
     private final int orderId;
+    private String name;
 
     public OrderDB(int orderId) {
         this.orderId = orderId;
@@ -12,5 +13,13 @@ public class OrderDB {
 
     public int getOrderId() {
         return orderId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 }

@@ -8,6 +8,7 @@ import code.utils.LoggerManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -22,11 +23,14 @@ import java.util.logging.Logger;
 public class NewOrderScreenController implements Initializable {
     private final Logger logger = LoggerManager.getLoggerInstance();
     private final ApplicationContext applicationContext = new ClassPathXmlApplicationContext(Defines.BEANS_CONFIG);
+
     private SettingsJDBCTemplate settingsJDBCTemplate;
     private Stage stage;
 
     @FXML
     public Label labelOrderId;
+    @FXML
+    public TextField textFieldName;
 
     public void onClickNewOrderDoneButton() {
         int orderId = Integer.parseInt(labelOrderId.getText());
@@ -34,10 +38,16 @@ public class NewOrderScreenController implements Initializable {
         settingsJDBCTemplate.saveLastOrderId(orderId);
 
         OrdersJDBCTemplate ordersJDBCTemplate = (OrdersJDBCTemplate) applicationContext.getBean("ordersJDBCTemplateId");
-        OrderDB orderDB = new OrderDB(orderId);
+        OrderDB orderDB = createOrderDB(orderId);
         ordersJDBCTemplate.saveNewOrder(orderDB);
 
         stage.hide();
+    }
+
+    private OrderDB createOrderDB(int orderId) {
+        OrderDB orderDB = new OrderDB(orderId);
+        orderDB.setName(textFieldName.getText());
+        return orderDB;
     }
 
     @Override

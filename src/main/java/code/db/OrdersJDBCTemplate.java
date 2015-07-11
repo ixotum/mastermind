@@ -16,9 +16,9 @@ public class OrdersJDBCTemplate {
     }
 
     public void saveNewOrder(OrderDB orderDB) {
-        String sql = "INSERT INTO ORDERS(ORDER_ID) " +
-                "VALUES (?)";
-        jdbcTemplate.update(sql, orderDB.getOrderId());
+        String sql = "INSERT INTO ORDERS(ORDER_ID, NAME) " +
+                "VALUES (?, ?)";
+        jdbcTemplate.update(sql, orderDB.getOrderId(), orderDB.getName());
     }
 
     public List<OrderDB> readAllOrders() {

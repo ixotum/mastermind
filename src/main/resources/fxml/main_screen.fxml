@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -8,14 +9,24 @@
    <children>
       <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button fx:id="buttonNewOrder" mnemonicParsing="false" onAction="#onClickNewOrder" text="New Order" />
+            <VBox>
+               <children>
+                  <Button fx:id="buttonNewOrder" mnemonicParsing="false" onAction="#onClickNewOrder" text="New Order" />
+               </children>
+            </VBox>
             <VBox HBox.hgrow="ALWAYS">
                <children>
                   <GridPane fx:id="gridOrders" hgap="1.0" vgap="1.0" VBox.vgrow="ALWAYS">
                   </GridPane>
                </children>
+               <HBox.margin>
+                  <Insets left="12.0" />
+               </HBox.margin>
             </VBox>
          </children>
+         <VBox.margin>
+            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+         </VBox.margin>
       </HBox>
    </children>
 </VBox>

@@ -12,6 +12,7 @@ public class OrderDBMapper implements RowMapper {
     @Override
     public Object mapRow(ResultSet rs, int rowNumber) throws SQLException {
         OrderDB orderDB = new OrderDB(rs.getInt("ORDER_ID"));
+        orderDB.setName(rs.getString("NAME"));
         return orderDB;
     }
 }
