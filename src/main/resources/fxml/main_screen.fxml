@@ -16,8 +16,12 @@
             </VBox>
             <VBox HBox.hgrow="ALWAYS">
                <children>
-                  <GridPane fx:id="gridOrders" hgap="1.0" vgap="1.0" VBox.vgrow="ALWAYS">
+                  <ScrollPane fx:id="gridOrdersScrollPane" hbarPolicy="NEVER" VBox.vgrow="ALWAYS">
+                     <content>
+                        <GridPane fx:id="gridOrders" hgap="1.0" vgap="1.0">
                   </GridPane>
+                     </content>
+                  </ScrollPane>
                </children>
                <HBox.margin>
                   <Insets left="12.0" />

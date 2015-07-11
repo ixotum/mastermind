@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -28,30 +29,50 @@ import java.util.logging.Logger;
 
 public class MainScreenController implements Initializable {
     private final static Logger logger = LoggerManager.getLoggerInstance();
+    private int gridOrdersRowCount;
 
     @FXML
     public GridPane gridOrders;
+    @FXML
+    public ScrollPane gridOrdersScrollPane;
 
     private Stage parentStage;
     private int previousCountInRow = 0;
+    private double standardOrderCardWidth;
+    private double standardOrderCardHeight;
 
     public void initialize(URL location, ResourceBundle resources) {
         checkForUpdates();
+        calculateGridParameters();
         initGridOrders();
+    }
+
+    private void calculateGridParameters() {
+        final OrderCardController standardOrderCard = new OrderCardController();
+        standardOrderCardWidth = standardOrderCard.getCardWidth();
+        standardOrderCardHeight = standardOrderCard.getCardHeight();
     }
 
     private void initGridOrders() {
         List<OrderCardController> cardList = createOrderCardsFromDB();
-        gridOrders.widthProperty().addListener((observable, oldValue, newValue) -> gridWidthChanged(newValue, cardList));
+        gridOrdersScrollPane.widthProperty().addListener((observable, oldValue, newValue) -> gridOrdersScrollPaneWidthChanged(newValue, cardList));
+        gridOrdersScrollPane.heightProperty().addListener((observable, oldValue, newValue) -> gridOrdersScrollPaneHeightChanged());
     }
 
-    private void gridWidthChanged(Number newGridWidth, List<OrderCardController> cardList) {
-        final OrderCardController standardOrderCard = new OrderCardController();
-        final double standardWidth = standardOrderCard.getCardWidth();
-        final int countInRow = (int) (newGridWidth.intValue() / standardWidth);
+    private void gridOrdersScrollPaneHeightChanged() {
+        System.out.println("gridOrders.rowSize = " + gridOrdersRowCount);
+        gridOrders.setPrefHeight((standardOrderCardHeight + gridOrders.getVgap()) * gridOrdersRowCount);
+    }
+
+    private void gridOrdersScrollPaneWidthChanged(Number newScrollPaneWidth, List<OrderCardController> cardList) {
+        System.out.println("newScrollPaneWidth = " + newScrollPaneWidth);
+        gridOrders.setPrefWidth(newScrollPaneWidth.doubleValue());
+        gridOrders.setPrefHeight((standardOrderCardHeight + gridOrders.getVgap()) * gridOrdersRowCount);
+
+        final int countInRow = (int) (newScrollPaneWidth.intValue() / standardOrderCardWidth);
 
         if (previousCountInRow != countInRow) {
-            fillGrid(gridOrders, cardList, countInRow);
+            gridOrdersRowCount = fillGrid(gridOrders, cardList, countInRow);
             previousCountInRow = countInRow;
         }
     }
@@ -75,9 +96,11 @@ public class MainScreenController implements Initializable {
         return ordersJDBCTemplate.readAllOrders();
     }
 
-    private static void fillGrid(GridPane gridOrders, List<OrderCardController> cardList, int countInRow) {
+    private static int fillGrid(GridPane gridOrders, List<OrderCardController> cardList, int countInRow) {
+        int gridRowCount = 0;
+
         if (countInRow == 0) {
-            return;
+            return gridRowCount;
         }
 
         gridOrders.getChildren().clear();
@@ -93,6 +116,9 @@ public class MainScreenController implements Initializable {
                 ++row;
             }
         }
+
+        gridRowCount = row + 1;
+        return gridRowCount;
     }
 
     private void checkForUpdates() {

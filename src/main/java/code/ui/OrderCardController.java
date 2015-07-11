@@ -37,7 +37,12 @@ public class OrderCardController extends VBox {
         return mainAnchor.getPrefWidth();
     }
 
+    public double getCardHeight() {
+        return mainAnchor.getPrefHeight();
+    }
+
     public void setOrderId(int orderId) {
         labelOrderId.setText(String.valueOf(orderId));
     }
+
 }
