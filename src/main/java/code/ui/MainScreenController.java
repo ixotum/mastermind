@@ -60,12 +60,10 @@ public class MainScreenController implements Initializable {
     }
 
     private void gridOrdersScrollPaneHeightChanged() {
-        System.out.println("gridOrders.rowSize = " + gridOrdersRowCount);
         gridOrders.setPrefHeight((standardOrderCardHeight + gridOrders.getVgap()) * gridOrdersRowCount);
     }
 
     private void gridOrdersScrollPaneWidthChanged(Number newScrollPaneWidth, List<OrderCardController> cardList) {
-        System.out.println("newScrollPaneWidth = " + newScrollPaneWidth);
         gridOrders.setPrefWidth(newScrollPaneWidth.doubleValue());
         gridOrders.setPrefHeight((standardOrderCardHeight + gridOrders.getVgap()) * gridOrdersRowCount);
 
