@@ -7,8 +7,6 @@ import code.db.SettingsJDBCTemplate;
 import code.utils.LoggerManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -27,14 +25,11 @@ public class NewOrderScreenController implements Initializable {
     private SettingsJDBCTemplate settingsJDBCTemplate;
     private Stage stage;
 
-    public Label labelOrderId;
-    public TextField textFieldName;
-
     @FXML
     public OrderComponentController orderComponent;
 
     public void onClickNewOrderDoneButton() {
-        int orderId = Integer.parseInt(labelOrderId.getText());
+        int orderId = Integer.parseInt(orderComponent.getLabelOrderId().getText());
         logger.info("Saving order with number: " + orderId);
         settingsJDBCTemplate.saveLastOrderId(orderId);
 
@@ -47,19 +42,16 @@ public class NewOrderScreenController implements Initializable {
 
     private OrderDB createOrderDB(int orderId) {
         OrderDB orderDB = new OrderDB(orderId);
-        orderDB.setName(textFieldName.getText());
+        orderDB.setName(orderComponent.getTextFieldName().getText());
         return orderDB;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        labelOrderId = orderComponent.getLabelOrderId();
-        textFieldName = orderComponent.getTextFieldName();
-
         settingsJDBCTemplate = (SettingsJDBCTemplate) applicationContext.getBean("settingsJDBCTemplateId");
         int lastOrderId = settingsJDBCTemplate.readLastOrderId();
         ++lastOrderId;
-        labelOrderId.setText(String.valueOf(lastOrderId));
+        orderComponent.getLabelOrderId().setText(String.valueOf(lastOrderId));
     }
 
     @FXML

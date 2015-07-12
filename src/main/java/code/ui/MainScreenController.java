@@ -75,13 +75,14 @@ public class MainScreenController implements Initializable {
         }
     }
 
-    private static List<OrderCardController> createOrderCardsFromDB() {
+    private List<OrderCardController> createOrderCardsFromDB() {
         List<OrderDB> orderDBList = readAllOrdersFromDB();
         List<OrderCardController> orderCardList = new ArrayList<>();
 
         for (OrderDB orderDB : orderDBList) {
             OrderCardController orderCard = new OrderCardController();
-            orderCard.setOrderId(orderDB.getOrderId());
+            orderCard.init(orderDB);
+            orderCard.setParentStage(parentStage);
             orderCardList.add(orderCard);
         }
 
