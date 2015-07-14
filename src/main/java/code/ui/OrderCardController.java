@@ -25,6 +25,8 @@ public class OrderCardController extends VBox {
     public AnchorPane mainAnchor;
     @FXML
     public Label labelOrderId;
+    @FXML
+    public Label labelName;
     private OrderDB orderDB;
     private Stage parentStage;
 
@@ -71,6 +73,7 @@ public class OrderCardController extends VBox {
     public void init(OrderDB orderDB) {
         this.orderDB = orderDB;
         labelOrderId.setText(String.valueOf(orderDB.getOrderId()));
+        labelName.setText(orderDB.getName());
     }
 
     public void setParentStage(Stage parentStage) {
