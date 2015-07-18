@@ -1,8 +1,12 @@
 package code.ui;
 
+import code.Defines;
 import code.db.OrderDB;
+import code.db.OrdersJDBCTemplate;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * Created by ixotum on 7/12/15
@@ -11,12 +15,14 @@ public class EditOrderScreenController {
     @FXML
     public OrderComponentController orderComponent;
     private Stage stage;
+    private OrderDB orderDB;
 
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
     public void init(OrderDB orderDB) {
+        this.orderDB = orderDB;
         orderComponent.getLabelOrderId().setText(String.valueOf(orderDB.getOrderId()));
         orderComponent.getTextFieldName().setText(orderDB.getName());
     }
@@ -26,6 +32,15 @@ public class EditOrderScreenController {
     }
 
     public void onClickNewOrderDoneButton() {
+        updateOrderDB();
+        final ApplicationContext applicationContext = new ClassPathXmlApplicationContext(Defines.BEANS_CONFIG);
+        OrdersJDBCTemplate ordersJDBCTemplate = (OrdersJDBCTemplate) applicationContext.getBean("ordersJDBCTemplateId");
+        ordersJDBCTemplate.updateExistedOrder(orderDB);
+
         stage.hide();
+    }
+
+    private void updateOrderDB() {
+        orderDB.setName(orderComponent.getTextFieldName().getText());
     }
 }

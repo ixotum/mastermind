@@ -25,4 +25,10 @@ public class OrdersJDBCTemplate {
         String sql = "SELECT * FROM ORDERS";
         return jdbcTemplate.query(sql, new OrderDBMapper());
     }
+
+    public void updateExistedOrder(OrderDB orderDB) {
+        String sql = "UPDATE ORDERS SET NAME=? " +
+                "WHERE ORDER_ID = ?";
+        jdbcTemplate.update(sql, orderDB.getName(), orderDB.getOrderId());
+    }
 }
