@@ -2,6 +2,9 @@ package code.ui;
 
 import code.Defines;
 import code.UpdateManager;
+import code.bus.BusEvent;
+import code.bus.BusEventListener;
+import code.bus.BusEventManager;
 import code.db.OrderDB;
 import code.db.OrdersJDBCTemplate;
 import code.utils.LoggerManager;
@@ -27,7 +30,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-public class MainScreenController implements Initializable {
+public class MainScreenController implements Initializable, BusEventListener {
     private final static Logger logger = LoggerManager.getLoggerInstance();
     private int gridOrdersRowCount;
 
@@ -45,6 +48,7 @@ public class MainScreenController implements Initializable {
         checkForUpdates();
         calculateGridParameters();
         initGridOrders();
+        BusEventManager.addListener(this, BusEvent.ORDER_UPDATED);
     }
 
     private void calculateGridParameters() {
@@ -172,5 +176,17 @@ public class MainScreenController implements Initializable {
 
     public void setParentStage(Stage stage) {
         parentStage = stage;
+    }
+
+    @Override
+    public void busEventDispatch(BusEvent event) {
+        if (event == BusEvent.ORDER_UPDATED) {
+            redrawGridOrders();
+        }
+    }
+
+    private void redrawGridOrders() {
+        List<OrderCardController> cardList = createOrderCardsFromDB();
+        fillGrid(gridOrders, cardList, previousCountInRow);
     }
 }
