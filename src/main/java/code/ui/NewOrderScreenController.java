@@ -43,6 +43,7 @@ public class NewOrderScreenController implements Initializable {
     private OrderDB createOrderDB(int orderId) {
         OrderDB orderDB = new OrderDB(orderId);
         orderDB.setName(orderComponent.getTextFieldName().getText());
+        orderDB.setStructure(orderComponent.getTextAreaStructure().getText());
         return orderDB;
     }
 

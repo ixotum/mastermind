@@ -27,6 +27,7 @@ public class EditOrderScreenController {
         this.orderDB = orderDB;
         orderComponent.getLabelOrderId().setText(String.valueOf(orderDB.getOrderId()));
         orderComponent.getTextFieldName().setText(orderDB.getName());
+        orderComponent.getTextAreaStructure().setText(orderDB.getStructure());
     }
 
     public void onClickCancelButton() {
@@ -45,5 +46,6 @@ public class EditOrderScreenController {
 
     private void updateOrderDB() {
         orderDB.setName(orderComponent.getTextFieldName().getText());
+        orderDB.setStructure(orderComponent.getTextAreaStructure().getText());
     }
 }

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.scene.control.Label?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TextField?>
-<fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+
+<fx:root type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
     <HBox alignment="TOP_CENTER">
         <children>
             <Label text="Order #" />
@@ -20,7 +24,7 @@
             <Label text="Name" />
             <TextField fx:id="textFieldName">
                 <HBox.margin>
-                    <Insets left="12.0" />
+                    <Insets left="33.0" />
                 </HBox.margin>
             </TextField>
         </children>
@@ -28,4 +32,18 @@
             <Insets left="12.0" right="12.0" top="12.0" />
         </VBox.margin>
     </HBox>
+      <HBox>
+         <children>
+            <Label text="Structure" />
+            <TextArea fx:id="textAreaStructure" prefHeight="100.0" prefWidth="400.0">
+               <HBox.margin>
+                  <Insets left="12.0" />
+               </HBox.margin>
+            </TextArea>
+         </children>
+         <VBox.margin>
+            <Insets left="12.0" right="12.0" top="12.0" />
+         </VBox.margin>
+      </HBox>
+    </children>
 </fx:root>

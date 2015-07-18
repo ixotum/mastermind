@@ -6,6 +6,7 @@ package code.db;
 public class OrderDB {
     private final int orderId;
     private String name;
+    private String structure;
 
     public OrderDB(int orderId) {
         this.orderId = orderId;
@@ -21,5 +22,13 @@ public class OrderDB {
 
     public String getName() {
         return name;
+    }
+
+    public void setStructure(String structure) {
+        this.structure = structure;
+    }
+
+    public String getStructure() {
+        return structure;
     }
 }

@@ -3,6 +3,7 @@ package code.ui;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
@@ -14,6 +15,8 @@ import java.io.IOException;
 public class OrderComponentController extends VBox {
     @FXML
     public Label labelOrderId;
+    @FXML
+    public TextArea textAreaStructure;
     @FXML
     private TextField textFieldName;
 
@@ -34,5 +37,9 @@ public class OrderComponentController extends VBox {
 
     public TextField getTextFieldName() {
         return textFieldName;
+    }
+
+    public TextArea getTextAreaStructure() {
+        return textAreaStructure;
     }
 }
