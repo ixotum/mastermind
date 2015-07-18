@@ -8,7 +8,7 @@
         <OrderComponentController fx:id="orderComponent"/>
         <HBox alignment="TOP_CENTER">
             <children>
-                <Button mnemonicParsing="false" onAction="#onClickCancelButton" text="Cancel" />
+                <Button cancelButton="true" mnemonicParsing="false" onAction="#onClickCancelButton" text="Cancel" />
                 <Button mnemonicParsing="false" onAction="#onClickNewOrderDoneButton" text="Done">
                     <HBox.margin>
                         <Insets left="25.0" />
