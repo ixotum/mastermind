@@ -59,6 +59,7 @@ public class MainScreenController implements Initializable, BusEventListener {
 
     private void initGridOrders() {
         List<OrderCardController> cardList = createOrderCardsFromDB();
+        sortByOrderId(cardList);
         gridOrdersScrollPane.widthProperty().addListener((observable, oldValue, newValue) -> gridOrdersScrollPaneWidthChanged(newValue, cardList));
         gridOrdersScrollPane.heightProperty().addListener((observable, oldValue, newValue) -> gridOrdersScrollPaneHeightChanged());
     }
@@ -187,6 +188,18 @@ public class MainScreenController implements Initializable, BusEventListener {
 
     private void redrawGridOrders() {
         List<OrderCardController> cardList = createOrderCardsFromDB();
+        sortByOrderId(cardList);
         fillGrid(gridOrders, cardList, previousCountInRow);
+    }
+
+    private static void sortByOrderId(List<OrderCardController> cardList) {
+        cardList.sort(MainScreenController::orderIdComparator);
+    }
+
+    private static int orderIdComparator(OrderCardController o1, OrderCardController o2) {
+        if (o1.getOrderDB().getOrderId() > o2.getOrderDB().getOrderId()) {
+            return 1;
+        }
+        return -1;
     }
 }

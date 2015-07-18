@@ -79,4 +79,8 @@ public class OrderCardController extends VBox {
     public void setParentStage(Stage parentStage) {
         this.parentStage = parentStage;
     }
+
+    public OrderDB getOrderDB() {
+        return orderDB;
+    }
 }
