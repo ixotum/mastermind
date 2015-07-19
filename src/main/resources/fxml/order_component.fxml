@@ -10,53 +10,41 @@
 
 <fx:root type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-    <HBox alignment="TOP_CENTER">
-        <children>
+      <AnchorPane>
+         <children>
             <Label text="Order #" />
-            <Label fx:id="labelOrderId" text="-1" />
-        </children>
-        <VBox.margin>
-            <Insets top="12.0" />
-        </VBox.margin>
-    </HBox>
-    <HBox>
-        <children>
-            <Label text="Name" />
-            <TextField fx:id="textFieldName">
-                <HBox.margin>
-                    <Insets left="33.0" />
-                </HBox.margin>
-            </TextField>
-        </children>
-        <VBox.margin>
+            <Label fx:id="labelOrderId" text="-1" AnchorPane.leftAnchor="75.0" />
+         </children>
+         <VBox.margin>
             <Insets left="12.0" right="12.0" top="12.0" />
-        </VBox.margin>
-    </HBox>
-      <HBox>
+         </VBox.margin>
+      </AnchorPane>
+      <AnchorPane>
+         <VBox.margin>
+            <Insets left="12.0" right="12.0" top="12.0" />
+         </VBox.margin>
+         <children>
+            <Label text="Name" />
+            <TextField fx:id="textFieldName" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="0.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane>
          <children>
             <Label text="Structure" />
-            <TextArea fx:id="textAreaStructure" prefHeight="100.0" prefWidth="400.0">
-               <HBox.margin>
-                  <Insets left="12.0" />
-               </HBox.margin>
-            </TextArea>
+            <TextArea fx:id="textAreaStructure" prefHeight="100.0" prefWidth="400.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="0.0" />
          </children>
          <VBox.margin>
             <Insets left="12.0" right="12.0" top="12.0" />
          </VBox.margin>
-      </HBox>
-      <HBox>
+      </AnchorPane>
+      <AnchorPane>
+         <VBox.margin>
+            <Insets left="12.0" right="12.0" top="12.0" />
+         </VBox.margin>
          <children>
             <Label text="Customer" />
-            <TextArea fx:id="textAreaCustomer" prefHeight="100.0" prefWidth="400.0">
-               <HBox.margin>
-                  <Insets left="12.0" />
-               </HBox.margin>
-            </TextArea>
+            <TextArea fx:id="textAreaCustomer" prefHeight="100.0" prefWidth="400.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="0.0" />
          </children>
-         <VBox.margin>
-            <Insets left="12.0" right="12.0" top="12.0" />
-         </VBox.margin>
-      </HBox>
+      </AnchorPane>
     </children>
 </fx:root>
