@@ -1,5 +1,7 @@
 package code.db;
 
+import java.sql.Date;
+
 /**
  * Created by ixotum on 7/7/15
  */
@@ -9,6 +11,7 @@ public class OrderDB {
     private String structure;
     private String customer;
     private String vk;
+    private Date dueDate;
 
     public OrderDB(int orderId) {
         this.orderId = orderId;
@@ -48,5 +51,13 @@ public class OrderDB {
 
     public String getVk() {
         return vk;
+    }
+
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public Date getDueDate() {
+        return dueDate;
     }
 }

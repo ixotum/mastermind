@@ -16,6 +16,7 @@ public class OrderDBMapper implements RowMapper {
         orderDB.setStructure(rs.getString("STRUCTURE"));
         orderDB.setCustomer(rs.getString("CUSTOMER"));
         orderDB.setVK(rs.getString("VK"));
+        orderDB.setDueDate(rs.getDate("DUE_DATE"));
         return orderDB;
     }
 }

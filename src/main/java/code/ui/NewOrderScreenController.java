@@ -14,6 +14,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
@@ -49,6 +51,9 @@ public class NewOrderScreenController implements Initializable {
         orderDB.setStructure(orderComponent.getTextAreaStructure().getText());
         orderDB.setCustomer(orderComponent.getTextAreaCustomer().getText());
         orderDB.setVK(orderComponent.getTextFieldVK().getText());
+        LocalDate localDueDate = orderComponent.getDatePickerDueDate().getValue();
+        orderDB.setDueDate(Date.valueOf(localDueDate));
+
         return orderDB;
     }
 

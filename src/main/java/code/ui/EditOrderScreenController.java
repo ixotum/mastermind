@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.sql.Date;
+
 /**
  * Created by ixotum on 7/12/15
  */
@@ -30,6 +32,10 @@ public class EditOrderScreenController {
         orderComponent.getTextAreaStructure().setText(orderDB.getStructure());
         orderComponent.getTextAreaCustomer().setText(orderDB.getCustomer());
         orderComponent.getTextFieldVK().setText(orderDB.getVk());
+        Date dueDate = orderDB.getDueDate();
+        if (dueDate != null) {
+            orderComponent.getDatePickerDueDate().setValue(dueDate.toLocalDate());
+        }
     }
 
     public void onClickCancelButton() {
@@ -51,5 +57,6 @@ public class EditOrderScreenController {
         orderDB.setStructure(orderComponent.getTextAreaStructure().getText());
         orderDB.setCustomer(orderComponent.getTextAreaCustomer().getText());
         orderDB.setVK(orderComponent.getTextFieldVK().getText());
+        orderDB.setDueDate(Date.valueOf(orderComponent.getDatePickerDueDate().getValue()));
     }
 }
