@@ -23,9 +23,11 @@ public class OrderComponentController extends VBox {
     @FXML
     private TextField textFieldVK;
     @FXML
-    private DatePicker datePickerDueDate;
+    private DatePicker datePickerEventDate;
     @FXML
     private TextField textFieldName;
+    @FXML
+    private DatePicker datePickerDueDate;
 
     public OrderComponentController() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/order_component.fxml"));
@@ -60,5 +62,9 @@ public class OrderComponentController extends VBox {
 
     public DatePicker getDatePickerDueDate() {
         return datePickerDueDate;
+    }
+
+    public DatePicker getDatePickerEventDate() {
+        return datePickerEventDate;
     }
 }

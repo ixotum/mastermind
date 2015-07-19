@@ -12,6 +12,7 @@ public class OrderDB {
     private String customer;
     private String vk;
     private Date dueDate;
+    private Date eventDate;
 
     public OrderDB(int orderId) {
         this.orderId = orderId;
@@ -59,5 +60,13 @@ public class OrderDB {
 
     public Date getDueDate() {
         return dueDate;
+    }
+
+    public void setEventDate(Date eventDate) {
+        this.eventDate = eventDate;
+    }
+
+    public Date getEventDate() {
+        return eventDate;
     }
 }

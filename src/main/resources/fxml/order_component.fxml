@@ -62,6 +62,8 @@
          <children>
             <Label text="Due Date" />
             <DatePicker fx:id="datePickerDueDate" prefWidth="125.0" AnchorPane.leftAnchor="75.0" />
+            <Label text="Event Date" AnchorPane.leftAnchor="260.0" />
+            <DatePicker fx:id="datePickerEventDate" prefWidth="125.0" AnchorPane.rightAnchor="0.0" />
          </children>
       </AnchorPane>
     </children>
