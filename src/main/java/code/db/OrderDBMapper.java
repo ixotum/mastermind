@@ -14,6 +14,7 @@ public class OrderDBMapper implements RowMapper {
         OrderDB orderDB = new OrderDB(rs.getInt("ORDER_ID"));
         orderDB.setName(rs.getString("NAME"));
         orderDB.setStructure(rs.getString("STRUCTURE"));
+        orderDB.setCustomer(rs.getString("CUSTOMER"));
         return orderDB;
     }
 }

@@ -45,5 +45,18 @@
             <Insets left="12.0" right="12.0" top="12.0" />
          </VBox.margin>
       </HBox>
+      <HBox>
+         <children>
+            <Label text="Customer" />
+            <TextArea fx:id="textAreaCustomer" prefHeight="100.0" prefWidth="400.0">
+               <HBox.margin>
+                  <Insets left="12.0" />
+               </HBox.margin>
+            </TextArea>
+         </children>
+         <VBox.margin>
+            <Insets left="12.0" right="12.0" top="12.0" />
+         </VBox.margin>
+      </HBox>
     </children>
 </fx:root>

@@ -28,6 +28,7 @@ public class EditOrderScreenController {
         orderComponent.getLabelOrderId().setText(String.valueOf(orderDB.getOrderId()));
         orderComponent.getTextFieldName().setText(orderDB.getName());
         orderComponent.getTextAreaStructure().setText(orderDB.getStructure());
+        orderComponent.getTextAreaCustomer().setText(orderDB.getCustomer());
     }
 
     public void onClickCancelButton() {

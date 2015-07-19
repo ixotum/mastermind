@@ -18,6 +18,8 @@ public class OrderComponentController extends VBox {
     @FXML
     public TextArea textAreaStructure;
     @FXML
+    public TextArea textAreaCustomer;
+    @FXML
     private TextField textFieldName;
 
     public OrderComponentController() {
@@ -41,5 +43,9 @@ public class OrderComponentController extends VBox {
 
     public TextArea getTextAreaStructure() {
         return textAreaStructure;
+    }
+
+    public TextArea getTextAreaCustomer() {
+        return textAreaCustomer;
     }
 }

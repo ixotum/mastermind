@@ -1,6 +1,8 @@
 package code.ui;
 
 import code.Defines;
+import code.bus.BusEvent;
+import code.bus.BusEventManager;
 import code.db.OrderDB;
 import code.db.OrdersJDBCTemplate;
 import code.db.SettingsJDBCTemplate;
@@ -37,6 +39,7 @@ public class NewOrderScreenController implements Initializable {
         OrderDB orderDB = createOrderDB(orderId);
         ordersJDBCTemplate.saveNewOrder(orderDB);
 
+        BusEventManager.dispatch(BusEvent.ORDER_UPDATED);
         stage.hide();
     }
 
@@ -44,6 +47,7 @@ public class NewOrderScreenController implements Initializable {
         OrderDB orderDB = new OrderDB(orderId);
         orderDB.setName(orderComponent.getTextFieldName().getText());
         orderDB.setStructure(orderComponent.getTextAreaStructure().getText());
+        orderDB.setCustomer(orderComponent.getTextAreaCustomer().getText());
         return orderDB;
     }
 

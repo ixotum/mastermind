@@ -7,6 +7,7 @@ public class OrderDB {
     private final int orderId;
     private String name;
     private String structure;
+    private String customer;
 
     public OrderDB(int orderId) {
         this.orderId = orderId;
@@ -30,5 +31,13 @@ public class OrderDB {
 
     public String getStructure() {
         return structure;
+    }
+
+    public void setCustomer(String customer) {
+        this.customer = customer;
+    }
+
+    public String getCustomer() {
+        return customer;
     }
 }
