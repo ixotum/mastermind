@@ -8,6 +8,7 @@ public class OrderDB {
     private String name;
     private String structure;
     private String customer;
+    private String vk;
 
     public OrderDB(int orderId) {
         this.orderId = orderId;
@@ -39,5 +40,13 @@ public class OrderDB {
 
     public String getCustomer() {
         return customer;
+    }
+
+    public void setVK(String vk) {
+        this.vk = vk;
+    }
+
+    public String getVk() {
+        return vk;
     }
 }

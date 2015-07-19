@@ -29,6 +29,7 @@ public class EditOrderScreenController {
         orderComponent.getTextFieldName().setText(orderDB.getName());
         orderComponent.getTextAreaStructure().setText(orderDB.getStructure());
         orderComponent.getTextAreaCustomer().setText(orderDB.getCustomer());
+        orderComponent.getTextFieldVK().setText(orderDB.getVk());
     }
 
     public void onClickCancelButton() {
@@ -48,5 +49,7 @@ public class EditOrderScreenController {
     private void updateOrderDB() {
         orderDB.setName(orderComponent.getTextFieldName().getText());
         orderDB.setStructure(orderComponent.getTextAreaStructure().getText());
+        orderDB.setCustomer(orderComponent.getTextAreaCustomer().getText());
+        orderDB.setVK(orderComponent.getTextFieldVK().getText());
     }
 }

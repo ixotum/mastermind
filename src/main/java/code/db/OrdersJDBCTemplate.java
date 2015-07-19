@@ -16,9 +16,9 @@ public class OrdersJDBCTemplate {
     }
 
     public void saveNewOrder(OrderDB orderDB) {
-        String sql = "INSERT INTO ORDERS(ORDER_ID, NAME, STRUCTURE, CUSTOMER) " +
-                "VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, orderDB.getOrderId(), orderDB.getName(), orderDB.getStructure(), orderDB.getCustomer());
+        String sql = "INSERT INTO ORDERS(ORDER_ID, NAME, STRUCTURE, CUSTOMER, VK) " +
+                "VALUES (?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, orderDB.getOrderId(), orderDB.getName(), orderDB.getStructure(), orderDB.getCustomer(), orderDB.getVk());
     }
 
     public List<OrderDB> readAllOrders() {
@@ -27,8 +27,8 @@ public class OrdersJDBCTemplate {
     }
 
     public void updateExistedOrder(OrderDB orderDB) {
-        String sql = "UPDATE ORDERS SET NAME=?, STRUCTURE=? " +
+        String sql = "UPDATE ORDERS SET NAME=?, STRUCTURE=?, CUSTOMER=?, VK=? " +
                 "WHERE ORDER_ID = ?";
-        jdbcTemplate.update(sql, orderDB.getName(), orderDB.getStructure(), orderDB.getOrderId());
+        jdbcTemplate.update(sql, orderDB.getName(), orderDB.getStructure(), orderDB.getCustomer(), orderDB.getVk(), orderDB.getOrderId());
     }
 }

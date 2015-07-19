@@ -46,5 +46,14 @@
             <TextArea fx:id="textAreaCustomer" prefHeight="100.0" prefWidth="400.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="0.0" />
          </children>
       </AnchorPane>
+      <AnchorPane>
+         <VBox.margin>
+            <Insets left="12.0" right="12.0" top="12.0" />
+         </VBox.margin>
+         <children>
+            <Label text="VK" />
+            <TextField fx:id="textFieldVK" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="0.0" />
+         </children>
+      </AnchorPane>
     </children>
 </fx:root>

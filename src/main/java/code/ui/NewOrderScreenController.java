@@ -48,6 +48,7 @@ public class NewOrderScreenController implements Initializable {
         orderDB.setName(orderComponent.getTextFieldName().getText());
         orderDB.setStructure(orderComponent.getTextAreaStructure().getText());
         orderDB.setCustomer(orderComponent.getTextAreaCustomer().getText());
+        orderDB.setVK(orderComponent.getTextFieldVK().getText());
         return orderDB;
     }
 
