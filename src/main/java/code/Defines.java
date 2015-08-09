@@ -11,7 +11,7 @@ public class Defines {
     public static final String VERSION_FILE_NAME = "app_full_name";
     public static final String APP_DIR_PATH = "./";
 
-    public static final String FTP_HOST = "192.168.2.5";
+    public static final String FTP_HOST = "192.168.2.4";
     public static final String FTP_NAME = "anonymous";
     public static final String FTP_PASSWORD = "";
 

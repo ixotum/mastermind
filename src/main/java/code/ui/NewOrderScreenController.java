@@ -55,6 +55,7 @@ public class NewOrderScreenController implements Initializable {
         orderDB.setDueDate(Date.valueOf(localDueDate));
         LocalDate localEventDate = orderComponent.getDatePickerEventDate().getValue();
         orderDB.setEventDate(Date.valueOf(localEventDate));
+        orderDB.setDescription(orderComponent.getTextAreaDescription().getText());
 
         return orderDB;
     }

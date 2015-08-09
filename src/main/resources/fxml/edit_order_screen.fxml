@@ -9,7 +9,7 @@
         <HBox alignment="TOP_CENTER">
             <children>
                 <Button cancelButton="true" mnemonicParsing="false" onAction="#onClickCancelButton" text="Cancel" />
-                <Button mnemonicParsing="false" onAction="#onClickNewOrderDoneButton" text="Done">
+                <Button mnemonicParsing="false" onAction="#onClickEditOrderDoneButton" text="Done">
                     <HBox.margin>
                         <Insets left="25.0" />
                     </HBox.margin>

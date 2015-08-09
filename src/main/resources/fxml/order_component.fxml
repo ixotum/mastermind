@@ -10,61 +10,70 @@
 
 <fx:root type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-      <AnchorPane>
-         <children>
-            <Label text="Order #" />
-            <Label fx:id="labelOrderId" text="-1" AnchorPane.leftAnchor="75.0" />
-         </children>
-         <VBox.margin>
-            <Insets left="12.0" right="12.0" top="12.0" />
-         </VBox.margin>
-      </AnchorPane>
-      <AnchorPane>
-         <VBox.margin>
-            <Insets left="12.0" right="12.0" top="12.0" />
-         </VBox.margin>
-         <children>
-            <Label text="Name" />
-            <TextField fx:id="textFieldName" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="0.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane>
-         <children>
-            <Label text="Structure" />
-            <TextArea fx:id="textAreaStructure" prefHeight="100.0" prefWidth="400.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="0.0" />
-         </children>
-         <VBox.margin>
-            <Insets left="12.0" right="12.0" top="12.0" />
-         </VBox.margin>
-      </AnchorPane>
-      <AnchorPane>
-         <VBox.margin>
-            <Insets left="12.0" right="12.0" top="12.0" />
-         </VBox.margin>
-         <children>
-            <Label text="Customer" />
-            <TextArea fx:id="textAreaCustomer" prefHeight="100.0" prefWidth="400.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="0.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane>
-         <VBox.margin>
-            <Insets left="12.0" right="12.0" top="12.0" />
-         </VBox.margin>
-         <children>
-            <Label text="VK" />
-            <TextField fx:id="textFieldVK" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="0.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane>
-         <VBox.margin>
-            <Insets left="12.0" right="12.0" top="12.0" />
-         </VBox.margin>
-         <children>
-            <Label text="Due Date" />
-            <DatePicker fx:id="datePickerDueDate" prefWidth="125.0" AnchorPane.leftAnchor="75.0" />
-            <Label text="Event Date" AnchorPane.leftAnchor="260.0" />
-            <DatePicker fx:id="datePickerEventDate" prefWidth="125.0" AnchorPane.rightAnchor="0.0" />
-         </children>
-      </AnchorPane>
+        <AnchorPane>
+            <children>
+                <Label text="Order #" />
+                <Label fx:id="labelOrderId" text="-1" AnchorPane.leftAnchor="75.0" />
+            </children>
+            <VBox.margin>
+                <Insets left="12.0" right="12.0" top="12.0" />
+            </VBox.margin>
+        </AnchorPane>
+        <AnchorPane>
+            <VBox.margin>
+                <Insets left="12.0" right="12.0" top="12.0" />
+            </VBox.margin>
+            <children>
+                <Label text="Name" />
+                <TextField fx:id="textFieldName" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="0.0" />
+            </children>
+        </AnchorPane>
+        <AnchorPane>
+            <children>
+                <Label text="Structure" />
+                <TextArea fx:id="textAreaStructure" prefHeight="100.0" prefWidth="400.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="0.0" />
+            </children>
+            <VBox.margin>
+                <Insets left="12.0" right="12.0" top="12.0" />
+            </VBox.margin>
+        </AnchorPane>
+        <AnchorPane>
+            <VBox.margin>
+                <Insets left="12.0" right="12.0" top="12.0" />
+            </VBox.margin>
+            <children>
+                <Label text="Customer" />
+                <TextArea fx:id="textAreaCustomer" prefHeight="100.0" prefWidth="400.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="0.0" />
+            </children>
+        </AnchorPane>
+        <AnchorPane>
+            <VBox.margin>
+                <Insets left="12.0" right="12.0" top="12.0" />
+            </VBox.margin>
+            <children>
+                <Label text="VK" />
+                <TextField fx:id="textFieldVK" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="0.0" />
+            </children>
+        </AnchorPane>
+        <AnchorPane>
+            <VBox.margin>
+                <Insets left="12.0" right="12.0" top="12.0" />
+            </VBox.margin>
+            <children>
+                <Label text="Due Date" />
+                <DatePicker fx:id="datePickerDueDate" prefWidth="125.0" AnchorPane.leftAnchor="85.0" />
+                <Label text="Event Date" AnchorPane.leftAnchor="260.0" />
+                <DatePicker fx:id="datePickerEventDate" prefWidth="125.0" AnchorPane.rightAnchor="0.0" />
+            </children>
+        </AnchorPane>
+        <AnchorPane>
+            <children>
+                <Label text="Description" />
+                <TextArea fx:id="textAreaDescription" prefHeight="100.0" prefWidth="400.0" AnchorPane.leftAnchor="85.0" />
+            </children>
+            <VBox.margin>
+                <Insets left="12.0" right="12.0" top="12.0" />
+            </VBox.margin>
+        </AnchorPane>
     </children>
 </fx:root>

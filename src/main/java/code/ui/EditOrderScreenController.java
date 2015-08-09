@@ -42,13 +42,15 @@ public class EditOrderScreenController {
         if (eventDate != null) {
             orderComponent.getDatePickerEventDate().setValue(eventDate.toLocalDate());
         }
+
+        orderComponent.getTextAreaDescription().setText(orderDB.getDescription());
     }
 
     public void onClickCancelButton() {
         stage.hide();
     }
 
-    public void onClickNewOrderDoneButton() {
+    public void onClickEditOrderDoneButton() {
         updateOrderDB();
         final ApplicationContext applicationContext = new ClassPathXmlApplicationContext(Defines.BEANS_CONFIG);
         OrdersJDBCTemplate ordersJDBCTemplate = (OrdersJDBCTemplate) applicationContext.getBean("ordersJDBCTemplateId");
@@ -65,5 +67,6 @@ public class EditOrderScreenController {
         orderDB.setVK(orderComponent.getTextFieldVK().getText());
         orderDB.setDueDate(Date.valueOf(orderComponent.getDatePickerDueDate().getValue()));
         orderDB.setEventDate(Date.valueOf(orderComponent.getDatePickerEventDate().getValue()));
+        orderDB.setDescription(orderComponent.getTextAreaDescription().getText());
     }
 }
