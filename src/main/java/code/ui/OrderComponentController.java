@@ -19,6 +19,8 @@ public class OrderComponentController extends VBox {
     @FXML
     private TextArea textAreaStructure;
     @FXML
+    private TextField textFieldPrice;
+    @FXML
     private TextArea textAreaCustomer;
     @FXML
     private TextField textFieldVK;
@@ -72,5 +74,9 @@ public class OrderComponentController extends VBox {
 
     public TextArea getTextAreaDescription() {
         return textAreaDescription;
+    }
+
+    public TextField getTextFieldPrice() {
+        return textFieldPrice;
     }
 }

@@ -16,9 +16,9 @@ public class OrdersJDBCTemplate {
     }
 
     public void saveNewOrder(OrderDB orderDB) {
-        String sql = "INSERT INTO ORDERS(ORDER_ID, NAME, STRUCTURE, CUSTOMER, VK, DUE_DATE, EVENT_DATE, DESCRIPTION) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, orderDB.getOrderId(), orderDB.getName(), orderDB.getStructure(), orderDB.getCustomer(),
+        String sql = "INSERT INTO ORDERS(ORDER_ID, NAME, STRUCTURE, PRICE, CUSTOMER, VK, DUE_DATE, EVENT_DATE, DESCRIPTION) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, orderDB.getOrderId(), orderDB.getName(), orderDB.getStructure(), orderDB.getPrice(), orderDB.getCustomer(),
                 orderDB.getVk(), orderDB.getDueDate(), orderDB.getEventDate(), orderDB.getDescription());
     }
 
@@ -28,9 +28,9 @@ public class OrdersJDBCTemplate {
     }
 
     public void updateExistedOrder(OrderDB orderDB) {
-        String sql = "UPDATE ORDERS SET NAME=?, STRUCTURE=?, CUSTOMER=?, VK=?, DUE_DATE=?, EVENT_DATE=?, DESCRIPTION=? " +
+        String sql = "UPDATE ORDERS SET NAME=?, STRUCTURE=?, PRICE=?, CUSTOMER=?, VK=?, DUE_DATE=?, EVENT_DATE=?, DESCRIPTION=? " +
                 "WHERE ORDER_ID = ?";
-        jdbcTemplate.update(sql, orderDB.getName(), orderDB.getStructure(), orderDB.getCustomer(), orderDB.getVk(),
+        jdbcTemplate.update(sql, orderDB.getName(), orderDB.getStructure(), orderDB.getPrice(), orderDB.getCustomer(), orderDB.getVk(),
                 orderDB.getDueDate(), orderDB.getEventDate(), orderDB.getDescription(), orderDB.getOrderId());
     }
 }

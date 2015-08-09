@@ -9,6 +9,7 @@ public class OrderDB {
     private final int orderId;
     private String name;
     private String structure;
+    private String price;
     private String customer;
     private String vk;
     private Date dueDate;
@@ -37,6 +38,14 @@ public class OrderDB {
 
     public String getStructure() {
         return structure;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getPrice() {
+        return price;
     }
 
     public void setCustomer(String customer) {

@@ -30,6 +30,7 @@ public class EditOrderScreenController {
         orderComponent.getLabelOrderId().setText(String.valueOf(orderDB.getOrderId()));
         orderComponent.getTextFieldName().setText(orderDB.getName());
         orderComponent.getTextAreaStructure().setText(orderDB.getStructure());
+        orderComponent.getTextFieldPrice().setText(orderDB.getPrice());
         orderComponent.getTextAreaCustomer().setText(orderDB.getCustomer());
         orderComponent.getTextFieldVK().setText(orderDB.getVk());
 
@@ -51,7 +52,7 @@ public class EditOrderScreenController {
     }
 
     public void onClickEditOrderDoneButton() {
-        updateOrderDB();
+        updateOrderDB(orderComponent, orderDB);
         final ApplicationContext applicationContext = new ClassPathXmlApplicationContext(Defines.BEANS_CONFIG);
         OrdersJDBCTemplate ordersJDBCTemplate = (OrdersJDBCTemplate) applicationContext.getBean("ordersJDBCTemplateId");
         ordersJDBCTemplate.updateExistedOrder(orderDB);
@@ -60,9 +61,10 @@ public class EditOrderScreenController {
         stage.hide();
     }
 
-    private void updateOrderDB() {
+    private static void updateOrderDB(OrderComponentController orderComponent, OrderDB orderDB) {
         orderDB.setName(orderComponent.getTextFieldName().getText());
         orderDB.setStructure(orderComponent.getTextAreaStructure().getText());
+        orderDB.setPrice(orderComponent.getTextFieldPrice().getText());
         orderDB.setCustomer(orderComponent.getTextAreaCustomer().getText());
         orderDB.setVK(orderComponent.getTextFieldVK().getText());
         orderDB.setDueDate(Date.valueOf(orderComponent.getDatePickerDueDate().getValue()));

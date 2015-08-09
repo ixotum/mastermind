@@ -49,6 +49,7 @@ public class NewOrderScreenController implements Initializable {
         OrderDB orderDB = new OrderDB(orderId);
         orderDB.setName(orderComponent.getTextFieldName().getText());
         orderDB.setStructure(orderComponent.getTextAreaStructure().getText());
+        orderDB.setPrice(orderComponent.getTextFieldPrice().getText());
         orderDB.setCustomer(orderComponent.getTextAreaCustomer().getText());
         orderDB.setVK(orderComponent.getTextFieldVK().getText());
         LocalDate localDueDate = orderComponent.getDatePickerDueDate().getValue();
