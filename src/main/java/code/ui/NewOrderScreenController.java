@@ -6,6 +6,7 @@ import code.bus.BusEventManager;
 import code.db.OrderDB;
 import code.db.OrdersJDBCTemplate;
 import code.db.SettingsJDBCTemplate;
+import code.ui.models.NewOrderScreenModel;
 import code.utils.LoggerManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -28,9 +29,14 @@ public class NewOrderScreenController implements Initializable {
 
     private SettingsJDBCTemplate settingsJDBCTemplate;
     private Stage stage;
+    private NewOrderScreenModel model;
 
     @FXML
-    public OrderComponentController orderComponent;
+    private OrderComponentController orderComponent;
+
+    public NewOrderScreenController() {
+        model = new NewOrderScreenModel(this);
+    }
 
     public void onClickNewOrderDoneButton() {
         int orderId = Integer.parseInt(orderComponent.getLabelOrderId().getText());
@@ -38,27 +44,11 @@ public class NewOrderScreenController implements Initializable {
         settingsJDBCTemplate.saveLastOrderId(orderId);
 
         OrdersJDBCTemplate ordersJDBCTemplate = (OrdersJDBCTemplate) applicationContext.getBean("ordersJDBCTemplateId");
-        OrderDB orderDB = createOrderDB(orderId);
+        OrderDB orderDB = model.createOrderDB(orderId);
         ordersJDBCTemplate.saveNewOrder(orderDB);
 
         BusEventManager.dispatch(BusEvent.ORDER_UPDATED);
         stage.hide();
-    }
-
-    private OrderDB createOrderDB(int orderId) {
-        OrderDB orderDB = new OrderDB(orderId);
-        orderDB.setName(orderComponent.getTextFieldName().getText());
-        orderDB.setStructure(orderComponent.getTextAreaStructure().getText());
-        orderDB.setPrice(orderComponent.getTextFieldPrice().getText());
-        orderDB.setCustomer(orderComponent.getTextAreaCustomer().getText());
-        orderDB.setVK(orderComponent.getTextFieldVK().getText());
-        LocalDate localDueDate = orderComponent.getDatePickerDueDate().getValue();
-        orderDB.setDueDate(Date.valueOf(localDueDate));
-        LocalDate localEventDate = orderComponent.getDatePickerEventDate().getValue();
-        orderDB.setEventDate(Date.valueOf(localEventDate));
-        orderDB.setDescription(orderComponent.getTextAreaDescription().getText());
-
-        return orderDB;
     }
 
     @Override
@@ -78,5 +68,9 @@ public class NewOrderScreenController implements Initializable {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    public OrderComponentController getOrderComponent() {
+        return orderComponent;
     }
 }
