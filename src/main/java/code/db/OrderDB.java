@@ -1,5 +1,7 @@
 package code.db;
 
+import code.db.order_structure_component.OrderStructureComponentDB;
+
 import java.sql.Date;
 
 /**
@@ -10,6 +12,7 @@ public class OrderDB {
     private String name;
     private String structure;
     private String price;
+    private OrderStructureComponentDB orderStructureComponentDB;
     private String customer;
     private String vk;
     private Date dueDate;
@@ -46,6 +49,14 @@ public class OrderDB {
 
     public String getPrice() {
         return price;
+    }
+
+    public void setOrderStructureComponentDB(OrderStructureComponentDB orderStructureComponentDB) {
+        this.orderStructureComponentDB = orderStructureComponentDB;
+    }
+
+    public OrderStructureComponentDB getOrderStructureComponentDB() {
+        return orderStructureComponentDB;
     }
 
     public void setCustomer(String customer) {

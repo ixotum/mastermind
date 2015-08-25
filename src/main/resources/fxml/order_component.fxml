@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import code.ui.order_structure_component.OrderStructureComponent?>
+<?import code.ui.order_structure_component.OrderStructureComponentController?>
 <fx:root type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <AnchorPane>
@@ -50,7 +50,7 @@
             </VBox.margin>
             <children>
                 <Label text="Struct.comp." />
-                <OrderStructureComponent prefHeight="200.0" prefWidth="400.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="0.0"/>
+                <OrderStructureComponentController fx:id="orderStructureComponentController" prefHeight="200.0" prefWidth="400.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="0.0"/>
             </children>
         </AnchorPane>
         <AnchorPane>

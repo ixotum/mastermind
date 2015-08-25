@@ -15,8 +15,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.net.URL;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
@@ -41,7 +39,7 @@ public class NewOrderScreenController implements Initializable {
     public void onClickNewOrderDoneButton() {
         int orderId = Integer.parseInt(orderComponent.getLabelOrderId().getText());
         logger.info("Saving order with number: " + orderId);
-        settingsJDBCTemplate.saveLastOrderId(orderId);
+        settingsJDBCTemplate.saveLastOrderId(orderId);//TODO db operations move to model
 
         OrdersJDBCTemplate ordersJDBCTemplate = (OrdersJDBCTemplate) applicationContext.getBean("ordersJDBCTemplateId");
         OrderDB orderDB = model.createOrderDB(orderId);

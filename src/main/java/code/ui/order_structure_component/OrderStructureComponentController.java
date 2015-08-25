@@ -19,7 +19,7 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class OrderStructureComponent extends AnchorPane implements Initializable {
+public class OrderStructureComponentController extends AnchorPane implements Initializable {
     @FXML
     public TableView tableViewOrderStructure;
     @FXML
@@ -29,7 +29,7 @@ public class OrderStructureComponent extends AnchorPane implements Initializable
     @FXML
     public TableColumn columnPrice;
 
-    public OrderStructureComponent() {
+    public OrderStructureComponentController() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/order_structure_component.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -149,5 +149,13 @@ public class OrderStructureComponent extends AnchorPane implements Initializable
         tableView.getItems().remove(rowIndex);
         recalculateTable(tableView);
         redrawTable(tableView);
+    }
+
+    public int getStructureSize() {
+        return tableViewOrderStructure.getItems().size();
+    }
+
+    public RowData getRowData(int rowIndex) {
+        return (RowData) tableViewOrderStructure.getItems().get(rowIndex);
     }
 }

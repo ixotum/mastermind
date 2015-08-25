@@ -1,5 +1,6 @@
 package code.ui;
 
+import code.ui.order_structure_component.OrderStructureComponentController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,6 +27,8 @@ public class OrderComponentController extends VBox implements Initializable {
     private TextArea textAreaStructure;
     @FXML
     private TextField textFieldPrice;
+    @FXML
+    private OrderStructureComponentController orderStructureComponentController;
     @FXML
     private TextArea textAreaCustomer;
     @FXML
@@ -84,6 +87,10 @@ public class OrderComponentController extends VBox implements Initializable {
 
     public TextField getTextFieldPrice() {
         return textFieldPrice;
+    }
+
+    public OrderStructureComponentController getOrderStructureComponentController() {
+        return orderStructureComponentController;
     }
 
     @Override
