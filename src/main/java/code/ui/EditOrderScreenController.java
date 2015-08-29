@@ -5,6 +5,8 @@ import code.bus.BusEvent;
 import code.bus.BusEventManager;
 import code.db.OrderDB;
 import code.db.OrdersJDBCTemplate;
+import code.db.order_structure_component.OrderStructureComponentDB;
+import code.ui.order_structure_component.OrderStructureComponentController;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import org.springframework.context.ApplicationContext;
@@ -66,6 +68,11 @@ public class EditOrderScreenController {
         orderDB.setName(orderComponent.getTextFieldName().getText());
         orderDB.setStructure(orderComponent.getTextAreaStructure().getText());
         orderDB.setPrice(orderComponent.getTextFieldPrice().getText());
+
+        OrderStructureComponentController orderStructureComponentController = orderComponent.getOrderStructureComponentController();
+        OrderStructureComponentDB orderStructureComponentDB = OrderComponentController.createOrderStructureComponentDB(orderStructureComponentController);
+        orderDB.setOrderStructureComponentDB(orderStructureComponentDB);
+
         orderDB.setCustomer(orderComponent.getTextAreaCustomer().getText());
         orderDB.setVK(orderComponent.getTextFieldVK().getText());
         orderDB.setDueDate(Date.valueOf(orderComponent.getDatePickerDueDate().getValue()));

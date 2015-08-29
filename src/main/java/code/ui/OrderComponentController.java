@@ -1,5 +1,6 @@
 package code.ui;
 
+import code.db.order_structure_component.OrderComponentModel;
 import code.db.order_structure_component.OrderStructureComponentDB;
 import code.ui.order_structure_component.OrderStructureComponentController;
 import javafx.fxml.FXML;
@@ -104,5 +105,9 @@ public class OrderComponentController extends VBox implements Initializable {
         LocalDate localDate = todayDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         datePickerDueDate.setValue(localDate);
         datePickerEventDate.setValue(localDate);
+    }
+
+    public static OrderStructureComponentDB createOrderStructureComponentDB(OrderStructureComponentController orderStructureComponentController) {
+        return OrderComponentModel.createOrderStructureComponentDB(orderStructureComponentController);
     }
 }

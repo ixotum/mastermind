@@ -81,5 +81,13 @@ public class OrdersJDBCTemplate {
                 "WHERE ORDER_ID = ?";
         jdbcTemplate.update(sql, orderDB.getName(), orderDB.getStructure(), orderDB.getPrice(), orderDB.getCustomer(), orderDB.getVk(),
                 orderDB.getDueDate(), orderDB.getEventDate(), orderDB.getDescription(), orderDB.getOrderId());
+
+        deleteOrderStructureComponent(orderDB.getOrderId());
+        saveNewOrderStructureComponent(orderDB.getOrderId(), orderDB.getOrderStructureComponentDB());
+    }
+
+    private void deleteOrderStructureComponent(int orderId) {
+        String sql = "DELETE FROM ORDER_STRUCTURE_COMPONENTS WHERE ORDER_ID = ?";
+        jdbcTemplate.update(sql, orderId);
     }
 }
