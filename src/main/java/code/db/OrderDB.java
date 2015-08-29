@@ -10,8 +10,6 @@ import java.sql.Date;
 public class OrderDB {
     private final int orderId;
     private String name;
-    private String structure;
-    private String price;
     private OrderStructureComponentDB orderStructureComponentDB;
     private String customer;
     private String vk;
@@ -33,22 +31,6 @@ public class OrderDB {
 
     public String getName() {
         return name;
-    }
-
-    public void setStructure(String structure) {
-        this.structure = structure;
-    }
-
-    public String getStructure() {
-        return structure;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getPrice() {
-        return price;
     }
 
     public void setOrderStructureComponentDB(OrderStructureComponentDB orderStructureComponentDB) {

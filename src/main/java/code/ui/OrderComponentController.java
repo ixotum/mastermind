@@ -26,10 +26,6 @@ public class OrderComponentController extends VBox implements Initializable {
     @FXML
     private Label labelOrderId;
     @FXML
-    private TextArea textAreaStructure;
-    @FXML
-    private TextField textFieldPrice;
-    @FXML
     private OrderStructureComponentController orderStructureComponentController;
     @FXML
     private TextArea textAreaCustomer;
@@ -63,10 +59,6 @@ public class OrderComponentController extends VBox implements Initializable {
         return textFieldName;
     }
 
-    public TextArea getTextAreaStructure() {
-        return textAreaStructure;
-    }
-
     public TextArea getTextAreaCustomer() {
         return textAreaCustomer;
     }
@@ -85,10 +77,6 @@ public class OrderComponentController extends VBox implements Initializable {
 
     public TextArea getTextAreaDescription() {
         return textAreaDescription;
-    }
-
-    public TextField getTextFieldPrice() {
-        return textFieldPrice;
     }
 
     public void initOrderStructureComponentController(OrderStructureComponentDB orderStructureComponentDB) {

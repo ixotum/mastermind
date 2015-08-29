@@ -31,8 +31,7 @@ public class EditOrderScreenController {
         this.orderDB = orderDB;
         orderComponent.getLabelOrderId().setText(String.valueOf(orderDB.getOrderId()));
         orderComponent.getTextFieldName().setText(orderDB.getName());
-        orderComponent.getTextAreaStructure().setText(orderDB.getStructure());
-        orderComponent.getTextFieldPrice().setText(orderDB.getPrice());
+        orderComponent.initOrderStructureComponentController(orderDB.getOrderStructureComponentDB());
         orderComponent.getTextAreaCustomer().setText(orderDB.getCustomer());
         orderComponent.getTextFieldVK().setText(orderDB.getVk());
 
@@ -47,7 +46,6 @@ public class EditOrderScreenController {
         }
 
         orderComponent.getTextAreaDescription().setText(orderDB.getDescription());
-        orderComponent.initOrderStructureComponentController(orderDB.getOrderStructureComponentDB());
     }
 
     public void onClickCancelButton() {
@@ -66,8 +64,6 @@ public class EditOrderScreenController {
 
     private static void updateOrderDB(OrderComponentController orderComponent, OrderDB orderDB) {
         orderDB.setName(orderComponent.getTextFieldName().getText());
-        orderDB.setStructure(orderComponent.getTextAreaStructure().getText());
-        orderDB.setPrice(orderComponent.getTextFieldPrice().getText());
 
         OrderStructureComponentController orderStructureComponentController = orderComponent.getOrderStructureComponentController();
         OrderStructureComponentDB orderStructureComponentDB = OrderComponentController.createOrderStructureComponentDB(orderStructureComponentController);

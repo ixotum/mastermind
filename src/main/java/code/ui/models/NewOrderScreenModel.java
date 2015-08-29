@@ -20,8 +20,6 @@ public class NewOrderScreenModel {
         OrderComponentController orderComponent = controller.getOrderComponent();
         OrderDB orderDB = new OrderDB(orderId);
         orderDB.setName(orderComponent.getTextFieldName().getText());
-        orderDB.setStructure(orderComponent.getTextAreaStructure().getText());
-        orderDB.setPrice(orderComponent.getTextFieldPrice().getText());
 
         OrderStructureComponentController orderStructureComponentController = orderComponent.getOrderStructureComponentController();
         OrderStructureComponentDB orderStructureComponentDB = OrderComponentController.createOrderStructureComponentDB(orderStructureComponentController);

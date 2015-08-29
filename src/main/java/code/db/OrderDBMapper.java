@@ -13,8 +13,6 @@ public class OrderDBMapper implements RowMapper {
     public Object mapRow(ResultSet rs, int rowNumber) throws SQLException {
         OrderDB orderDB = new OrderDB(rs.getInt("ORDER_ID"));
         orderDB.setName(rs.getString("NAME"));
-        orderDB.setStructure(rs.getString("STRUCTURE"));
-        orderDB.setPrice(rs.getString("PRICE"));
         orderDB.setCustomer(rs.getString("CUSTOMER"));
         orderDB.setVK(rs.getString("VK"));
         orderDB.setDueDate(rs.getDate("DUE_DATE"));
