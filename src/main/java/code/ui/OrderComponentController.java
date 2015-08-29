@@ -1,5 +1,6 @@
 package code.ui;
 
+import code.db.order_structure_component.OrderComponentModel;
 import code.db.order_structure_component.OrderStructureComponentDB;
 import code.ui.order_structure_component.OrderStructureComponentController;
 import javafx.fxml.FXML;
@@ -24,10 +25,6 @@ import java.util.ResourceBundle;
 public class OrderComponentController extends VBox implements Initializable {
     @FXML
     private Label labelOrderId;
-    @FXML
-    private TextArea textAreaStructure;
-    @FXML
-    private TextField textFieldPrice;
     @FXML
     private OrderStructureComponentController orderStructureComponentController;
     @FXML
@@ -62,10 +59,6 @@ public class OrderComponentController extends VBox implements Initializable {
         return textFieldName;
     }
 
-    public TextArea getTextAreaStructure() {
-        return textAreaStructure;
-    }
-
     public TextArea getTextAreaCustomer() {
         return textAreaCustomer;
     }
@@ -86,10 +79,6 @@ public class OrderComponentController extends VBox implements Initializable {
         return textAreaDescription;
     }
 
-    public TextField getTextFieldPrice() {
-        return textFieldPrice;
-    }
-
     public void initOrderStructureComponentController(OrderStructureComponentDB orderStructureComponentDB) {
         orderStructureComponentController.setOrderStructureComponentDB(orderStructureComponentDB);
     }
@@ -104,5 +93,9 @@ public class OrderComponentController extends VBox implements Initializable {
         LocalDate localDate = todayDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         datePickerDueDate.setValue(localDate);
         datePickerEventDate.setValue(localDate);
+    }
+
+    public static OrderStructureComponentDB createOrderStructureComponentDB(OrderStructureComponentController orderStructureComponentController) {
+        return OrderComponentModel.createOrderStructureComponentDB(orderStructureComponentController);
     }
 }
