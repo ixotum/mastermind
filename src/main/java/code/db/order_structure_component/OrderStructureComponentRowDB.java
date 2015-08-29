@@ -3,6 +3,8 @@ package code.db.order_structure_component;
 import java.math.BigDecimal;
 
 public class OrderStructureComponentRowDB {
+    private int orderId;
+    private int position;
     private String item;
     private BigDecimal price;
 
@@ -20,5 +22,21 @@ public class OrderStructureComponentRowDB {
 
     public BigDecimal getPrice() {
         return price;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 }

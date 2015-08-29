@@ -1,5 +1,6 @@
 package code.ui;
 
+import code.db.order_structure_component.OrderStructureComponentDB;
 import code.ui.order_structure_component.OrderStructureComponentController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -87,6 +88,10 @@ public class OrderComponentController extends VBox implements Initializable {
 
     public TextField getTextFieldPrice() {
         return textFieldPrice;
+    }
+
+    public void initOrderStructureComponentController(OrderStructureComponentDB orderStructureComponentDB) {
+        orderStructureComponentController.setOrderStructureComponentDB(orderStructureComponentDB);
     }
 
     public OrderStructureComponentController getOrderStructureComponentController() {

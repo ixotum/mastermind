@@ -16,4 +16,12 @@ public class OrderStructureComponentDB {
     public OrderStructureComponentRowDB getComponentRow(int rowIndex) {
         return componentRowList.get(rowIndex);
     }
+
+    public int getOrderId() {
+        return getComponentRow(0).getOrderId();
+    }
+
+    public List<OrderStructureComponentRowDB> getComponentRowList() {
+        return componentRowList;
+    }
 }

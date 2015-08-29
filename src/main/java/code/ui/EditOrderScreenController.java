@@ -45,6 +45,7 @@ public class EditOrderScreenController {
         }
 
         orderComponent.getTextAreaDescription().setText(orderDB.getDescription());
+        orderComponent.initOrderStructureComponentController(orderDB.getOrderStructureComponentDB());
     }
 
     public void onClickCancelButton() {

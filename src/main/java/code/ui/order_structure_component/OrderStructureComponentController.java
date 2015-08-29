@@ -1,7 +1,10 @@
 package code.ui.order_structure_component;
 
+import code.db.order_structure_component.OrderStructureComponentDB;
+import code.db.order_structure_component.OrderStructureComponentRowDB;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,11 +20,12 @@ import javafx.util.Callback;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class OrderStructureComponentController extends AnchorPane implements Initializable {
     @FXML
-    public TableView tableViewOrderStructure;
+    public TableView<RowData> tableViewOrderStructure;
     @FXML
     public TableColumn columnButtonDelete;
     @FXML
@@ -60,7 +64,7 @@ public class OrderStructureComponentController extends AnchorPane implements Ini
                 int countRow = event.getTableView().getItems().size();
 
                 if (currentRow == countRow - 1) {
-                    addNewRow(tableViewOrderStructure);
+                    addEmptyRow(tableViewOrderStructure, true);
                     recalculateTable(tableViewOrderStructure);
                 }
             }
@@ -79,7 +83,7 @@ public class OrderStructureComponentController extends AnchorPane implements Ini
         tableViewOrderStructure.setEditable(true);
         ObservableList<RowData> observableList = FXCollections.observableArrayList();
         tableViewOrderStructure.setItems(observableList);
-        addNewRow(tableViewOrderStructure);
+        addEmptyRow(tableViewOrderStructure, true);
     }
 
     private static void recalculateTable(TableView tableView) {
@@ -122,27 +126,29 @@ public class OrderStructureComponentController extends AnchorPane implements Ini
         ((TableColumn) tableView.getColumns().get(0)).setVisible(true);
     }
 
-    private static void addNewRow(TableView tableView) {
+    private static void addEmptyRow(TableView<RowData> tableView, boolean zeroFlag) {
         int lastRowIndex = tableView.getItems().size() - 1;
         System.out.println("lastRowIndex = " + lastRowIndex);
 
-        if (lastRowIndex != -1) {
-            ((RowData) tableView.getItems().get(lastRowIndex)).setColumnPrice("0");
+        if (lastRowIndex != -1 && zeroFlag) {
+            tableView.getItems().get(lastRowIndex).setColumnPrice("0");
         }
 
         int newRowIndex = lastRowIndex + 1;
 
-        RowData rowData = new RowData(newRowIndex, event -> {
-            int rowIndex = (int) event.getSource();
-            System.out.println("handle delete event row index: " + rowIndex);
-            removeRow(tableView, rowIndex);
-        });
+        RowData rowData = new RowData(newRowIndex, event -> deleteButtonHandler(tableView, event));
         ObservableList<RowData> observableList = tableView.getItems();
         observableList.add(rowData);
 
         if (newRowIndex == 0) {
-            ((RowData) tableView.getItems().get(newRowIndex)).getColumnButtonDelete().setVisible(false);
+            tableView.getItems().get(newRowIndex).getColumnButtonDelete().setVisible(false);
         }
+    }
+
+    private static void deleteButtonHandler(TableView tableView, Event event) {
+        int rowIndex = (int) event.getSource();
+        System.out.println("handle delete event row index: " + rowIndex);
+        removeRow(tableView, rowIndex);
     }
 
     private static void removeRow(TableView tableView, int rowIndex) {
@@ -156,6 +162,28 @@ public class OrderStructureComponentController extends AnchorPane implements Ini
     }
 
     public RowData getRowData(int rowIndex) {
-        return (RowData) tableViewOrderStructure.getItems().get(rowIndex);
+        return tableViewOrderStructure.getItems().get(rowIndex);
+    }
+
+    public void setOrderStructureComponentDB(OrderStructureComponentDB structureComponentDB) {
+        tableViewOrderStructure.getItems().clear();
+
+        List<OrderStructureComponentRowDB> componentRowList = structureComponentDB.getComponentRowList();
+        for (OrderStructureComponentRowDB componentRowDB : componentRowList) {
+            addNewRow(componentRowDB, tableViewOrderStructure);
+        }
+
+        addEmptyRow(tableViewOrderStructure, false);
+        recalculateTable(tableViewOrderStructure);
+    }
+
+    private static void addNewRow(OrderStructureComponentRowDB componentRowDB, TableView<RowData> table) {
+        int rowIndex = table.getItems().size();
+        RowData rowData = new RowData(rowIndex, event -> deleteButtonHandler(table, event));
+        rowData.setColumnItem(componentRowDB.getItem());
+        rowData.setColumnPrice(componentRowDB.getPrice().toString());
+
+        ObservableList<RowData> observableList = table.getItems();
+        observableList.add(rowData);
     }
 }
