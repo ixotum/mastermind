@@ -11,11 +11,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -91,8 +93,34 @@ public class OrderComponentController extends VBox implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         Date todayDate = new Date();
         LocalDate localDate = todayDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        initDatePicker(datePickerDueDate);
+        initDatePicker(datePickerEventDate);
         datePickerDueDate.setValue(localDate);
         datePickerEventDate.setValue(localDate);
+    }
+
+    private static void initDatePicker(DatePicker datePicker) {
+        StringConverter<LocalDate> converter = new StringConverter<LocalDate>() {
+            String pattern = "dd/MM/yyyy";
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
+            @Override
+            public String toString(LocalDate date) {
+                if (date != null) {
+                    return dateFormatter.format(date);
+                } else {
+                    return "";
+                }
+            }
+            @Override
+            public LocalDate fromString(String string) {
+                if (string != null && !string.isEmpty()) {
+                    return LocalDate.parse(string, dateFormatter);
+                } else {
+                    return null;
+                }
+            }
+        };
+        datePicker.setConverter(converter);
     }
 
     public static OrderStructureComponentDB createOrderStructureComponentDB(OrderStructureComponentController orderStructureComponentController) {
