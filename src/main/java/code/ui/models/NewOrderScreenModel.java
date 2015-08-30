@@ -26,6 +26,7 @@ public class NewOrderScreenModel {
         orderDB.setOrderStructureComponentDB(orderStructureComponentDB);
 
         orderDB.setCustomer(orderComponent.getTextAreaCustomer().getText());
+        orderDB.setAddress(orderComponent.getTextAreaAddress().getText());
         orderDB.setVK(orderComponent.getTextFieldVK().getText());
         LocalDate localDueDate = orderComponent.getDatePickerDueDate().getValue();
         orderDB.setDueDate(Date.valueOf(localDueDate));

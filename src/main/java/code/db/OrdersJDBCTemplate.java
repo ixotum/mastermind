@@ -22,9 +22,9 @@ public class OrdersJDBCTemplate {
     }
 
     public void saveNewOrder(OrderDB orderDB) {
-        String sql = "INSERT INTO ORDERS(ORDER_ID, NAME, CUSTOMER, VK, DUE_DATE, EVENT_DATE, DESCRIPTION, NOTES) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, orderDB.getOrderId(), orderDB.getName(), orderDB.getCustomer(),
+        String sql = "INSERT INTO ORDERS(ORDER_ID, NAME, CUSTOMER, ADDRESS, VK, DUE_DATE, EVENT_DATE, DESCRIPTION, NOTES) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, orderDB.getOrderId(), orderDB.getName(), orderDB.getCustomer(), orderDB.getAddress(),
                 orderDB.getVk(), orderDB.getDueDate(), orderDB.getEventDate(), orderDB.getDescription(), orderDB.getNotes());
 
         saveNewOrderStructureComponent(orderDB.getOrderId(), orderDB.getOrderStructureComponentDB());
@@ -87,9 +87,9 @@ public class OrdersJDBCTemplate {
     }
 
     public void updateExistedOrder(OrderDB orderDB) {
-        String sql = "UPDATE ORDERS SET NAME=?, CUSTOMER=?, VK=?, DUE_DATE=?, EVENT_DATE=?, DESCRIPTION=?, NOTES=? " +
+        String sql = "UPDATE ORDERS SET NAME=?, CUSTOMER=?, ADDRESS=?, VK=?, DUE_DATE=?, EVENT_DATE=?, DESCRIPTION=?, NOTES=? " +
                 "WHERE ORDER_ID = ?";
-        jdbcTemplate.update(sql, orderDB.getName(), orderDB.getCustomer(), orderDB.getVk(),
+        jdbcTemplate.update(sql, orderDB.getName(), orderDB.getCustomer(), orderDB.getAddress(), orderDB.getVk(),
                 orderDB.getDueDate(), orderDB.getEventDate(), orderDB.getDescription(), orderDB.getNotes(), orderDB.getOrderId());
 
         deleteOrderStructureComponent(orderDB.getOrderId());

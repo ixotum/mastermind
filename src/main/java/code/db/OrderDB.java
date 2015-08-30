@@ -17,6 +17,7 @@ public class OrderDB {
     private Date eventDate;
     private String description;
     private String notes;
+    private String address;
 
     public OrderDB(int orderId) {
         this.orderId = orderId;
@@ -48,6 +49,14 @@ public class OrderDB {
 
     public String getCustomer() {
         return customer;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     public void setVK(String vk) {

@@ -33,6 +33,7 @@ public class EditOrderScreenController {
         orderComponent.getTextFieldName().setText(orderDB.getName());
         orderComponent.initOrderStructureComponentController(orderDB.getOrderStructureComponentDB());
         orderComponent.getTextAreaCustomer().setText(orderDB.getCustomer());
+        orderComponent.getTextAreaAddress().setText(orderDB.getAddress());
         orderComponent.getTextFieldVK().setText(orderDB.getVk());
 
         Date dueDate = orderDB.getDueDate();
@@ -71,6 +72,7 @@ public class EditOrderScreenController {
         orderDB.setOrderStructureComponentDB(orderStructureComponentDB);
 
         orderDB.setCustomer(orderComponent.getTextAreaCustomer().getText());
+        orderDB.setAddress(orderComponent.getTextAreaAddress().getText());
         orderDB.setVK(orderComponent.getTextFieldVK().getText());
         orderDB.setDueDate(Date.valueOf(orderComponent.getDatePickerDueDate().getValue()));
         orderDB.setEventDate(Date.valueOf(orderComponent.getDatePickerEventDate().getValue()));

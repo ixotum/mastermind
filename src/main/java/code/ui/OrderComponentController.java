@@ -32,6 +32,8 @@ public class OrderComponentController extends VBox implements Initializable {
     @FXML
     private TextArea textAreaCustomer;
     @FXML
+    private TextArea textAreaAddress;
+    @FXML
     private TextField textFieldVK;
     @FXML
     private DatePicker datePickerEventDate;
@@ -65,6 +67,10 @@ public class OrderComponentController extends VBox implements Initializable {
 
     public TextArea getTextAreaCustomer() {
         return textAreaCustomer;
+    }
+
+    public TextArea getTextAreaAddress() {
+        return textAreaAddress;
     }
 
     public TextField getTextFieldVK() {
