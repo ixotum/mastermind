@@ -41,6 +41,8 @@ public class OrderComponentController extends VBox implements Initializable {
     private DatePicker datePickerDueDate;
     @FXML
     private TextArea textAreaDescription;
+    @FXML
+    private TextArea textAreaNotes;
 
     public OrderComponentController() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/order_component.fxml"));
@@ -87,6 +89,10 @@ public class OrderComponentController extends VBox implements Initializable {
 
     public OrderStructureComponentController getOrderStructureComponentController() {
         return orderStructureComponentController;
+    }
+
+    public TextArea getTextAreaNotes() {
+        return textAreaNotes;
     }
 
     @Override

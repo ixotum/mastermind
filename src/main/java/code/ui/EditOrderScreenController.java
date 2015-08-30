@@ -46,6 +46,7 @@ public class EditOrderScreenController {
         }
 
         orderComponent.getTextAreaDescription().setText(orderDB.getDescription());
+        orderComponent.getTextAreaNotes().setText(orderDB.getNotes());
     }
 
     public void onClickCancelButton() {
@@ -74,5 +75,6 @@ public class EditOrderScreenController {
         orderDB.setDueDate(Date.valueOf(orderComponent.getDatePickerDueDate().getValue()));
         orderDB.setEventDate(Date.valueOf(orderComponent.getDatePickerEventDate().getValue()));
         orderDB.setDescription(orderComponent.getTextAreaDescription().getText());
+        orderDB.setNotes(orderComponent.getTextAreaNotes().getText());
     }
 }

@@ -16,6 +16,7 @@ public class OrderDB {
     private Date dueDate;
     private Date eventDate;
     private String description;
+    private String notes;
 
     public OrderDB(int orderId) {
         this.orderId = orderId;
@@ -79,5 +80,13 @@ public class OrderDB {
 
     public String getDescription() {
         return description;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public String getNotes() {
+        return notes;
     }
 }

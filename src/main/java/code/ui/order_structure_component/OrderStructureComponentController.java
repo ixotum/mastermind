@@ -168,9 +168,11 @@ public class OrderStructureComponentController extends AnchorPane implements Ini
     public void setOrderStructureComponentDB(OrderStructureComponentDB structureComponentDB) {
         tableViewOrderStructure.getItems().clear();
 
-        List<OrderStructureComponentRowDB> componentRowList = structureComponentDB.getComponentRowList();
-        for (OrderStructureComponentRowDB componentRowDB : componentRowList) {
-            addNewRow(componentRowDB, tableViewOrderStructure);
+        if (structureComponentDB != null) {
+            List<OrderStructureComponentRowDB> componentRowList = structureComponentDB.getComponentRowList();
+            for (OrderStructureComponentRowDB componentRowDB : componentRowList) {
+                addNewRow(componentRowDB, tableViewOrderStructure);
+            }
         }
 
         addEmptyRow(tableViewOrderStructure, false);

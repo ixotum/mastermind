@@ -12,12 +12,15 @@ public class OrderDBMapper implements RowMapper {
     @Override
     public Object mapRow(ResultSet rs, int rowNumber) throws SQLException {
         OrderDB orderDB = new OrderDB(rs.getInt("ORDER_ID"));
+
         orderDB.setName(rs.getString("NAME"));
         orderDB.setCustomer(rs.getString("CUSTOMER"));
         orderDB.setVK(rs.getString("VK"));
         orderDB.setDueDate(rs.getDate("DUE_DATE"));
         orderDB.setEventDate(rs.getDate("EVENT_DATE"));
         orderDB.setDescription(rs.getString("DESCRIPTION"));
+        orderDB.setNotes(rs.getString("NOTES"));
+
         return orderDB;
     }
 }

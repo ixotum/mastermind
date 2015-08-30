@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 /**
@@ -21,10 +22,10 @@ public class OrdersJDBCTemplate {
     }
 
     public void saveNewOrder(OrderDB orderDB) {
-        String sql = "INSERT INTO ORDERS(ORDER_ID, NAME, CUSTOMER, VK, DUE_DATE, EVENT_DATE, DESCRIPTION) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO ORDERS(ORDER_ID, NAME, CUSTOMER, VK, DUE_DATE, EVENT_DATE, DESCRIPTION, NOTES) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, orderDB.getOrderId(), orderDB.getName(), orderDB.getCustomer(),
-                orderDB.getVk(), orderDB.getDueDate(), orderDB.getEventDate(), orderDB.getDescription());
+                orderDB.getVk(), orderDB.getDueDate(), orderDB.getEventDate(), orderDB.getDescription(), orderDB.getNotes());
 
         saveNewOrderStructureComponent(orderDB.getOrderId(), orderDB.getOrderStructureComponentDB());
     }
@@ -45,9 +46,15 @@ public class OrdersJDBCTemplate {
         List<Integer> orderIdList = extractOrderIdList(orderDBList);
         List<OrderStructureComponentDB> orderStructureComponentDBList = readAllOrderStructureComponents(orderIdList);
 
-        for (OrderDB orderDB : orderDBList) {
-            OrderStructureComponentDB orderStructureComponentDB = orderStructureComponentDBList.stream().filter(component -> isOrderIdEqual(orderDB.getOrderId(), component.getOrderId())).findFirst().get();
-            orderDB.setOrderStructureComponentDB(orderStructureComponentDB);
+        if (!orderStructureComponentDBList.isEmpty()) {
+            for (OrderDB orderDB : orderDBList) {
+                try {
+                    OrderStructureComponentDB orderStructureComponentDB = orderStructureComponentDBList.stream().filter(component -> isOrderIdEqual(orderDB.getOrderId(), component.getOrderId())).findFirst().get();
+                    orderDB.setOrderStructureComponentDB(orderStructureComponentDB);
+                } catch (NoSuchElementException e) {
+                    System.out.println("INFO: orderStructureComponentDB is empty!");
+                }
+            }
         }
 
         return orderDBList;
@@ -60,9 +67,12 @@ public class OrdersJDBCTemplate {
 
         for (Integer orderId : orderIdList) {
             List<OrderStructureComponentRowDB> filteredRowDBList = orderStructureComponentRowDBList.stream().filter(row -> isOrderIdEqual(row.getOrderId(), orderId)).collect(Collectors.toList());
-            OrderStructureComponentDB orderStructureComponentDB = new OrderStructureComponentDB();
-            orderStructureComponentDB.setComponentRowList(filteredRowDBList);
-            orderStructureComponentDBList.add(orderStructureComponentDB);
+
+            if (!filteredRowDBList.isEmpty()) {
+                OrderStructureComponentDB orderStructureComponentDB = new OrderStructureComponentDB();
+                orderStructureComponentDB.setComponentRowList(filteredRowDBList);
+                orderStructureComponentDBList.add(orderStructureComponentDB);
+            }
         }
 
         return orderStructureComponentDBList;
@@ -77,10 +87,10 @@ public class OrdersJDBCTemplate {
     }
 
     public void updateExistedOrder(OrderDB orderDB) {
-        String sql = "UPDATE ORDERS SET NAME=?, CUSTOMER=?, VK=?, DUE_DATE=?, EVENT_DATE=?, DESCRIPTION=? " +
+        String sql = "UPDATE ORDERS SET NAME=?, CUSTOMER=?, VK=?, DUE_DATE=?, EVENT_DATE=?, DESCRIPTION=?, NOTES=? " +
                 "WHERE ORDER_ID = ?";
         jdbcTemplate.update(sql, orderDB.getName(), orderDB.getCustomer(), orderDB.getVk(),
-                orderDB.getDueDate(), orderDB.getEventDate(), orderDB.getDescription(), orderDB.getOrderId());
+                orderDB.getDueDate(), orderDB.getEventDate(), orderDB.getDescription(), orderDB.getNotes(), orderDB.getOrderId());
 
         deleteOrderStructureComponent(orderDB.getOrderId());
         saveNewOrderStructureComponent(orderDB.getOrderId(), orderDB.getOrderStructureComponentDB());

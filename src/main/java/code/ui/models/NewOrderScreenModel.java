@@ -32,6 +32,7 @@ public class NewOrderScreenModel {
         LocalDate localEventDate = orderComponent.getDatePickerEventDate().getValue();
         orderDB.setEventDate(Date.valueOf(localEventDate));
         orderDB.setDescription(orderComponent.getTextAreaDescription().getText());
+        orderDB.setNotes(orderComponent.getTextAreaNotes().getText());
 
         return orderDB;
     }
