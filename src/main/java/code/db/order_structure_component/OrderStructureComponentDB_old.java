@@ -2,7 +2,7 @@ package code.db.order_structure_component;
 
 import java.util.List;
 
-public class OrderStructureComponentDB {
+public class OrderStructureComponentDB_old {
     private List<OrderStructureComponentRowDB> componentRowList;
 
     public void setComponentRowList(List<OrderStructureComponentRowDB> orderStructureComponentRowDBList) {

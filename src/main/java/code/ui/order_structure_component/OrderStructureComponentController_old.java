@@ -1,6 +1,6 @@
 package code.ui.order_structure_component;
 
-import code.db.order_structure_component.OrderStructureComponentDB;
+import code.db.order_structure_component.OrderStructureComponentDB_old;
 import code.db.order_structure_component.OrderStructureComponentRowDB;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,7 +23,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class OrderStructureComponentController extends AnchorPane implements Initializable {
+@Deprecated
+public class OrderStructureComponentController_old extends AnchorPane implements Initializable {
     @FXML
     public TableView<RowData> tableViewOrderStructure;
     @FXML
@@ -33,7 +34,7 @@ public class OrderStructureComponentController extends AnchorPane implements Ini
     @FXML
     public TableColumn columnPrice;
 
-    public OrderStructureComponentController() {
+    public OrderStructureComponentController_old() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/order_structure_component.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -165,7 +166,7 @@ public class OrderStructureComponentController extends AnchorPane implements Ini
         return tableViewOrderStructure.getItems().get(rowIndex);
     }
 
-    public void setOrderStructureComponentDB(OrderStructureComponentDB structureComponentDB) {
+    public void setOrderStructureComponentDB(OrderStructureComponentDB_old structureComponentDB) {
         tableViewOrderStructure.getItems().clear();
 
         if (structureComponentDB != null) {

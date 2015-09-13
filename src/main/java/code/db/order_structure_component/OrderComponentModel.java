@@ -1,6 +1,6 @@
 package code.db.order_structure_component;
 
-import code.ui.order_structure_component.OrderStructureComponentController;
+import code.ui.order_structure_component.OrderStructureComponentController_old;
 import code.ui.order_structure_component.RowData;
 
 import java.math.BigDecimal;
@@ -8,19 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderComponentModel {
-    public static OrderStructureComponentDB createOrderStructureComponentDB(OrderStructureComponentController orderStructureComponentController) {
-        int structureSize = orderStructureComponentController.getStructureSize() - 1;
+    public static OrderStructureComponentDB_old createOrderStructureComponentDB(OrderStructureComponentController_old orderStructureComponentControllerOld) {
+        int structureSize = orderStructureComponentControllerOld.getStructureSize() - 1;
         List<OrderStructureComponentRowDB> orderStructureComponentRowDBList = new ArrayList<>();
 
         for (int rowIndex = 0; rowIndex < structureSize; ++rowIndex) {
-            RowData rowData = orderStructureComponentController.getRowData(rowIndex);
+            RowData rowData = orderStructureComponentControllerOld.getRowData(rowIndex);
             OrderStructureComponentRowDB orderStructureComponentRowDB = createOrderStructureComponentRowDB(rowData);
             orderStructureComponentRowDBList.add(orderStructureComponentRowDB);
         }
 
-        OrderStructureComponentDB orderStructureComponentDB = new OrderStructureComponentDB();
-        orderStructureComponentDB.setComponentRowList(orderStructureComponentRowDBList);
-        return orderStructureComponentDB;
+        OrderStructureComponentDB_old orderStructureComponentDBOld = new OrderStructureComponentDB_old();
+        orderStructureComponentDBOld.setComponentRowList(orderStructureComponentRowDBList);
+        return orderStructureComponentDBOld;
     }
 
     private static OrderStructureComponentRowDB createOrderStructureComponentRowDB(RowData rowData) {

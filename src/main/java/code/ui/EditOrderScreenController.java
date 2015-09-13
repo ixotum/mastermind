@@ -5,8 +5,8 @@ import code.bus.BusEvent;
 import code.bus.BusEventManager;
 import code.db.OrderDB;
 import code.db.OrdersJDBCTemplate;
-import code.db.order_structure_component.OrderStructureComponentDB;
-import code.ui.order_structure_component.OrderStructureComponentController;
+import code.db.order_structure_component.OrderStructureComponentDB_old;
+import code.ui.order_structure_component.OrderStructureComponentController_old;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import org.springframework.context.ApplicationContext;
@@ -31,7 +31,7 @@ public class EditOrderScreenController {
         this.orderDB = orderDB;
         orderComponent.getLabelOrderId().setText(String.valueOf(orderDB.getOrderId()));
         orderComponent.getTextFieldName().setText(orderDB.getName());
-        orderComponent.initOrderStructureComponentController(orderDB.getOrderStructureComponentDB());
+//        orderComponent.initOrderStructureComponentController_old(orderDB.getOrderStructureComponentDBOld());
         orderComponent.getTextAreaCustomer().setText(orderDB.getCustomer());
         orderComponent.getTextAreaAddress().setText(orderDB.getAddress());
         orderComponent.getTextFieldVK().setText(orderDB.getVk());
@@ -67,9 +67,9 @@ public class EditOrderScreenController {
     private static void updateOrderDB(OrderComponentController orderComponent, OrderDB orderDB) {
         orderDB.setName(orderComponent.getTextFieldName().getText());
 
-        OrderStructureComponentController orderStructureComponentController = orderComponent.getOrderStructureComponentController();
-        OrderStructureComponentDB orderStructureComponentDB = OrderComponentController.createOrderStructureComponentDB(orderStructureComponentController);
-        orderDB.setOrderStructureComponentDB(orderStructureComponentDB);
+//        OrderStructureComponentController_old orderStructureComponentControllerOld = orderComponent.getOrderStructureComponentControllerOld();
+//        OrderStructureComponentDB_old orderStructureComponentDBOld = OrderComponentController.createOrderStructureComponentDB(orderStructureComponentControllerOld);
+//        orderDB.setOrderStructureComponentDBOld(orderStructureComponentDBOld);
 
         orderDB.setCustomer(orderComponent.getTextAreaCustomer().getText());
         orderDB.setAddress(orderComponent.getTextAreaAddress().getText());

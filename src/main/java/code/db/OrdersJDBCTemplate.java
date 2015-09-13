@@ -1,6 +1,6 @@
 package code.db;
 
-import code.db.order_structure_component.OrderStructureComponentDB;
+import code.db.order_structure_component.OrderStructureComponentDB_old;
 import code.db.order_structure_component.OrderStructureComponentRowDB;
 import code.db.order_structure_component.OrderStructureComponentRowDBMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -27,15 +27,15 @@ public class OrdersJDBCTemplate {
         jdbcTemplate.update(sql, orderDB.getOrderId(), orderDB.getName(), orderDB.getCustomer(), orderDB.getAddress(),
                 orderDB.getVk(), orderDB.getDueDate(), orderDB.getEventDate(), orderDB.getDescription(), orderDB.getNotes());
 
-        saveNewOrderStructureComponent(orderDB.getOrderId(), orderDB.getOrderStructureComponentDB());
+//        saveNewOrderStructureComponent_old(orderDB.getOrderId(), orderDB.getOrderStructureComponentDBOld());
     }
 
-    private void saveNewOrderStructureComponent(int orderId, OrderStructureComponentDB orderStructureComponentDB) {
+    private void saveNewOrderStructureComponent_old(int orderId, OrderStructureComponentDB_old orderStructureComponentDBOld) {
         String sql = "INSERT INTO ORDER_STRUCTURE_COMPONENTS(ORDER_ID, POSITION, ITEM, PRICE) VALUES (?, ?, ?, ?)";
-        int componentRowCount = orderStructureComponentDB.getComponentRowCount();
+        int componentRowCount = orderStructureComponentDBOld.getComponentRowCount();
 
         for (int rowIndex = 0; rowIndex < componentRowCount; ++rowIndex) {
-            OrderStructureComponentRowDB componentRowDB = orderStructureComponentDB.getComponentRow(rowIndex);
+            OrderStructureComponentRowDB componentRowDB = orderStructureComponentDBOld.getComponentRow(rowIndex);
             jdbcTemplate.update(sql, orderId, rowIndex, componentRowDB.getItem(), componentRowDB.getPrice());
         }
     }
@@ -44,24 +44,24 @@ public class OrdersJDBCTemplate {
         String sql = "SELECT * FROM ORDERS";
         List<OrderDB> orderDBList = jdbcTemplate.query(sql, new OrderDBMapper());
         List<Integer> orderIdList = extractOrderIdList(orderDBList);
-        List<OrderStructureComponentDB> orderStructureComponentDBList = readAllOrderStructureComponents(orderIdList);
+        /*List<OrderStructureComponentDB_old> orderStructureComponentDBOldList = readAllOrderStructureComponents_old(orderIdList);
 
-        if (!orderStructureComponentDBList.isEmpty()) {
+        if (!orderStructureComponentDBOldList.isEmpty()) {
             for (OrderDB orderDB : orderDBList) {
                 try {
-                    OrderStructureComponentDB orderStructureComponentDB = orderStructureComponentDBList.stream().filter(component -> isOrderIdEqual(orderDB.getOrderId(), component.getOrderId())).findFirst().get();
-                    orderDB.setOrderStructureComponentDB(orderStructureComponentDB);
+                    OrderStructureComponentDB_old orderStructureComponentDBOld = orderStructureComponentDBOldList.stream().filter(component -> isOrderIdEqual(orderDB.getOrderId(), component.getOrderId())).findFirst().get();
+                    orderDB.setOrderStructureComponentDBOld(orderStructureComponentDBOld);
                 } catch (NoSuchElementException e) {
-                    System.out.println("INFO: orderStructureComponentDB is empty!");
+                    System.out.println("INFO: orderStructureComponentDBOld is empty!");
                 }
             }
-        }
+        }*/
 
         return orderDBList;
     }
 
-    private List<OrderStructureComponentDB> readAllOrderStructureComponents(List<Integer> orderIdList) {
-        List<OrderStructureComponentDB> orderStructureComponentDBList = new ArrayList<>();
+    private List<OrderStructureComponentDB_old> readAllOrderStructureComponents_old(List<Integer> orderIdList) {
+        List<OrderStructureComponentDB_old> orderStructureComponentDBOldList = new ArrayList<>();
         String sql = "SELECT * FROM ORDER_STRUCTURE_COMPONENTS";
         List<OrderStructureComponentRowDB> orderStructureComponentRowDBList = jdbcTemplate.query(sql, new OrderStructureComponentRowDBMapper());
 
@@ -69,13 +69,13 @@ public class OrdersJDBCTemplate {
             List<OrderStructureComponentRowDB> filteredRowDBList = orderStructureComponentRowDBList.stream().filter(row -> isOrderIdEqual(row.getOrderId(), orderId)).collect(Collectors.toList());
 
             if (!filteredRowDBList.isEmpty()) {
-                OrderStructureComponentDB orderStructureComponentDB = new OrderStructureComponentDB();
-                orderStructureComponentDB.setComponentRowList(filteredRowDBList);
-                orderStructureComponentDBList.add(orderStructureComponentDB);
+                OrderStructureComponentDB_old orderStructureComponentDBOld = new OrderStructureComponentDB_old();
+                orderStructureComponentDBOld.setComponentRowList(filteredRowDBList);
+                orderStructureComponentDBOldList.add(orderStructureComponentDBOld);
             }
         }
 
-        return orderStructureComponentDBList;
+        return orderStructureComponentDBOldList;
     }
 
     private static boolean isOrderIdEqual(int id0, int id1) {
@@ -92,11 +92,11 @@ public class OrdersJDBCTemplate {
         jdbcTemplate.update(sql, orderDB.getName(), orderDB.getCustomer(), orderDB.getAddress(), orderDB.getVk(),
                 orderDB.getDueDate(), orderDB.getEventDate(), orderDB.getDescription(), orderDB.getNotes(), orderDB.getOrderId());
 
-        deleteOrderStructureComponent(orderDB.getOrderId());
-        saveNewOrderStructureComponent(orderDB.getOrderId(), orderDB.getOrderStructureComponentDB());
+//        deleteOrderStructureComponent_old(orderDB.getOrderId());
+//        saveNewOrderStructureComponent_old(orderDB.getOrderId(), orderDB.getOrderStructureComponentDBOld());
     }
 
-    private void deleteOrderStructureComponent(int orderId) {
+    private void deleteOrderStructureComponent_old(int orderId) {
         String sql = "DELETE FROM ORDER_STRUCTURE_COMPONENTS WHERE ORDER_ID = ?";
         jdbcTemplate.update(sql, orderId);
     }

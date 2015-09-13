@@ -1,6 +1,6 @@
 package code.db;
 
-import code.db.order_structure_component.OrderStructureComponentDB;
+import code.db.order_structure_component.OrderStructureComponentDB_old;
 
 import java.sql.Date;
 
@@ -10,7 +10,8 @@ import java.sql.Date;
 public class OrderDB {
     private final int orderId;
     private String name;
-    private OrderStructureComponentDB orderStructureComponentDB;
+    @Deprecated
+    private OrderStructureComponentDB_old orderStructureComponentDBOld;
     private String customer;
     private String vk;
     private Date dueDate;
@@ -35,12 +36,12 @@ public class OrderDB {
         return name;
     }
 
-    public void setOrderStructureComponentDB(OrderStructureComponentDB orderStructureComponentDB) {
-        this.orderStructureComponentDB = orderStructureComponentDB;
+    public void setOrderStructureComponentDBOld(OrderStructureComponentDB_old orderStructureComponentDBOld) {
+        this.orderStructureComponentDBOld = orderStructureComponentDBOld;
     }
 
-    public OrderStructureComponentDB getOrderStructureComponentDB() {
-        return orderStructureComponentDB;
+    public OrderStructureComponentDB_old getOrderStructureComponentDBOld() {
+        return orderStructureComponentDBOld;
     }
 
     public void setCustomer(String customer) {
