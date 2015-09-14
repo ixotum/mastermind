@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root style="-fx-background-color: red" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView fx:id="tableViewOrderStructure" prefHeight="200.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" focusTraversable="false">
+         <columns>
+            <TableColumn fx:id="columnButtonDelete" prefWidth="38.0" />
+            <TableColumn fx:id="columnItem" prefWidth="286.0" text="items" />
+            <TableColumn fx:id="columnPrice" prefWidth="74.0" text="price" />
+         </columns>
+      </TableView>
+   </children>
+</fx:root>

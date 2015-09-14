@@ -1,10 +1,10 @@
-package code.ui.order_structure_component;
+package code.ui.order_structure_component_old;
 
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 
-public class EditingCellFactory extends TableCell<RowData, String> {
+public class EditingCellFactory extends TableCell<RowData_old, String> {
     private TextField textField;
 
     @Override

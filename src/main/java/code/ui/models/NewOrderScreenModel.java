@@ -1,10 +1,8 @@
 package code.ui.models;
 
 import code.db.OrderDB;
-import code.db.order_structure_component.OrderStructureComponentDB_old;
 import code.ui.NewOrderScreenController;
 import code.ui.OrderComponentController;
-import code.ui.order_structure_component.OrderStructureComponentController_old;
 
 import java.sql.Date;
 import java.time.LocalDate;

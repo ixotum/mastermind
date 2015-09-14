@@ -2,7 +2,7 @@ package code.ui;
 
 import code.db.order_structure_component.OrderComponentModel;
 import code.db.order_structure_component.OrderStructureComponentDB_old;
-import code.ui.order_structure_component.OrderStructureComponentController_old;
+import code.ui.order_structure_component_old.OrderStructureComponentController_old;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

@@ -1,4 +1,4 @@
-package code.ui.order_structure_component;
+package code.ui.order_structure_component_old;
 
 import code.db.order_structure_component.OrderStructureComponentDB_old;
 import code.db.order_structure_component.OrderStructureComponentRowDB;
@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
 @Deprecated
 public class OrderStructureComponentController_old extends AnchorPane implements Initializable {
     @FXML
-    public TableView<RowData> tableViewOrderStructure;
+    public TableView<RowData_old> tableViewOrderStructure;
     @FXML
     public TableColumn columnButtonDelete;
     @FXML
@@ -35,7 +35,7 @@ public class OrderStructureComponentController_old extends AnchorPane implements
     public TableColumn columnPrice;
 
     public OrderStructureComponentController_old() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/order_structure_component.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/order_structure_component_old.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         try {
@@ -53,15 +53,15 @@ public class OrderStructureComponentController_old extends AnchorPane implements
     private void initTableView() {
         Callback<TableColumn, TableCell> cellFactory = param -> new EditingCellFactory();
 
-        columnButtonDelete.setCellValueFactory(new PropertyValueFactory<RowData, Button>("columnButtonDelete"));
+        columnButtonDelete.setCellValueFactory(new PropertyValueFactory<RowData_old, Button>("columnButtonDelete"));
 
-        columnItem.setCellValueFactory(new PropertyValueFactory<RowData, String>("columnItem"));
+        columnItem.setCellValueFactory(new PropertyValueFactory<RowData_old, String>("columnItem"));
         columnItem.setCellFactory(cellFactory);
         columnItem.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent>() {
             @Override
             public void handle(TableColumn.CellEditEvent event) {
                 int currentRow = event.getTablePosition().getRow();
-                ((RowData) event.getTableView().getItems().get(currentRow)).setColumnItem((String) event.getNewValue());
+                ((RowData_old) event.getTableView().getItems().get(currentRow)).setColumnItem((String) event.getNewValue());
                 int countRow = event.getTableView().getItems().size();
 
                 if (currentRow == countRow - 1) {
@@ -71,18 +71,18 @@ public class OrderStructureComponentController_old extends AnchorPane implements
             }
         });
 
-        columnPrice.setCellValueFactory(new PropertyValueFactory<RowData, String>("columnPrice"));
+        columnPrice.setCellValueFactory(new PropertyValueFactory<RowData_old, String>("columnPrice"));
         columnPrice.setCellFactory(cellFactory);
         columnPrice.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent>() {
             @Override
             public void handle(TableColumn.CellEditEvent event) {
-                ((RowData) event.getTableView().getItems().get(event.getTablePosition().getRow())).setColumnPrice((String) event.getNewValue());
+                ((RowData_old) event.getTableView().getItems().get(event.getTablePosition().getRow())).setColumnPrice((String) event.getNewValue());
                 recalculateTable(tableViewOrderStructure);
             }
         });
 
         tableViewOrderStructure.setEditable(true);
-        ObservableList<RowData> observableList = FXCollections.observableArrayList();
+        ObservableList<RowData_old> observableList = FXCollections.observableArrayList();
         tableViewOrderStructure.setItems(observableList);
         addEmptyRow(tableViewOrderStructure, true);
     }
@@ -92,7 +92,7 @@ public class OrderStructureComponentController_old extends AnchorPane implements
         BigDecimal totalPrice = BigDecimal.ZERO;
 
         for (int rowIndex = 0; rowIndex < rowCount - 1; ++rowIndex) {
-            String priceString = ((RowData)tableView.getItems().get(rowIndex)).getColumnPrice();
+            String priceString = ((RowData_old)tableView.getItems().get(rowIndex)).getColumnPrice();
             BigDecimal priceItem = BigDecimal.ZERO;
 
             if (priceString != null && !priceString.isEmpty()) {
@@ -102,20 +102,20 @@ public class OrderStructureComponentController_old extends AnchorPane implements
                     System.out.println("Number format mismatch!");
                     priceItem = BigDecimal.ZERO;
                     priceString = priceString.replace("!", "");
-                    ((RowData)tableView.getItems().get(rowIndex)).setColumnPrice("!" + priceString);
+                    ((RowData_old)tableView.getItems().get(rowIndex)).setColumnPrice("!" + priceString);
                 }
             }
 
             totalPrice = totalPrice.add(priceItem);
 
-            ((RowData)tableView.getItems().get(rowIndex)).setRowIndex(rowIndex);
-            ((RowData)tableView.getItems().get(rowIndex)).getColumnButtonDelete().setVisible(true);
+            ((RowData_old)tableView.getItems().get(rowIndex)).setRowIndex(rowIndex);
+            ((RowData_old)tableView.getItems().get(rowIndex)).getColumnButtonDelete().setVisible(true);
         }
 
-        ((RowData) tableView.getItems().get(rowCount - 1)).setRowIndex(rowCount - 1);
-        ((RowData) tableView.getItems().get(rowCount - 1)).getColumnButtonDelete().setVisible(false);
-        ((RowData) tableView.getItems().get(rowCount - 1)).setColumnItem("total:");
-        ((RowData) tableView.getItems().get(rowCount - 1)).setColumnPrice(totalPrice.toString());
+        ((RowData_old) tableView.getItems().get(rowCount - 1)).setRowIndex(rowCount - 1);
+        ((RowData_old) tableView.getItems().get(rowCount - 1)).getColumnButtonDelete().setVisible(false);
+        ((RowData_old) tableView.getItems().get(rowCount - 1)).setColumnItem("total:");
+        ((RowData_old) tableView.getItems().get(rowCount - 1)).setColumnPrice(totalPrice.toString());
 
         redrawTable(tableView);
 
@@ -127,7 +127,7 @@ public class OrderStructureComponentController_old extends AnchorPane implements
         ((TableColumn) tableView.getColumns().get(0)).setVisible(true);
     }
 
-    private static void addEmptyRow(TableView<RowData> tableView, boolean zeroFlag) {
+    private static void addEmptyRow(TableView<RowData_old> tableView, boolean zeroFlag) {
         int lastRowIndex = tableView.getItems().size() - 1;
         System.out.println("lastRowIndex = " + lastRowIndex);
 
@@ -137,9 +137,9 @@ public class OrderStructureComponentController_old extends AnchorPane implements
 
         int newRowIndex = lastRowIndex + 1;
 
-        RowData rowData = new RowData(newRowIndex, event -> deleteButtonHandler(tableView, event));
-        ObservableList<RowData> observableList = tableView.getItems();
-        observableList.add(rowData);
+        RowData_old rowDataOld = new RowData_old(newRowIndex, event -> deleteButtonHandler(tableView, event));
+        ObservableList<RowData_old> observableList = tableView.getItems();
+        observableList.add(rowDataOld);
 
         if (newRowIndex == 0) {
             tableView.getItems().get(newRowIndex).getColumnButtonDelete().setVisible(false);
@@ -162,7 +162,7 @@ public class OrderStructureComponentController_old extends AnchorPane implements
         return tableViewOrderStructure.getItems().size();
     }
 
-    public RowData getRowData(int rowIndex) {
+    public RowData_old getRowData(int rowIndex) {
         return tableViewOrderStructure.getItems().get(rowIndex);
     }
 
@@ -180,13 +180,13 @@ public class OrderStructureComponentController_old extends AnchorPane implements
         recalculateTable(tableViewOrderStructure);
     }
 
-    private static void addNewRow(OrderStructureComponentRowDB componentRowDB, TableView<RowData> table) {
+    private static void addNewRow(OrderStructureComponentRowDB componentRowDB, TableView<RowData_old> table) {
         int rowIndex = table.getItems().size();
-        RowData rowData = new RowData(rowIndex, event -> deleteButtonHandler(table, event));
-        rowData.setColumnItem(componentRowDB.getItem());
-        rowData.setColumnPrice(componentRowDB.getPrice().toString());
+        RowData_old rowDataOld = new RowData_old(rowIndex, event -> deleteButtonHandler(table, event));
+        rowDataOld.setColumnItem(componentRowDB.getItem());
+        rowDataOld.setColumnPrice(componentRowDB.getPrice().toString());
 
-        ObservableList<RowData> observableList = table.getItems();
-        observableList.add(rowData);
+        ObservableList<RowData_old> observableList = table.getItems();
+        observableList.add(rowDataOld);
     }
 }

@@ -5,8 +5,6 @@ import code.bus.BusEvent;
 import code.bus.BusEventManager;
 import code.db.OrderDB;
 import code.db.OrdersJDBCTemplate;
-import code.db.order_structure_component.OrderStructureComponentDB_old;
-import code.ui.order_structure_component.OrderStructureComponentController_old;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import org.springframework.context.ApplicationContext;

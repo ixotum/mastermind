@@ -1,7 +1,7 @@
 package code.db.order_structure_component;
 
-import code.ui.order_structure_component.OrderStructureComponentController_old;
-import code.ui.order_structure_component.RowData;
+import code.ui.order_structure_component_old.OrderStructureComponentController_old;
+import code.ui.order_structure_component_old.RowData_old;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -13,8 +13,8 @@ public class OrderComponentModel {
         List<OrderStructureComponentRowDB> orderStructureComponentRowDBList = new ArrayList<>();
 
         for (int rowIndex = 0; rowIndex < structureSize; ++rowIndex) {
-            RowData rowData = orderStructureComponentControllerOld.getRowData(rowIndex);
-            OrderStructureComponentRowDB orderStructureComponentRowDB = createOrderStructureComponentRowDB(rowData);
+            RowData_old rowDataOld = orderStructureComponentControllerOld.getRowData(rowIndex);
+            OrderStructureComponentRowDB orderStructureComponentRowDB = createOrderStructureComponentRowDB(rowDataOld);
             orderStructureComponentRowDBList.add(orderStructureComponentRowDB);
         }
 
@@ -23,11 +23,11 @@ public class OrderComponentModel {
         return orderStructureComponentDBOld;
     }
 
-    private static OrderStructureComponentRowDB createOrderStructureComponentRowDB(RowData rowData) {
+    private static OrderStructureComponentRowDB createOrderStructureComponentRowDB(RowData_old rowDataOld) {
         OrderStructureComponentRowDB orderStructureComponentRowDB = new OrderStructureComponentRowDB();
-        orderStructureComponentRowDB.setItem(rowData.getColumnItem());
+        orderStructureComponentRowDB.setItem(rowDataOld.getColumnItem());
 
-        String priceString = rowData.getColumnPrice();
+        String priceString = rowDataOld.getColumnPrice();
         BigDecimal price;
 
         try {
