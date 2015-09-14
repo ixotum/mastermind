@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -24,10 +25,14 @@ public class OrderStructureComponentController extends AnchorPane implements Ini
     private TableColumn<RowData, String> columnItem;
     @FXML
     private TableColumn<RowData, String> columnPrice;
+    @FXML
+    private Label labelTotal;
 
     private final OrderStructureComponentModel model;
 
     public OrderStructureComponentController() {
+        model = new OrderStructureComponentModel(this);
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/order_structure_component.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -36,7 +41,6 @@ public class OrderStructureComponentController extends AnchorPane implements Ini
         } catch (IOException e) {
             e.printStackTrace();
         }
-        model = new OrderStructureComponentModel(this);
     }
 
     @Override
@@ -62,15 +66,8 @@ public class OrderStructureComponentController extends AnchorPane implements Ini
 
         columnPrice.setCellValueFactory(cellData -> cellData.getValue().columnPriceProperty());
         columnPrice.setCellFactory(createStringCellFactory());
-        columnPrice.onEditCommitProperty().set(this::priceCommited);
+        columnPrice.onEditCommitProperty().set(model::priceCommited);
     }
-
-    private void priceCommited(TableColumn.CellEditEvent<RowData, String> event) {
-        String newValue = event.getNewValue();
-        event.getTableView().getItems().get(event.getTablePosition().getRow()).setColumnPrice(newValue);
-        //double total = calcTotal(table.getItems());
-    }
-
 
     private static Callback<TableColumn<RowData, String>, TableCell<RowData, String>> createStringCellFactory() {
         return TextFieldTableCell.forTableColumn();
@@ -84,5 +81,9 @@ public class OrderStructureComponentController extends AnchorPane implements Ini
 
     public TableView<RowData> getTable() {
         return table;
+    }
+
+    public Label getLabelTotal() {
+        return labelTotal;
     }
 }

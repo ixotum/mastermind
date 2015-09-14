@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -16,11 +17,30 @@
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
+               <VBox.margin>
+                  <Insets left="12.0" right="12.0" top="12.0" />
+               </VBox.margin>
             </TableView>
             <HBox>
                <children>
-                  <Button mnemonicParsing="false" text="Delete" onAction="#onButtonDelete"/>
+                  <Button mnemonicParsing="false" onAction="#onButtonDelete" text="Delete">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin></Button>
+                  <Label text="Total:">
+                     <HBox.margin>
+                        <Insets left="25.0" top="4.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="labelTotal" text="0.0">
+                     <HBox.margin>
+                        <Insets left="25.0" top="4.0" />
+                     </HBox.margin>
+                  </Label>
                </children>
+               <VBox.margin>
+                  <Insets left="12.0" right="12.0" top="12.0" />
+               </VBox.margin>
             </HBox>
          </children>
       </VBox>

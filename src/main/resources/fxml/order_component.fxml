@@ -34,7 +34,7 @@
             </VBox.margin>
             <children>
                 <Label text="Struct.old" />
-                <OrderStructureComponentController_old fx:id="orderStructureComponentControllerOld" prefHeight="100.0" prefWidth="400.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="0.0" />
+                <OrderStructureComponentController_old fx:id="orderStructureComponentControllerOld" prefHeight="50.0" prefWidth="400.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="0.0" />
             </children>
         </AnchorPane>
         <AnchorPane>
@@ -43,7 +43,7 @@
             </VBox.margin>
             <children>
                 <Label text="Structure" />
-                <OrderStructureComponentController fx:id="orderStructureComponentController" prefHeight="100.0" prefWidth="400.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="0.0" />
+                <OrderStructureComponentController fx:id="orderStructureComponentController" prefHeight="200.0" prefWidth="400.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="0.0" />
             </children>
         </AnchorPane>
         <AnchorPane>

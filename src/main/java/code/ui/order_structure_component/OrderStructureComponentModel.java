@@ -67,19 +67,26 @@ public class OrderStructureComponentModel {
         return currentColumnIndex == lastColumnIndex ? currentRowIndex + 1 : currentRowIndex;
     }
 
-    public void removeSelectedRow() {
+    protected void removeSelectedRow() {
         TableView<RowData> table = controller.getTable();
 
         if (table.getItems().size() != 1) {
             table.getItems().remove(table.getSelectionModel().getSelectedItem());
             table.getSelectionModel().clearSelection();
 
-            //double total = calcTotal(table.getItems());
-            //controller.getLabelTotal().setText(String.valueOf(total));
+            double total = calcTotal(table.getItems());
+            controller.getLabelTotal().setText(String.valueOf(total));
         }
     }
 
     private static double calcTotal(ObservableList<RowData> items) {
         return items.stream().mapToDouble(rowData -> Double.parseDouble(rowData.getColumnPrice())).sum();
+    }
+
+    protected void priceCommited(TableColumn.CellEditEvent<RowData, String> event) {
+        String newValue = event.getNewValue();
+        event.getTableView().getItems().get(event.getTablePosition().getRow()).setColumnPrice(newValue);
+        double total = calcTotal(controller.getTable().getItems());
+        controller.getLabelTotal().setText(String.valueOf(total));
     }
 }
