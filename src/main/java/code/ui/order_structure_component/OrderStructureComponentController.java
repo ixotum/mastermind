@@ -7,11 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
@@ -21,11 +18,11 @@ import java.util.ResourceBundle;
 
 public class OrderStructureComponentController extends AnchorPane implements Initializable {
     @FXML
-    public TableView<RowData> table;
+    private TableView<RowData> table;
     @FXML
-    public TableColumn<RowData, String> columnItem;
+    private TableColumn<RowData, String> columnItem;
     @FXML
-    public TableColumn<RowData, String> columnPrice;
+    private TableColumn<RowData, String> columnPrice;
 
     public OrderStructureComponentController() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/order_structure_component.fxml"));
@@ -41,6 +38,7 @@ public class OrderStructureComponentController extends AnchorPane implements Ini
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initTable();
+        OrderStructureComponentModel.addRow(table);
     }
 
     private void initTable() {
@@ -51,61 +49,7 @@ public class OrderStructureComponentController extends AnchorPane implements Ini
         table.getSelectionModel().setCellSelectionEnabled(true);
         table.getSelectionModel().selectFirst();
 
-        initTableHandlers(table);
-        addRow(table);
-    }
-
-    private static void initTableHandlers(final TableView<RowData> table) {
-        table.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (table.getEditingCell() == null) {
-                KeyCode keyCode = event.getCode();
-
-                if (keyCode.isLetterKey() || keyCode.isDigitKey()) {
-                    TablePosition<RowData, String> focusedPosition = table.getFocusModel().getFocusedCell();
-                    table.edit(focusedPosition.getRow(), focusedPosition.getTableColumn());
-                }
-            }
-        });
-
-        table.addEventFilter(KeyEvent.KEY_RELEASED, event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                selectNextCell(table);
-            }
-        });
-    }
-
-    private static void selectNextCell(TableView<RowData> table) {
-        TablePosition<RowData, String> focusedPosition = table.getFocusModel().getFocusedCell();
-        int currentRowIndex = focusedPosition.getRow();
-        int currentColumnIndex = focusedPosition.getColumn();
-        int lastRowIndex = table.getItems().size() - 1;
-        int lastColumnIndex = table.getColumns().size() - 1;
-
-        if (currentRowIndex == lastRowIndex && currentColumnIndex == lastColumnIndex) {
-            addRow(table);
-        }
-
-        int nextRowIndex = calcNextRowIndex(currentRowIndex, currentColumnIndex, lastColumnIndex);
-        int nextColumnIndex = calcNextColumnIndex(currentColumnIndex, lastColumnIndex);
-        selectNextCell(table, nextRowIndex, nextColumnIndex);
-    }
-
-    private static void selectNextCell(TableView<RowData> table, int rowIndex, int columnIndex) {
-        TableColumn<RowData, String> column = (TableColumn<RowData, String>) table.getColumns().get(columnIndex);
-        table.getSelectionModel().clearAndSelect(rowIndex, column);
-        table.scrollTo(rowIndex);
-    }
-
-    private static int calcNextColumnIndex(int currentColumnIndex, int lastColumnIndex) {
-        return currentColumnIndex == lastColumnIndex ? 0 : currentColumnIndex + 1;
-    }
-
-    private static int calcNextRowIndex(int currentRowIndex, int currentColumnIndex, int lastColumnIndex) {
-        return currentColumnIndex == lastColumnIndex ? currentRowIndex + 1 : currentRowIndex;
-    }
-
-    private static void addRow(TableView<RowData> table) {
-        table.getItems().add(new RowData());
+        OrderStructureComponentModel.initTableHandlers(table);
     }
 
     private void initColumns() {
