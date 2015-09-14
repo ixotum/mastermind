@@ -1,5 +1,6 @@
 package code.ui.order_structure_component;
 
+import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
@@ -7,6 +8,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 public class OrderStructureComponentModel {
+    private final OrderStructureComponentController controller;
+
+    public OrderStructureComponentModel(OrderStructureComponentController controller) {
+        this.controller = controller;
+    }
+
     protected static void addRow(final TableView<RowData> table) {
         table.getItems().add(new RowData());
     }
@@ -58,5 +65,21 @@ public class OrderStructureComponentModel {
 
     private static int calcNextRowIndex(final int currentRowIndex, final int currentColumnIndex, final int lastColumnIndex) {
         return currentColumnIndex == lastColumnIndex ? currentRowIndex + 1 : currentRowIndex;
+    }
+
+    public void removeSelectedRow() {
+        TableView<RowData> table = controller.getTable();
+
+        if (table.getItems().size() != 1) {
+            table.getItems().remove(table.getSelectionModel().getSelectedItem());
+            table.getSelectionModel().clearSelection();
+
+            //double total = calcTotal(table.getItems());
+            //controller.getLabelTotal().setText(String.valueOf(total));
+        }
+    }
+
+    private static double calcTotal(ObservableList<RowData> items) {
+        return items.stream().mapToDouble(rowData -> Double.parseDouble(rowData.getColumnPrice())).sum();
     }
 }

@@ -19,7 +19,7 @@
             </TableView>
             <HBox>
                <children>
-                  <Button mnemonicParsing="false" text="Delete"/>
+                  <Button mnemonicParsing="false" text="Delete" onAction="#onButtonDelete"/>
                </children>
             </HBox>
          </children>

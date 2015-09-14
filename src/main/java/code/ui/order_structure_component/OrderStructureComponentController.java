@@ -2,6 +2,7 @@ package code.ui.order_structure_component;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,6 +25,8 @@ public class OrderStructureComponentController extends AnchorPane implements Ini
     @FXML
     private TableColumn<RowData, String> columnPrice;
 
+    private final OrderStructureComponentModel model;
+
     public OrderStructureComponentController() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/order_structure_component.fxml"));
         fxmlLoader.setRoot(this);
@@ -33,6 +36,7 @@ public class OrderStructureComponentController extends AnchorPane implements Ini
         } catch (IOException e) {
             e.printStackTrace();
         }
+        model = new OrderStructureComponentModel(this);
     }
 
     @Override
@@ -64,14 +68,21 @@ public class OrderStructureComponentController extends AnchorPane implements Ini
     private void priceCommited(TableColumn.CellEditEvent<RowData, String> event) {
         String newValue = event.getNewValue();
         event.getTableView().getItems().get(event.getTablePosition().getRow()).setColumnPrice(newValue);
-        double total = calcTotal(table.getItems());
+        //double total = calcTotal(table.getItems());
     }
 
-    private static double calcTotal(ObservableList<RowData> items) {
-        return items.stream().mapToDouble(rowData -> Double.parseDouble(rowData.getColumnPrice())).sum();
-    }
 
     private static Callback<TableColumn<RowData, String>, TableCell<RowData, String>> createStringCellFactory() {
         return TextFieldTableCell.forTableColumn();
+    }
+
+    @FXML
+    public void onButtonDelete(ActionEvent actionEvent) {
+        System.out.println("ComponentController.onButtonDelete");
+        model.removeSelectedRow();
+    }
+
+    public TableView<RowData> getTable() {
+        return table;
     }
 }
