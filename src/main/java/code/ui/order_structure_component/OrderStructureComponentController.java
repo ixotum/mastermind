@@ -1,5 +1,7 @@
 package code.ui.order_structure_component;
 
+import code.db.order_structure_component.OrderStructureComponentDB;
+import code.db.order_structure_component.OrderStructureComponentRowDB;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,6 +18,7 @@ import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class OrderStructureComponentController extends AnchorPane implements Initializable {
@@ -46,7 +49,7 @@ public class OrderStructureComponentController extends AnchorPane implements Ini
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initTable();
-        OrderStructureComponentModel.addRow(table);
+        OrderStructureComponentModel.addEmptyRow(table);
     }
 
     private void initTable() {
@@ -85,5 +88,18 @@ public class OrderStructureComponentController extends AnchorPane implements Ini
 
     public Label getLabelTotal() {
         return labelTotal;
+    }
+
+    public int getStructureSize() {
+        return table.getItems().size();
+    }
+
+    public RowData getRowData(int rowIndex) {
+        assert rowIndex < table.getItems().size();
+        return table.getItems().get(rowIndex);
+    }
+
+    public void setOrderStructureComponentDB(OrderStructureComponentDB orderStructureComponentDB) {
+        model.initComponent(orderStructureComponentDB);
     }
 }

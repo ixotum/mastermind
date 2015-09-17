@@ -1,6 +1,6 @@
 package code.ui.order_structure_component_old;
 
-import code.db.order_structure_component.OrderStructureComponentDB_old;
+import code.db.order_structure_component.OrderStructureComponentDB;
 import code.db.order_structure_component.OrderStructureComponentRowDB;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -166,7 +166,7 @@ public class OrderStructureComponentController_old extends AnchorPane implements
         return tableViewOrderStructure.getItems().get(rowIndex);
     }
 
-    public void setOrderStructureComponentDB(OrderStructureComponentDB_old structureComponentDB) {
+    public void setOrderStructureComponentDB(OrderStructureComponentDB structureComponentDB) {
         tableViewOrderStructure.getItems().clear();
 
         if (structureComponentDB != null) {

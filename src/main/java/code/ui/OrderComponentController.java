@@ -1,7 +1,7 @@
 package code.ui;
 
-import code.db.order_structure_component.OrderComponentModel;
-import code.db.order_structure_component.OrderStructureComponentDB_old;
+import code.db.order_structure_component.OrderStructureComponentDB;
+import code.ui.order_structure_component.OrderStructureComponentController;
 import code.ui.order_structure_component_old.OrderStructureComponentController_old;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +29,8 @@ public class OrderComponentController extends VBox implements Initializable {
     private Label labelOrderId;
     @FXML
     private OrderStructureComponentController_old orderStructureComponentControllerOld;
+    @FXML
+    private OrderStructureComponentController orderStructureComponentController;
     @FXML
     private TextArea textAreaCustomer;
     @FXML
@@ -90,12 +92,21 @@ public class OrderComponentController extends VBox implements Initializable {
     }
 
     @Deprecated
-    public void initOrderStructureComponentController_old(OrderStructureComponentDB_old orderStructureComponentDBOld) {
+    public void initOrderStructureComponentController_old(OrderStructureComponentDB orderStructureComponentDBOld) {
         orderStructureComponentControllerOld.setOrderStructureComponentDB(orderStructureComponentDBOld);
     }
 
+    @Deprecated
     public OrderStructureComponentController_old getOrderStructureComponentControllerOld() {
         return orderStructureComponentControllerOld;
+    }
+
+    public void initOrderStructureComponentController(OrderStructureComponentDB orderStructureComponentDB) {
+        orderStructureComponentController.setOrderStructureComponentDB(orderStructureComponentDB);
+    }
+
+    public OrderStructureComponentController getOrderStructureComponentController() {
+        return orderStructureComponentController;
     }
 
     public TextArea getTextAreaNotes() {
@@ -134,9 +145,5 @@ public class OrderComponentController extends VBox implements Initializable {
             }
         };
         datePicker.setConverter(converter);
-    }
-
-    public static OrderStructureComponentDB_old createOrderStructureComponentDB(OrderStructureComponentController_old orderStructureComponentControllerOld) {
-        return OrderComponentModel.createOrderStructureComponentDB(orderStructureComponentControllerOld);
     }
 }

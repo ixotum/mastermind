@@ -1,8 +1,10 @@
 package code.ui.models;
 
 import code.db.OrderDB;
+import code.db.order_structure_component.OrderStructureComponentDB;
 import code.ui.NewOrderScreenController;
 import code.ui.OrderComponentController;
+import code.ui.order_structure_component.OrderStructureComponentController;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -20,8 +22,12 @@ public class NewOrderScreenModel {
         orderDB.setName(orderComponent.getTextFieldName().getText());
 
 //        OrderStructureComponentController_old orderStructureComponentControllerOld = orderComponent.getOrderStructureComponentControllerOld();
-//        OrderStructureComponentDB_old orderStructureComponentDBOld = OrderComponentController.createOrderStructureComponentDB(orderStructureComponentControllerOld);
+//        OrderStructureComponentDB orderStructureComponentDBOld = OrderComponentController.createOrderStructureComponentDB_old(orderStructureComponentControllerOld);
 //        orderDB.setOrderStructureComponentDBOld(orderStructureComponentDBOld);
+
+        OrderStructureComponentController orderStructureComponentController = orderComponent.getOrderStructureComponentController();
+        OrderStructureComponentDB orderStructureComponentDB = OrderComponentModel.createOrderStructureComponentDB(orderStructureComponentController);
+        orderDB.setOrderStructureComponentDB(orderStructureComponentDB);
 
         orderDB.setCustomer(orderComponent.getTextAreaCustomer().getText());
         orderDB.setAddress(orderComponent.getTextAreaAddress().getText());

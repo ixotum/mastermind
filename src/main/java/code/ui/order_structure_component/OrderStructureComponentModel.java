@@ -1,11 +1,16 @@
 package code.ui.order_structure_component;
 
+import code.db.order_structure_component.OrderStructureComponentDB;
+import code.db.order_structure_component.OrderStructureComponentRowDB;
+import code.ui.order_structure_component_old.RowData_old;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+
+import java.util.List;
 
 public class OrderStructureComponentModel {
     private final OrderStructureComponentController controller;
@@ -14,7 +19,7 @@ public class OrderStructureComponentModel {
         this.controller = controller;
     }
 
-    protected static void addRow(final TableView<RowData> table) {
+    protected static void addEmptyRow(final TableView<RowData> table) {
         table.getItems().add(new RowData());
     }
 
@@ -45,7 +50,7 @@ public class OrderStructureComponentModel {
         final int lastColumnIndex = table.getColumns().size() - 1;
 
         if (currentRowIndex == lastRowIndex && currentColumnIndex == lastColumnIndex) {
-            OrderStructureComponentModel.addRow(table);
+            OrderStructureComponentModel.addEmptyRow(table);
         }
 
         final int nextRowIndex = calcNextRowIndex(currentRowIndex, currentColumnIndex, lastColumnIndex);
@@ -88,5 +93,24 @@ public class OrderStructureComponentModel {
         event.getTableView().getItems().get(event.getTablePosition().getRow()).setColumnPrice(newValue);
         double total = calcTotal(controller.getTable().getItems());
         controller.getLabelTotal().setText(String.valueOf(total));
+    }
+
+    public void initComponent(OrderStructureComponentDB orderStructureComponentDB) {
+        TableView<RowData> table = controller.getTable();
+        table.getItems().clear();
+
+        if (orderStructureComponentDB != null) {
+            List<OrderStructureComponentRowDB> componentRowList = orderStructureComponentDB.getComponentRowList();
+            for (OrderStructureComponentRowDB componentRowDB : componentRowList) {
+                addRow(componentRowDB, table);
+            }
+        }
+    }
+
+    private static void addRow(OrderStructureComponentRowDB componentRowDB, TableView<RowData> table) {
+        RowData rowData = new RowData();
+        rowData.setColumnItem(componentRowDB.getItem());
+        rowData.setColumnPrice(componentRowDB.getPrice().toString());
+        table.getItems().add(rowData);
     }
 }
