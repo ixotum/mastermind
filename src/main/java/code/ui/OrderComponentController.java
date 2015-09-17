@@ -2,7 +2,6 @@ package code.ui;
 
 import code.db.order_structure_component.OrderStructureComponentDB;
 import code.ui.order_structure_component.OrderStructureComponentController;
-import code.ui.order_structure_component_old.OrderStructureComponentController_old;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,8 +26,6 @@ import java.util.ResourceBundle;
 public class OrderComponentController extends VBox implements Initializable {
     @FXML
     private Label labelOrderId;
-    @FXML
-    private OrderStructureComponentController_old orderStructureComponentControllerOld;
     @FXML
     private OrderStructureComponentController orderStructureComponentController;
     @FXML
@@ -89,16 +86,6 @@ public class OrderComponentController extends VBox implements Initializable {
 
     public TextArea getTextAreaDescription() {
         return textAreaDescription;
-    }
-
-    @Deprecated
-    public void initOrderStructureComponentController_old(OrderStructureComponentDB orderStructureComponentDBOld) {
-        orderStructureComponentControllerOld.setOrderStructureComponentDB(orderStructureComponentDBOld);
-    }
-
-    @Deprecated
-    public OrderStructureComponentController_old getOrderStructureComponentControllerOld() {
-        return orderStructureComponentControllerOld;
     }
 
     public void initOrderStructureComponentController(OrderStructureComponentDB orderStructureComponentDB) {

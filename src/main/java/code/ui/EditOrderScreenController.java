@@ -32,7 +32,6 @@ public class EditOrderScreenController {
         this.orderDB = orderDB;
         orderComponent.getLabelOrderId().setText(String.valueOf(orderDB.getOrderId()));
         orderComponent.getTextFieldName().setText(orderDB.getName());
-//        orderComponent.initOrderStructureComponentController_old(orderDB.getOrderStructureComponentDBOld());
         orderComponent.initOrderStructureComponentController(orderDB.getOrderStructureComponentDB());
         orderComponent.getTextAreaCustomer().setText(orderDB.getCustomer());
         orderComponent.getTextAreaAddress().setText(orderDB.getAddress());
@@ -68,10 +67,6 @@ public class EditOrderScreenController {
 
     private static void updateOrderDB(OrderComponentController orderComponent, OrderDB orderDB) {
         orderDB.setName(orderComponent.getTextFieldName().getText());
-
-//        OrderStructureComponentController_old orderStructureComponentControllerOld = orderComponent.getOrderStructureComponentControllerOld();
-//        OrderStructureComponentDB orderStructureComponentDBOld = OrderComponentController.createOrderStructureComponentDB_old(orderStructureComponentControllerOld);
-//        orderDB.setOrderStructureComponentDBOld(orderStructureComponentDBOld);
 
         OrderStructureComponentController orderStructureComponentController = orderComponent.getOrderStructureComponentController();
         OrderStructureComponentDB orderStructureComponentDB = OrderComponentModel.createOrderStructureComponentDB(orderStructureComponentController);

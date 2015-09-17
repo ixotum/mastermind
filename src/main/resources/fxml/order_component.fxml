@@ -5,7 +5,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import code.ui.order_structure_component_old.OrderStructureComponentController_old?>
 <?import code.ui.order_structure_component.OrderStructureComponentController?>
 
 <fx:root type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
@@ -26,15 +25,6 @@
             <children>
                 <Label text="Name" />
                 <TextField fx:id="textFieldName" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="0.0" focusTraversable="false"/>
-            </children>
-        </AnchorPane>
-        <AnchorPane>
-            <VBox.margin>
-                <Insets left="12.0" right="12.0" top="12.0" />
-            </VBox.margin>
-            <children>
-                <Label text="Struct.old" />
-                <OrderStructureComponentController_old fx:id="orderStructureComponentControllerOld" prefHeight="50.0" prefWidth="400.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="0.0" />
             </children>
         </AnchorPane>
         <AnchorPane>

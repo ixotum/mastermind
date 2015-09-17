@@ -2,7 +2,6 @@ package code.ui.order_structure_component;
 
 import code.db.order_structure_component.OrderStructureComponentDB;
 import code.db.order_structure_component.OrderStructureComponentRowDB;
-import code.ui.order_structure_component_old.RowData_old;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;

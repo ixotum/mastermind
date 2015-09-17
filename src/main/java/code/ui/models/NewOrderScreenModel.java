@@ -21,10 +21,6 @@ public class NewOrderScreenModel {
         OrderDB orderDB = new OrderDB(orderId);
         orderDB.setName(orderComponent.getTextFieldName().getText());
 
-//        OrderStructureComponentController_old orderStructureComponentControllerOld = orderComponent.getOrderStructureComponentControllerOld();
-//        OrderStructureComponentDB orderStructureComponentDBOld = OrderComponentController.createOrderStructureComponentDB_old(orderStructureComponentControllerOld);
-//        orderDB.setOrderStructureComponentDBOld(orderStructureComponentDBOld);
-
         OrderStructureComponentController orderStructureComponentController = orderComponent.getOrderStructureComponentController();
         OrderStructureComponentDB orderStructureComponentDB = OrderComponentModel.createOrderStructureComponentDB(orderStructureComponentController);
         orderDB.setOrderStructureComponentDB(orderStructureComponentDB);
