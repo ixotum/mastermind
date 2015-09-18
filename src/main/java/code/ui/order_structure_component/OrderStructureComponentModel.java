@@ -9,6 +9,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class OrderStructureComponentModel {
@@ -78,20 +79,24 @@ public class OrderStructureComponentModel {
             table.getItems().remove(table.getSelectionModel().getSelectedItem());
             table.getSelectionModel().clearSelection();
 
-            double total = calcTotal(table.getItems());
-            controller.getLabelTotal().setText(String.valueOf(total));
+            updateTotal();
         }
     }
 
-    private static double calcTotal(ObservableList<RowData> items) {
-        return items.stream().mapToDouble(rowData -> Double.parseDouble(rowData.getColumnPrice())).sum();
+    private static BigDecimal calcTotal(ObservableList<RowData> items) {
+        double total = items.stream().mapToDouble(rowData -> Double.parseDouble(rowData.getColumnPrice())).sum();
+        return new BigDecimal(total).setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 
     protected void priceCommited(TableColumn.CellEditEvent<RowData, String> event) {
         String newValue = event.getNewValue();
         event.getTableView().getItems().get(event.getTablePosition().getRow()).setColumnPrice(newValue);
-        double total = calcTotal(controller.getTable().getItems());
-        controller.getLabelTotal().setText(String.valueOf(total));
+        updateTotal();
+    }
+
+    private void updateTotal() {
+        BigDecimal total = calcTotal(controller.getTable().getItems());
+        controller.getLabelTotal().setText(total.toString());
     }
 
     public void initComponent(OrderStructureComponentDB orderStructureComponentDB) {
@@ -104,6 +109,8 @@ public class OrderStructureComponentModel {
                 addRow(componentRowDB, table);
             }
         }
+
+        updateTotal();
     }
 
     private static void addRow(OrderStructureComponentRowDB componentRowDB, TableView<RowData> table) {
