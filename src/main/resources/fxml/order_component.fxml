@@ -33,7 +33,7 @@
             </VBox.margin>
             <children>
                 <Label text="Structure" />
-                <OrderStructureComponentController fx:id="orderStructureComponentController" prefHeight="200.0" prefWidth="400.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="0.0" stylesheets="@../styles/order_structure_component.css"/>
+                <OrderStructureComponentController fx:id="orderStructureComponentController" prefHeight="237.0" prefWidth="400.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="0.0" stylesheets="@../styles/order_structure_component.css"/>
             </children>
         </AnchorPane>
         <AnchorPane>
