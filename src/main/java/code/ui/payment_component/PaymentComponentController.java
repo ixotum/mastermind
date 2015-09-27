@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -23,6 +24,8 @@ public class PaymentComponentController extends AnchorPane implements Initializa
     private TableColumn<PaymentRowData, String> columnPayment;
     @FXML
     private DatePicker datePicker;
+    @FXML
+    public TextField textFieldPayment;
 
     public PaymentComponentController() {
         model = new PaymentComponentModel(this);
@@ -58,5 +61,13 @@ public class PaymentComponentController extends AnchorPane implements Initializa
 
     public DatePicker getDatePicker() {
         return datePicker;
+    }
+
+    public TextField getTextFieldPayment() {
+        return textFieldPayment;
+    }
+
+    public TableColumn<PaymentRowData, String> getColumnPayment() {
+        return columnPayment;
     }
 }

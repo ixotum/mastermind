@@ -23,6 +23,9 @@ public class PaymentComponentModel {
         String date = controller.getDatePicker().getValue().toString();
         PaymentRowData rowData = new PaymentRowData();
         rowData.setDate(date);
+
+        String payment = controller.getTextFieldPayment().getText();
+        rowData.setPayment(payment);
         table.getItems().add(rowData);
     }
 
@@ -37,6 +40,9 @@ public class PaymentComponentModel {
     private void initColumns() {
         TableColumn<PaymentRowData, String> columnDate = controller.getColumnDate();
         columnDate.setCellValueFactory(cell -> cell.getValue().dateProperty());
+
+        TableColumn<PaymentRowData, String> columnPayment = controller.getColumnPayment();
+        columnPayment.setCellValueFactory(cell -> cell.getValue().paymentProperty());
     }
 
     public void initDatePicker() {

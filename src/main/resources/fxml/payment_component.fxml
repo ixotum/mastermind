@@ -20,10 +20,15 @@
                 </TableView>
             <HBox>
                <children>
-                  <DatePicker fx:id="datePicker">
+                  <DatePicker fx:id="datePicker" prefWidth="125.0">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin></DatePicker>
+                  <TextField fx:id="textFieldPayment" prefWidth="100.0">
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin>
+                  </TextField>
                   <Button mnemonicParsing="false" onAction="#onButtonAdd" text="Add">
                      <HBox.margin>
                         <Insets left="25.0" />
