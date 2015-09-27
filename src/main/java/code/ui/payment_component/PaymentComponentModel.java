@@ -3,9 +3,7 @@ package code.ui.payment_component;
 import code.utils.UITools;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -24,9 +22,12 @@ public class PaymentComponentModel {
         PaymentRowData rowData = new PaymentRowData();
         rowData.setDate(date);
 
-        String payment = controller.getTextFieldPayment().getText();
+        TextField textFieldPayment = controller.getTextFieldPayment();
+        String payment = textFieldPayment.getText();
         rowData.setPayment(payment);
         table.getItems().add(rowData);
+
+        textFieldPayment.clear();
     }
 
     protected void initTable() {
@@ -51,5 +52,18 @@ public class PaymentComponentModel {
         Date todayDate = new Date();
         LocalDate localDate = todayDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         datePicker.setValue(localDate);
+    }
+
+    public void initPaymentFieldHandlers() {
+        TextField textFieldPayment = controller.getTextFieldPayment();
+        Button buttonAdd = controller.getButtonAdd();
+        textFieldPayment.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!textFieldPayment.getText().isEmpty()) {
+                buttonAdd.setDisable(false);
+                return;
+            }
+
+            buttonAdd.setDisable(true);
+        });
     }
 }

@@ -3,10 +3,7 @@ package code.ui.payment_component;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -15,7 +12,6 @@ import java.util.ResourceBundle;
 
 public class PaymentComponentController extends AnchorPane implements Initializable {
     private final PaymentComponentModel model;
-
     @FXML
     private TableView<PaymentRowData> table;
     @FXML
@@ -25,7 +21,9 @@ public class PaymentComponentController extends AnchorPane implements Initializa
     @FXML
     private DatePicker datePicker;
     @FXML
-    public TextField textFieldPayment;
+    private TextField textFieldPayment;
+    @FXML
+    private Button buttonAdd;
 
     public PaymentComponentController() {
         model = new PaymentComponentModel(this);
@@ -49,6 +47,7 @@ public class PaymentComponentController extends AnchorPane implements Initializa
     public void initialize(URL location, ResourceBundle resources) {
         model.initTable();
         model.initDatePicker();
+        model.initPaymentFieldHandlers();
     }
 
     public TableView<PaymentRowData> getTable() {
@@ -69,5 +68,9 @@ public class PaymentComponentController extends AnchorPane implements Initializa
 
     public TableColumn<PaymentRowData, String> getColumnPayment() {
         return columnPayment;
+    }
+
+    public Button getButtonAdd() {
+        return buttonAdd;
     }
 }
