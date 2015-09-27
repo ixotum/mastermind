@@ -1,13 +1,11 @@
 package code.ui.payment_component;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -20,9 +18,11 @@ public class PaymentComponentController extends AnchorPane implements Initializa
     @FXML
     private TableView<PaymentRowData> table;
     @FXML
-    private TableColumn<PaymentRowData, AnchorPane> columnDate;
+    private TableColumn<PaymentRowData, String> columnDate;
     @FXML
     private TableColumn<PaymentRowData, String> columnPayment;
+    @FXML
+    private DatePicker datePicker;
 
     public PaymentComponentController() {
         model = new PaymentComponentModel(this);
@@ -39,27 +39,24 @@ public class PaymentComponentController extends AnchorPane implements Initializa
 
     @FXML
     public void onButtonAdd() {
-        addRow(table);
-    }
-
-    private static void addRow(TableView<PaymentRowData> table) {
-        ObservableList<PaymentRowData> observableList = table.getItems();
-        table.getItems().add(new PaymentRowData());
+        model.addRow();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        initTable();
+        model.initTable();
+        model.initDatePicker();
     }
 
-    private void initTable() {
-        ObservableList<PaymentRowData> observableList = FXCollections.observableArrayList();
-        table.setItems(observableList);
-
-        initColumns();
+    public TableView<PaymentRowData> getTable() {
+        return table;
     }
 
-    private void initColumns() {
-        columnDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+    public TableColumn<PaymentRowData, String> getColumnDate() {
+        return columnDate;
+    }
+
+    public DatePicker getDatePicker() {
+        return datePicker;
     }
 }
