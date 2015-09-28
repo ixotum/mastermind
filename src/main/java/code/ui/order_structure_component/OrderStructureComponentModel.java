@@ -1,5 +1,8 @@
 package code.ui.order_structure_component;
 
+import code.bus.BusEvent;
+import code.bus.BusEventType;
+import code.bus.BusEventManager;
 import code.db.order_structure_component.OrderStructureComponentDB;
 import code.db.order_structure_component.OrderStructureComponentRowDB;
 import javafx.collections.ObservableList;
@@ -97,6 +100,8 @@ public class OrderStructureComponentModel {
     private void updateTotal() {
         BigDecimal total = calcTotal(controller.getTable().getItems());
         controller.getLabelTotal().setText(total.toString());
+        BusEvent busEvent = new BusEvent(BusEventType.TOTAL_UPDATED, total);
+        BusEventManager.dispatch(busEvent);
     }
 
     public void initComponent(OrderStructureComponentDB orderStructureComponentDB) {

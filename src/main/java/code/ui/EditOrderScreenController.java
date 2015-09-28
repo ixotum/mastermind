@@ -2,6 +2,7 @@ package code.ui;
 
 import code.Defines;
 import code.bus.BusEvent;
+import code.bus.BusEventType;
 import code.bus.BusEventManager;
 import code.db.OrderDB;
 import code.db.OrdersJDBCTemplate;
@@ -61,7 +62,8 @@ public class EditOrderScreenController {
         OrdersJDBCTemplate ordersJDBCTemplate = (OrdersJDBCTemplate) applicationContext.getBean("ordersJDBCTemplateId");
         ordersJDBCTemplate.updateExistedOrder(orderDB);
 
-        BusEventManager.dispatch(BusEvent.ORDER_UPDATED);
+        BusEvent busEvent = new BusEvent(BusEventType.ORDER_UPDATED, null);
+        BusEventManager.dispatch(busEvent);
         stage.hide();
     }
 

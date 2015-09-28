@@ -1,15 +1,20 @@
 package code.ui.payment_component;
 
+import code.bus.BusEvent;
+import code.bus.BusEventType;
+import code.bus.BusEventListener;
+import code.bus.BusEventManager;
 import code.utils.UITools;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
-public class PaymentComponentModel {
+public class PaymentComponentModel implements BusEventListener {
     private final PaymentComponentController controller;
 
     public PaymentComponentModel(PaymentComponentController paymentComponentController) {
@@ -70,5 +75,20 @@ public class PaymentComponentModel {
     public void removeSelectedRow() {
         TableView<PaymentRowData> table = controller.getTable();
         table.getItems().remove(table.getSelectionModel().getSelectedItem());
+    }
+
+    public void initListeners() {
+        BusEventManager.addListener(this, BusEventType.TOTAL_UPDATED);
+    }
+
+    @Override
+    public void busEventDispatch(BusEvent busEvent) {
+        BusEventType busEventType = busEvent.getType();
+        if (busEventType != BusEventType.TOTAL_UPDATED) {
+            return;
+        }
+
+        BigDecimal total = (BigDecimal) busEvent.getContent();
+        controller.getLabelTotal().setText(total.toString());
     }
 }

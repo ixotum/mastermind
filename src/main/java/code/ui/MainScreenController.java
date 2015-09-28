@@ -3,6 +3,7 @@ package code.ui;
 import code.Defines;
 import code.UpdateManager;
 import code.bus.BusEvent;
+import code.bus.BusEventType;
 import code.bus.BusEventListener;
 import code.bus.BusEventManager;
 import code.db.OrderDB;
@@ -48,7 +49,7 @@ public class MainScreenController implements Initializable, BusEventListener {
         checkForUpdates();
         calculateGridParameters();
         initGridOrders();
-        BusEventManager.addListener(this, BusEvent.ORDER_UPDATED);
+        BusEventManager.addListener(this, BusEventType.ORDER_UPDATED);
     }
 
     private void calculateGridParameters() {
@@ -180,8 +181,8 @@ public class MainScreenController implements Initializable, BusEventListener {
     }
 
     @Override
-    public void busEventDispatch(BusEvent event) {
-        if (event == BusEvent.ORDER_UPDATED) {
+    public void busEventDispatch(BusEvent busEvent) {
+        if (busEvent.getType() == BusEventType.ORDER_UPDATED) {
             redrawGridOrders();
         }
     }

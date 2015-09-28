@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 
 public class PaymentComponentController extends AnchorPane implements Initializable {
     private final PaymentComponentModel model;
+
     @FXML
     private TableView<PaymentRowData> table;
     @FXML
@@ -24,6 +25,8 @@ public class PaymentComponentController extends AnchorPane implements Initializa
     private TextField textFieldPayment;
     @FXML
     private Button buttonAdd;
+    @FXML
+    private Label labelTotal;
 
     public PaymentComponentController() {
         model = new PaymentComponentModel(this);
@@ -48,6 +51,7 @@ public class PaymentComponentController extends AnchorPane implements Initializa
         model.initTable();
         model.initDatePicker();
         model.initPaymentFieldHandlers();
+        model.initListeners();
     }
 
     public TableView<PaymentRowData> getTable() {
@@ -77,5 +81,9 @@ public class PaymentComponentController extends AnchorPane implements Initializa
     @FXML
     public void onButtonDelete() {
         model.removeSelectedRow();
+    }
+
+    public Label getLabelTotal() {
+        return labelTotal;
     }
 }

@@ -9,9 +9,9 @@ import java.util.Map;
  * Created by ixotum on 7/18/15
  */
 public class BusEventManager {
-    private static Map<BusEvent, List<BusEventListener>> mapListener = new HashMap<>();
+    private static Map<BusEventType, List<BusEventListener>> mapListener = new HashMap<>();
 
-    public static void addListener(BusEventListener listener, BusEvent event) {
+    public static void addListener(BusEventListener listener, BusEventType event) {
         List<BusEventListener> listeners = mapListener.get(event);
 
         if (listeners == null) {
@@ -25,15 +25,15 @@ public class BusEventManager {
         mapListener.put(event, listeners);
     }
 
-    public static void dispatch(BusEvent event) {
-        List<BusEventListener> listeners = mapListener.get(event);
+    public static void dispatch(BusEvent busEvent) {
+        List<BusEventListener> listeners = mapListener.get(busEvent.getType());
 
         if (listeners == null) {
             return;
         }
 
         for (BusEventListener listener : listeners) {
-            listener.busEventDispatch(event);
+            listener.busEventDispatch(busEvent);
         }
     }
 }
