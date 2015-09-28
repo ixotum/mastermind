@@ -73,4 +73,9 @@ public class PaymentComponentController extends AnchorPane implements Initializa
     public Button getButtonAdd() {
         return buttonAdd;
     }
+
+    @FXML
+    public void onButtonDelete() {
+        model.removeSelectedRow();
+    }
 }

@@ -1,7 +1,6 @@
 package code.ui.order_structure_component;
 
 import code.db.order_structure_component.OrderStructureComponentDB;
-import code.db.order_structure_component.OrderStructureComponentRowDB;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,7 +17,6 @@ import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class OrderStructureComponentController extends AnchorPane implements Initializable {
@@ -69,7 +67,7 @@ public class OrderStructureComponentController extends AnchorPane implements Ini
 
         columnPrice.setCellValueFactory(cellData -> cellData.getValue().columnPriceProperty());
         columnPrice.setCellFactory(createStringCellFactory());
-        columnPrice.onEditCommitProperty().set(model::priceCommited);
+        columnPrice.onEditCommitProperty().set(model::priceCommitted);
     }
 
     private static Callback<TableColumn<RowData, String>, TableCell<RowData, String>> createStringCellFactory() {

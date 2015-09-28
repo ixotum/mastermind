@@ -88,7 +88,7 @@ public class OrderStructureComponentModel {
         return new BigDecimal(total).setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 
-    protected void priceCommited(TableColumn.CellEditEvent<RowData, String> event) {
+    protected void priceCommitted(TableColumn.CellEditEvent<RowData, String> event) {
         String newValue = event.getNewValue();
         event.getTableView().getItems().get(event.getTablePosition().getRow()).setColumnPrice(newValue);
         updateTotal();

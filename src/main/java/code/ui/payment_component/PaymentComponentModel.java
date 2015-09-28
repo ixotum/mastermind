@@ -66,4 +66,9 @@ public class PaymentComponentModel {
             buttonAdd.setDisable(true);
         });
     }
+
+    public void removeSelectedRow() {
+        TableView<PaymentRowData> table = controller.getTable();
+        table.getItems().remove(table.getSelectionModel().getSelectedItem());
+    }
 }

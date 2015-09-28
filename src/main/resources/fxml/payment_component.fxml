@@ -24,14 +24,19 @@
                      <HBox.margin>
                         <Insets />
                      </HBox.margin></DatePicker>
-                  <TextField fx:id="textFieldPayment" prefWidth="100.0">
+                  <TextField fx:id="textFieldPayment" prefWidth="75.0">
                      <HBox.margin>
-                        <Insets left="25.0" />
+                        <Insets left="20.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button fx:id="buttonAdd" mnemonicParsing="false" onAction="#onButtonAdd" text="Add" disable="true">
+                  <Button fx:id="buttonAdd" disable="true" mnemonicParsing="false" onAction="#onButtonAdd" text="Add">
                      <HBox.margin>
-                        <Insets left="25.0" />
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" text="Delete" onAction="#onButtonDelete">
+                     <HBox.margin>
+                        <Insets left="20.0" />
                      </HBox.margin>
                   </Button>
                </children>
