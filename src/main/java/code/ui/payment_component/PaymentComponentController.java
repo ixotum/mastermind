@@ -29,6 +29,10 @@ public class PaymentComponentController extends AnchorPane implements Initializa
     private Label labelTotal;
     @FXML
     private Label labelPaid;
+    @FXML
+    private Label labelDue;
+    @FXML
+    private Label status;
 
     public PaymentComponentController() {
         model = new PaymentComponentModel(this);
@@ -91,5 +95,13 @@ public class PaymentComponentController extends AnchorPane implements Initializa
 
     public Label getLabelPaid() {
         return labelPaid;
+    }
+
+    public Label getLabelDue() {
+        return labelDue;
+    }
+
+    public Label getLabelStatus() {
+        return status;
     }
 }

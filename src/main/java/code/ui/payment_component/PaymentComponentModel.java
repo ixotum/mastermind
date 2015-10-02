@@ -42,6 +42,27 @@ public class PaymentComponentModel implements BusEventListener {
         ObservableList<PaymentRowData> observableList = table.getItems();
         BigDecimal paid = calcPaid(observableList);
         controller.getLabelPaid().setText(paid.toString());
+
+        BigDecimal total = new BigDecimal(controller.getLabelTotal().getText());
+        BigDecimal due = total.subtract(paid);
+        controller.getLabelDue().setText(due.toString());
+
+        String status = getStatus(total, paid, due);
+        controller.getLabelStatus().setText(status);
+    }
+
+    private static String getStatus(BigDecimal total, BigDecimal paid, BigDecimal due) {
+        String status = "UNPAID";
+
+        if (due.compareTo(total) < 0 && due.compareTo(BigDecimal.ZERO) > 0) {
+            status = "PARTIALLY PAID";
+        } else if (due.compareTo(BigDecimal.ZERO) == 0) {
+            status = "PAID";
+        } else if (due.compareTo(BigDecimal.ZERO) < 0) {
+            status = "OVERPAID";
+        }
+
+        return status;
     }
 
     private static BigDecimal calcPaid(ObservableList<PaymentRowData> observableList) {
@@ -105,5 +126,6 @@ public class PaymentComponentModel implements BusEventListener {
 
         BigDecimal total = (BigDecimal) busEvent.getContent();
         controller.getLabelTotal().setText(total.toString());
+        updatePaymentBar();
     }
 }
