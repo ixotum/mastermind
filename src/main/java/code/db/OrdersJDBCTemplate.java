@@ -27,7 +27,6 @@ public class OrdersJDBCTemplate {
         jdbcTemplate.update(sql, orderDB.getOrderId(), orderDB.getName(), orderDB.getCustomer(), orderDB.getAddress(),
                 orderDB.getVk(), orderDB.getDueDate(), orderDB.getEventDate(), orderDB.getDescription(), orderDB.getNotes());
 
-//        saveNewOrderStructureComponent_old(orderDB.getOrderId(), orderDB.getOrderStructureComponentDBOld());
         saveNewOrderStructureComponent(orderDB.getOrderId(), orderDB.getOrderStructureComponentDB());
     }
 

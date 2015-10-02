@@ -33,6 +33,19 @@ public class PaymentComponentModel implements BusEventListener {
         table.getItems().add(rowData);
 
         textFieldPayment.clear();
+
+        updatePaymentBar();
+    }
+
+    private void updatePaymentBar() {
+        TableView<PaymentRowData> table = controller.getTable();
+        ObservableList<PaymentRowData> observableList = table.getItems();
+        BigDecimal paid = calcPaid(observableList);
+        controller.getLabelPaid().setText(paid.toString());
+    }
+
+    private static BigDecimal calcPaid(ObservableList<PaymentRowData> observableList) {
+        return observableList.stream().map(paymentRowData -> new BigDecimal(paymentRowData.getPayment())).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     protected void initTable() {
@@ -75,6 +88,8 @@ public class PaymentComponentModel implements BusEventListener {
     public void removeSelectedRow() {
         TableView<PaymentRowData> table = controller.getTable();
         table.getItems().remove(table.getSelectionModel().getSelectedItem());
+
+        updatePaymentBar();
     }
 
     public void initListeners() {

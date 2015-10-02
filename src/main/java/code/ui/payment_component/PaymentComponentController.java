@@ -27,6 +27,8 @@ public class PaymentComponentController extends AnchorPane implements Initializa
     private Button buttonAdd;
     @FXML
     private Label labelTotal;
+    @FXML
+    private Label labelPaid;
 
     public PaymentComponentController() {
         model = new PaymentComponentModel(this);
@@ -41,17 +43,22 @@ public class PaymentComponentController extends AnchorPane implements Initializa
         }
     }
 
-    @FXML
-    public void onButtonAdd() {
-        model.addRow();
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         model.initTable();
         model.initDatePicker();
         model.initPaymentFieldHandlers();
         model.initListeners();
+    }
+
+    @FXML
+    public void onButtonAdd() {
+        model.addRow();
+    }
+
+    @FXML
+    public void onButtonDelete() {
+        model.removeSelectedRow();
     }
 
     public TableView<PaymentRowData> getTable() {
@@ -78,12 +85,11 @@ public class PaymentComponentController extends AnchorPane implements Initializa
         return buttonAdd;
     }
 
-    @FXML
-    public void onButtonDelete() {
-        model.removeSelectedRow();
-    }
-
     public Label getLabelTotal() {
         return labelTotal;
+    }
+
+    public Label getLabelPaid() {
+        return labelPaid;
     }
 }
