@@ -102,7 +102,7 @@
             <VBox>
                 <AnchorPane>
                     <VBox.margin>
-                        <Insets left="12.0" right="12.0" top="12.0" />
+                        <Insets left="12.0" right="12.0" top="40.0" />
                     </VBox.margin>
                     <children>
                         <Label text="Payments" />
