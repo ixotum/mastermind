@@ -19,4 +19,8 @@ public class PaymentComponentDB {
     public PaymentDB getPayment(int paymentIndex) {
         return paymentDBList.get(paymentIndex);
     }
+
+    public int getOrderId() {
+        return paymentDBList.get(0).getOrderId();
+    }
 }

@@ -5,6 +5,7 @@ import code.db.order_structure_component.OrderStructureComponentRowDB;
 import code.db.order_structure_component.OrderStructureComponentRowDBMapper;
 import code.db.payment_component.PaymentComponentDB;
 import code.db.payment_component.PaymentDB;
+import code.db.payment_component.PaymentDBMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
@@ -58,20 +59,50 @@ public class OrdersJDBCTemplate {
         String sql = "SELECT * FROM ORDERS";
         List<OrderDB> orderDBList = jdbcTemplate.query(sql, new OrderDBMapper());
         List<Integer> orderIdList = extractOrderIdList(orderDBList);
-        List<OrderStructureComponentDB> orderStructureComponentDBList = readAllOrderStructureComponents(orderIdList);
 
+        List<OrderStructureComponentDB> orderStructureComponentDBList = readAllOrderStructureComponents(orderIdList);
         if (!orderStructureComponentDBList.isEmpty()) {
             for (OrderDB orderDB : orderDBList) {
                 try {
                     OrderStructureComponentDB orderStructureComponentDB = orderStructureComponentDBList.stream().filter(component -> isOrderIdEqual(orderDB.getOrderId(), component.getOrderId())).findFirst().get();
                     orderDB.setOrderStructureComponentDB(orderStructureComponentDB);
                 } catch (NoSuchElementException e) {
-                    System.out.println("INFO: orderStructureComponentDBOld is empty!");
+                    System.out.println("INFO: orderStructureComponentDB is empty!");
+                }
+            }
+        }
+
+        List<PaymentComponentDB> paymentComponentDBList = readAllPaymentComponents(orderIdList);
+        if (!paymentComponentDBList.isEmpty()) {
+            for (OrderDB orderDB : orderDBList) {
+                try {
+                    PaymentComponentDB paymentComponentDB = paymentComponentDBList.stream().filter(component -> isOrderIdEqual(orderDB.getOrderId(), component.getOrderId())).findFirst().get();
+                    orderDB.setPaymentComponentDB(paymentComponentDB);
+                } catch (NoSuchElementException e) {
+                    System.out.println("INFO: PaymentComponentDB is empty!");
                 }
             }
         }
 
         return orderDBList;
+    }
+
+    private List<PaymentComponentDB> readAllPaymentComponents(List<Integer> orderIdList) {
+        List<PaymentComponentDB> paymentComponentDBList = new ArrayList<>();
+        String sql = "SELECT * FROM PAYMENT";
+        List<PaymentDB> paymentDBList = jdbcTemplate.query(sql, new PaymentDBMapper());
+
+        for (Integer orderId : orderIdList) {
+            List<PaymentDB> filteredPaymentDBList = paymentDBList.stream().filter(row -> isOrderIdEqual(row.getOrderId(), orderId)).collect(Collectors.toList());
+
+            if(!filteredPaymentDBList.isEmpty()) {
+                PaymentComponentDB paymentComponentDB = new PaymentComponentDB();
+                paymentComponentDB.setPaymentDBList(filteredPaymentDBList);
+                paymentComponentDBList.add(paymentComponentDB);
+            }
+        }
+
+        return paymentComponentDBList;
     }
 
     private List<OrderStructureComponentDB> readAllOrderStructureComponents(List<Integer> orderIdList) {

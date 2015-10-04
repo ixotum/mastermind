@@ -7,8 +7,17 @@ import java.sql.Date;
  * Created by ixotum on 02.10.15
  */
 public class PaymentDB {
+    private int orderId;
     private Date date;
     private BigDecimal payment;
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
 
     public void setDate(Date date) {
         this.date = date;

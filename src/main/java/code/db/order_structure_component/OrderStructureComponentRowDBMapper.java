@@ -1,6 +1,5 @@
 package code.db.order_structure_component;
 
-import code.db.order_structure_component.OrderStructureComponentRowDB;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
