@@ -137,8 +137,17 @@ public class OrdersJDBCTemplate {
         jdbcTemplate.update(sql, orderDB.getName(), orderDB.getCustomer(), orderDB.getAddress(), orderDB.getVk(),
                 orderDB.getDueDate(), orderDB.getEventDate(), orderDB.getDescription(), orderDB.getNotes(), orderDB.getOrderId());
 
-        deleteOrderStructureComponent(orderDB.getOrderId());
-        saveNewOrderStructureComponent(orderDB.getOrderId(), orderDB.getOrderStructureComponentDB());
+        int orderId = orderDB.getOrderId();
+        deleteOrderStructureComponent(orderId);
+        saveNewOrderStructureComponent(orderId, orderDB.getOrderStructureComponentDB());
+
+        deletePaymentComponent(orderId);
+        saveNewPaymentComponent(orderId, orderDB.getPaymentComponentDB());
+    }
+
+    private void deletePaymentComponent(int orderId) {
+        String sql = "DELETE FROM PAYMENT WHERE ORDER_ID = ?";
+        jdbcTemplate.update(sql, orderId);
     }
 
     private void deleteOrderStructureComponent(int orderId) {

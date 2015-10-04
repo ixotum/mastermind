@@ -144,6 +144,10 @@ public class PaymentComponentModel implements BusEventListener {
     }
 
     public void initComponent(PaymentComponentDB paymentComponentDB) {
+        if (paymentComponentDB == null) {
+            return;
+        }
+
         List<PaymentDB> paymentDBList = paymentComponentDB.getPaymentDBList();
         paymentDBList.forEach(this::addRow);
     }

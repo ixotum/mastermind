@@ -7,8 +7,10 @@ import code.bus.BusEventManager;
 import code.db.OrderDB;
 import code.db.OrdersJDBCTemplate;
 import code.db.order_structure_component.OrderStructureComponentDB;
+import code.db.payment_component.PaymentComponentDB;
 import code.ui.models.OrderComponentModel;
 import code.ui.order_structure_component.OrderStructureComponentController;
+import code.ui.payment_component.PaymentComponentController;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import org.springframework.context.ApplicationContext;
@@ -82,5 +84,9 @@ public class EditOrderScreenController {
         orderDB.setEventDate(Date.valueOf(orderComponent.getDatePickerEventDate().getValue()));
         orderDB.setDescription(orderComponent.getTextAreaDescription().getText());
         orderDB.setNotes(orderComponent.getTextAreaNotes().getText());
+
+        PaymentComponentController paymentComponentController = orderComponent.getPaymentComponentController();
+        PaymentComponentDB paymentComponentDB = OrderComponentModel.createPaymentComponentDB(paymentComponentController);
+        orderDB.setPaymentComponentDB(paymentComponentDB);
     }
 }
