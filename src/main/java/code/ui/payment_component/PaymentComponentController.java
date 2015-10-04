@@ -1,5 +1,6 @@
 package code.ui.payment_component;
 
+import code.db.payment_component.PaymentComponentDB;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -111,5 +112,9 @@ public class PaymentComponentController extends AnchorPane implements Initializa
 
     public PaymentRowData getPayment(int paymentIndex) {
         return table.getItems().get(paymentIndex);
+    }
+
+    public void setPaymentComponentDB(PaymentComponentDB paymentComponentDB) {
+        model.initComponent(paymentComponentDB);
     }
 }

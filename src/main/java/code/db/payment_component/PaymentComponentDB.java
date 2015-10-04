@@ -12,6 +12,10 @@ public class PaymentComponentDB {
         this.paymentDBList = paymentDBList;
     }
 
+    public List<PaymentDB> getPaymentDBList() {
+        return paymentDBList;
+    }
+
     public int getPaymentsCount() {
         return paymentDBList.size();
     }

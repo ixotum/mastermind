@@ -50,6 +50,7 @@ public class EditOrderScreenController {
 
         orderComponent.getTextAreaDescription().setText(orderDB.getDescription());
         orderComponent.getTextAreaNotes().setText(orderDB.getNotes());
+        orderComponent.initPaymentComponentController(orderDB.getPaymentComponentDB());
     }
 
     public void onClickCancelButton() {

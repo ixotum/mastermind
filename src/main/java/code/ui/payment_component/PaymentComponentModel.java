@@ -4,6 +4,8 @@ import code.bus.BusEvent;
 import code.bus.BusEventType;
 import code.bus.BusEventListener;
 import code.bus.BusEventManager;
+import code.db.payment_component.PaymentComponentDB;
+import code.db.payment_component.PaymentDB;
 import code.utils.UITools;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +16,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 
 public class PaymentComponentModel implements BusEventListener {
     private final PaymentComponentController controller;
@@ -34,6 +37,16 @@ public class PaymentComponentModel implements BusEventListener {
         table.getItems().add(rowData);
 
         textFieldPayment.clear();
+
+        updatePaymentBar();
+    }
+
+    private void addRow(PaymentDB paymentDB) {
+        PaymentRowData paymentRowData = new PaymentRowData();
+        paymentRowData.setDate(paymentDB.getDate().toLocalDate());
+        paymentRowData.setPayment(paymentDB.getPayment());
+        TableView<PaymentRowData> table = controller.getTable();
+        table.getItems().add(paymentRowData);
 
         updatePaymentBar();
     }
@@ -128,5 +141,10 @@ public class PaymentComponentModel implements BusEventListener {
         BigDecimal total = (BigDecimal) busEvent.getContent();
         controller.getLabelTotal().setText(total.toString());
         updatePaymentBar();
+    }
+
+    public void initComponent(PaymentComponentDB paymentComponentDB) {
+        List<PaymentDB> paymentDBList = paymentComponentDB.getPaymentDBList();
+        paymentDBList.forEach(this::addRow);
     }
 }

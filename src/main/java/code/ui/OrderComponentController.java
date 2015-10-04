@@ -1,6 +1,7 @@
 package code.ui;
 
 import code.db.order_structure_component.OrderStructureComponentDB;
+import code.db.payment_component.PaymentComponentDB;
 import code.ui.order_structure_component.OrderStructureComponentController;
 import code.ui.payment_component.PaymentComponentController;
 import code.utils.UITools;
@@ -114,5 +115,9 @@ public class OrderComponentController extends VBox implements Initializable {
 
     public PaymentComponentController getPaymentComponentController() {
         return paymentComponentController;
+    }
+
+    public void initPaymentComponentController(PaymentComponentDB paymentComponentDB) {
+        paymentComponentController.setPaymentComponentDB(paymentComponentDB);
     }
 }
