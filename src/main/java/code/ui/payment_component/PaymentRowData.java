@@ -1,37 +1,33 @@
 package code.ui.payment_component;
 
-import javafx.beans.property.SimpleStringProperty;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public class PaymentRowData {
-    private final SimpleStringProperty date;
-    private final SimpleStringProperty payment;
-
-    public PaymentRowData() {
-        date = new SimpleStringProperty();
-        payment = new SimpleStringProperty();
-    }
+    private LocalDate localDate;
+    private BigDecimal payment = BigDecimal.ZERO;
 
     public String getDate() {
-        return date.get();
+        return localDate.toString();
     }
 
-    public SimpleStringProperty dateProperty() {
-        return date;
+    public void setDate(LocalDate localDate) {
+        this.localDate = localDate;
     }
 
-    public void setDate(String value) {
-        this.date.setValue(value);
-    }
-
-    public void setPayment(String payment) {
-        this.payment.setValue(payment);
+    public void setPayment(BigDecimal payment) {
+        this.payment = payment;
     }
 
     public String getPayment() {
-        return payment.get();
+        return payment.toString();
     }
 
-    public SimpleStringProperty paymentProperty() {
+    public LocalDate getLocalDate() {
+        return localDate;
+    }
+
+    public BigDecimal getPaymentData() {
         return payment;
     }
 }

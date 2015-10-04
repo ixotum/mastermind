@@ -104,4 +104,12 @@ public class PaymentComponentController extends AnchorPane implements Initializa
     public Label getLabelStatus() {
         return status;
     }
+
+    public int getPaymentsSize() {
+        return table.getItems().size();
+    }
+
+    public PaymentRowData getPayment(int paymentIndex) {
+        return table.getItems().get(paymentIndex);
+    }
 }

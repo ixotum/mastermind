@@ -2,6 +2,7 @@ package code.ui;
 
 import code.db.order_structure_component.OrderStructureComponentDB;
 import code.ui.order_structure_component.OrderStructureComponentController;
+import code.ui.payment_component.PaymentComponentController;
 import code.utils.UITools;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,6 +44,8 @@ public class OrderComponentController extends VBox implements Initializable {
     private TextArea textAreaDescription;
     @FXML
     private TextArea textAreaNotes;
+    @FXML
+    private PaymentComponentController paymentComponentController;
 
     public OrderComponentController() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/order_component.fxml"));
@@ -107,5 +110,9 @@ public class OrderComponentController extends VBox implements Initializable {
         UITools.initDatePicker(datePickerEventDate);
         datePickerDueDate.setValue(localDate);
         datePickerEventDate.setValue(localDate);
+    }
+
+    public PaymentComponentController getPaymentComponentController() {
+        return paymentComponentController;
     }
 }

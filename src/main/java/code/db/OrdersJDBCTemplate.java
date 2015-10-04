@@ -3,6 +3,8 @@ package code.db;
 import code.db.order_structure_component.OrderStructureComponentDB;
 import code.db.order_structure_component.OrderStructureComponentRowDB;
 import code.db.order_structure_component.OrderStructureComponentRowDBMapper;
+import code.db.payment_component.PaymentComponentDB;
+import code.db.payment_component.PaymentDB;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
@@ -27,16 +29,18 @@ public class OrdersJDBCTemplate {
         jdbcTemplate.update(sql, orderDB.getOrderId(), orderDB.getName(), orderDB.getCustomer(), orderDB.getAddress(),
                 orderDB.getVk(), orderDB.getDueDate(), orderDB.getEventDate(), orderDB.getDescription(), orderDB.getNotes());
 
-        saveNewOrderStructureComponent(orderDB.getOrderId(), orderDB.getOrderStructureComponentDB());
+        int orderId = orderDB.getOrderId();
+        saveNewOrderStructureComponent(orderId, orderDB.getOrderStructureComponentDB());
+        saveNewPaymentComponent(orderId, orderDB.getPaymentComponentDB());
     }
 
-    private void saveNewOrderStructureComponent_old(int orderId, OrderStructureComponentDB orderStructureComponentDBOld) {
-        String sql = "INSERT INTO ORDER_STRUCTURE_COMPONENTS(ORDER_ID, POSITION, ITEM, PRICE) VALUES (?, ?, ?, ?)";
-        int componentRowCount = orderStructureComponentDBOld.getComponentRowCount();
+    private void saveNewPaymentComponent(int orderId, PaymentComponentDB paymentComponentDB) {
+        String sql = "INSERT INTO PAYMENT(ORDER_ID, DATE, PAYMENT) VALUES (?, ?, ?)";
+        int paymentsCount = paymentComponentDB.getPaymentsCount();
 
-        for (int rowIndex = 0; rowIndex < componentRowCount; ++rowIndex) {
-            OrderStructureComponentRowDB componentRowDB = orderStructureComponentDBOld.getComponentRow(rowIndex);
-            jdbcTemplate.update(sql, orderId, rowIndex, componentRowDB.getItem(), componentRowDB.getPrice());
+        for (int paymentIndex = 0; paymentIndex < paymentsCount; ++paymentIndex) {
+            PaymentDB paymentDB = paymentComponentDB.getPayment(paymentIndex);
+            jdbcTemplate.update(sql, orderId, paymentDB.getDate(), paymentDB.getPayment());
         }
     }
 

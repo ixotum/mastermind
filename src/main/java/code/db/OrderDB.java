@@ -1,6 +1,7 @@
 package code.db;
 
 import code.db.order_structure_component.OrderStructureComponentDB;
+import code.db.payment_component.PaymentComponentDB;
 
 import java.sql.Date;
 
@@ -10,8 +11,6 @@ import java.sql.Date;
 public class OrderDB {
     private final int orderId;
     private String name;
-    @Deprecated
-    private OrderStructureComponentDB orderStructureComponentDBOld;
     private OrderStructureComponentDB orderStructureComponentDB;
     private String customer;
     private String vk;
@@ -20,6 +19,7 @@ public class OrderDB {
     private String description;
     private String notes;
     private String address;
+    private PaymentComponentDB paymentComponentDB;
 
     public OrderDB(int orderId) {
         this.orderId = orderId;
@@ -35,15 +35,6 @@ public class OrderDB {
 
     public String getName() {
         return name;
-    }
-
-    public void setOrderStructureComponentDBOld(OrderStructureComponentDB orderStructureComponentDBOld) {
-        this.orderStructureComponentDBOld = orderStructureComponentDBOld;
-    }
-
-    @Deprecated
-    public OrderStructureComponentDB getOrderStructureComponentDBOld() {
-        return orderStructureComponentDBOld;
     }
 
     public void setOrderStructureComponentDB(OrderStructureComponentDB orderStructureComponentDB) {
@@ -108,5 +99,13 @@ public class OrderDB {
 
     public String getNotes() {
         return notes;
+    }
+
+    public void setPaymentComponentDB(PaymentComponentDB paymentComponentDB) {
+        this.paymentComponentDB = paymentComponentDB;
+    }
+
+    public PaymentComponentDB getPaymentComponentDB() {
+        return paymentComponentDB;
     }
 }

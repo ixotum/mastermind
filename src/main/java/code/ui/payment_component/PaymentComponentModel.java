@@ -8,6 +8,7 @@ import code.utils.UITools;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -23,12 +24,12 @@ public class PaymentComponentModel implements BusEventListener {
 
     protected void addRow() {
         TableView<PaymentRowData> table = controller.getTable();
-        String date = controller.getDatePicker().getValue().toString();
+        LocalDate date = controller.getDatePicker().getValue();
         PaymentRowData rowData = new PaymentRowData();
         rowData.setDate(date);
 
         TextField textFieldPayment = controller.getTextFieldPayment();
-        String payment = textFieldPayment.getText();
+        BigDecimal payment = new BigDecimal(textFieldPayment.getText());
         rowData.setPayment(payment);
         table.getItems().add(rowData);
 
@@ -47,11 +48,11 @@ public class PaymentComponentModel implements BusEventListener {
         BigDecimal due = total.subtract(paid);
         controller.getLabelDue().setText(due.toString());
 
-        String status = getStatus(total, paid, due);
+        String status = getStatus(total, due);
         controller.getLabelStatus().setText(status);
     }
 
-    private static String getStatus(BigDecimal total, BigDecimal paid, BigDecimal due) {
+    private static String getStatus(BigDecimal total, BigDecimal due) {
         String status = "UNPAID";
 
         if (due.compareTo(total) < 0 && due.compareTo(BigDecimal.ZERO) > 0) {
@@ -79,10 +80,10 @@ public class PaymentComponentModel implements BusEventListener {
 
     private void initColumns() {
         TableColumn<PaymentRowData, String> columnDate = controller.getColumnDate();
-        columnDate.setCellValueFactory(cell -> cell.getValue().dateProperty());
+        columnDate.setCellValueFactory(new PropertyValueFactory<>("date"));
 
         TableColumn<PaymentRowData, String> columnPayment = controller.getColumnPayment();
-        columnPayment.setCellValueFactory(cell -> cell.getValue().paymentProperty());
+        columnPayment.setCellValueFactory(new PropertyValueFactory<>("payment"));
     }
 
     public void initDatePicker() {

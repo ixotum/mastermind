@@ -2,9 +2,11 @@ package code.ui.models;
 
 import code.db.OrderDB;
 import code.db.order_structure_component.OrderStructureComponentDB;
+import code.db.payment_component.PaymentComponentDB;
 import code.ui.NewOrderScreenController;
 import code.ui.OrderComponentController;
 import code.ui.order_structure_component.OrderStructureComponentController;
+import code.ui.payment_component.PaymentComponentController;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -34,6 +36,10 @@ public class NewOrderScreenModel {
         orderDB.setEventDate(Date.valueOf(localEventDate));
         orderDB.setDescription(orderComponent.getTextAreaDescription().getText());
         orderDB.setNotes(orderComponent.getTextAreaNotes().getText());
+
+        PaymentComponentController paymentComponentController = orderComponent.getPaymentComponentController();
+        PaymentComponentDB paymentComponentDB = OrderComponentModel.createPaymentComponentDB(paymentComponentController);
+        orderDB.setPaymentComponentDB(paymentComponentDB);
 
         return orderDB;
     }
