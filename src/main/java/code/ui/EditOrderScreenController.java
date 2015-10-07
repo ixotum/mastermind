@@ -53,6 +53,7 @@ public class EditOrderScreenController {
         orderComponent.getTextAreaDescription().setText(orderDB.getDescription());
         orderComponent.getTextAreaNotes().setText(orderDB.getNotes());
         orderComponent.initPaymentComponentController(orderDB.getPaymentComponentDB());
+        orderComponent.setOrderStatus(orderDB.getStatus());
     }
 
     public void onClickCancelButton() {
@@ -88,5 +89,8 @@ public class EditOrderScreenController {
         PaymentComponentController paymentComponentController = orderComponent.getPaymentComponentController();
         PaymentComponentDB paymentComponentDB = OrderComponentModel.createPaymentComponentDB(paymentComponentController);
         orderDB.setPaymentComponentDB(paymentComponentDB);
+
+        int orderStatus = OrderComponentModel.getOrderStatus(orderComponent.getComboBoxStatus().getValue());
+        orderDB.setStatus(orderStatus);
     }
 }

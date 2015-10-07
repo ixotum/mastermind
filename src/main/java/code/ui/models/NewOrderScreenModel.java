@@ -41,6 +41,9 @@ public class NewOrderScreenModel {
         PaymentComponentDB paymentComponentDB = OrderComponentModel.createPaymentComponentDB(paymentComponentController);
         orderDB.setPaymentComponentDB(paymentComponentDB);
 
+        int orderStatus = OrderComponentModel.getOrderStatus(orderComponent.getComboBoxStatus().getValue());
+        orderDB.setStatus(orderStatus);
+
         return orderDB;
     }
 }

@@ -1,5 +1,9 @@
 package code;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by ixotum on 6/28/15
  */
@@ -21,4 +25,6 @@ public class Defines {
     public static final String BEANS_CONFIG = "Beans.xml";
 
     public enum ApplicationMode {GENERAL, VERSION}
+
+    public static List<String> orderStatuses = new ArrayList<>(Arrays.asList("NEW", "IN PROGRESS", "COMPLETED", "SHIPPED", "CLOSED", "CANCELED"));
 }

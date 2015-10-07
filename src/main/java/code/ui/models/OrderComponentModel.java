@@ -1,5 +1,6 @@
 package code.ui.models;
 
+import code.Defines;
 import code.db.order_structure_component.OrderStructureComponentDB;
 import code.db.order_structure_component.OrderStructureComponentRowDB;
 import code.db.payment_component.PaymentComponentDB;
@@ -71,5 +72,9 @@ public class OrderComponentModel {
         paymentDB.setPayment(paymentRowData.getPaymentData());
 
         return paymentDB;
+    }
+
+    public static int getOrderStatus(String value) {
+        return Defines.orderStatuses.indexOf(value);
     }
 }

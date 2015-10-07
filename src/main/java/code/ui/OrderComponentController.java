@@ -1,17 +1,16 @@
 package code.ui;
 
+import code.Defines;
 import code.db.order_structure_component.OrderStructureComponentDB;
 import code.db.payment_component.PaymentComponentDB;
 import code.ui.order_structure_component.OrderStructureComponentController;
 import code.ui.payment_component.PaymentComponentController;
 import code.utils.UITools;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -47,6 +46,8 @@ public class OrderComponentController extends VBox implements Initializable {
     private TextArea textAreaNotes;
     @FXML
     private PaymentComponentController paymentComponentController;
+    @FXML
+    private ComboBox<String> comboBoxStatus;
 
     public OrderComponentController() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/order_component.fxml"));
@@ -105,6 +106,15 @@ public class OrderComponentController extends VBox implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initDatePickers();
+        initComboStatus();
+    }
+
+    private void initComboStatus() {
+        comboBoxStatus.setItems(FXCollections.observableArrayList(Defines.orderStatuses));
+    }
+
+    private void initDatePickers() {
         Date todayDate = new Date();
         LocalDate localDate = todayDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         UITools.initDatePicker(datePickerDueDate);
@@ -119,5 +129,13 @@ public class OrderComponentController extends VBox implements Initializable {
 
     public void initPaymentComponentController(PaymentComponentDB paymentComponentDB) {
         paymentComponentController.setPaymentComponentDB(paymentComponentDB);
+    }
+
+    public void setOrderStatus(int statusCode) {
+        comboBoxStatus.setValue(Defines.orderStatuses.get(statusCode));
+    }
+
+    public ComboBox<String> getComboBoxStatus() {
+        return comboBoxStatus;
     }
 }

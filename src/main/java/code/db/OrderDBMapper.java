@@ -21,6 +21,7 @@ public class OrderDBMapper implements RowMapper {
         orderDB.setEventDate(rs.getDate("EVENT_DATE"));
         orderDB.setDescription(rs.getString("DESCRIPTION"));
         orderDB.setNotes(rs.getString("NOTES"));
+        orderDB.setStatus(rs.getInt("STATUS"));
 
         return orderDB;
     }

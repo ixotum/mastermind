@@ -25,10 +25,10 @@ public class OrdersJDBCTemplate {
     }
 
     public void saveNewOrder(OrderDB orderDB) {
-        String sql = "INSERT INTO ORDERS(ORDER_ID, NAME, CUSTOMER, ADDRESS, VK, DUE_DATE, EVENT_DATE, DESCRIPTION, NOTES) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO ORDERS(ORDER_ID, NAME, CUSTOMER, ADDRESS, VK, DUE_DATE, EVENT_DATE, DESCRIPTION, NOTES, STATUS) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, orderDB.getOrderId(), orderDB.getName(), orderDB.getCustomer(), orderDB.getAddress(),
-                orderDB.getVk(), orderDB.getDueDate(), orderDB.getEventDate(), orderDB.getDescription(), orderDB.getNotes());
+                orderDB.getVk(), orderDB.getDueDate(), orderDB.getEventDate(), orderDB.getDescription(), orderDB.getNotes(), orderDB.getStatus());
 
         int orderId = orderDB.getOrderId();
         saveNewOrderStructureComponent(orderId, orderDB.getOrderStructureComponentDB());
@@ -132,10 +132,10 @@ public class OrdersJDBCTemplate {
     }
 
     public void updateExistedOrder(OrderDB orderDB) {
-        String sql = "UPDATE ORDERS SET NAME=?, CUSTOMER=?, ADDRESS=?, VK=?, DUE_DATE=?, EVENT_DATE=?, DESCRIPTION=?, NOTES=? " +
+        String sql = "UPDATE ORDERS SET NAME=?, CUSTOMER=?, ADDRESS=?, VK=?, DUE_DATE=?, EVENT_DATE=?, DESCRIPTION=?, NOTES=?, STATUS=? " +
                 "WHERE ORDER_ID = ?";
         jdbcTemplate.update(sql, orderDB.getName(), orderDB.getCustomer(), orderDB.getAddress(), orderDB.getVk(),
-                orderDB.getDueDate(), orderDB.getEventDate(), orderDB.getDescription(), orderDB.getNotes(), orderDB.getOrderId());
+                orderDB.getDueDate(), orderDB.getEventDate(), orderDB.getDescription(), orderDB.getNotes(), orderDB.getStatus(), orderDB.getOrderId());
 
         int orderId = orderDB.getOrderId();
         deleteOrderStructureComponent(orderId);

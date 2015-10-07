@@ -53,6 +53,15 @@ public class NewOrderScreenController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initOrderId();
+        initComboStatus();
+    }
+
+    private void initComboStatus() {
+        orderComponent.setOrderStatus(0);
+    }
+
+    private void initOrderId() {
         settingsJDBCTemplate = (SettingsJDBCTemplate) applicationContext.getBean("settingsJDBCTemplateId");
         int lastOrderId = settingsJDBCTemplate.readLastOrderId();
         ++lastOrderId;

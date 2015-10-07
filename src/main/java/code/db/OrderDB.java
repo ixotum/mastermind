@@ -20,6 +20,7 @@ public class OrderDB {
     private String notes;
     private String address;
     private PaymentComponentDB paymentComponentDB;
+    private int status;
 
     public OrderDB(int orderId) {
         this.orderId = orderId;
@@ -107,5 +108,13 @@ public class OrderDB {
 
     public PaymentComponentDB getPaymentComponentDB() {
         return paymentComponentDB;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getStatus() {
+        return status;
     }
 }
