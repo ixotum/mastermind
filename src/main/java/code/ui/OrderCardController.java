@@ -1,5 +1,6 @@
 package code.ui;
 
+import code.Defines;
 import code.db.OrderDB;
 import code.utils.LoggerManager;
 import javafx.fxml.FXML;
@@ -22,11 +23,14 @@ public class OrderCardController extends VBox {
     private final static Logger logger = LoggerManager.getLoggerInstance();
 
     @FXML
-    public AnchorPane mainAnchor;
+    private AnchorPane mainAnchor;
     @FXML
-    public Label labelOrderId;
+    private Label labelOrderId;
     @FXML
-    public Label labelName;
+    private Label labelName;
+    @FXML
+    private Label labelStatus;
+
     private OrderDB orderDB;
     private Stage parentStage;
 
@@ -74,6 +78,12 @@ public class OrderCardController extends VBox {
         this.orderDB = orderDB;
         labelOrderId.setText(String.valueOf(orderDB.getOrderId()));
         labelName.setText(orderDB.getName());
+        initStatus(orderDB);
+    }
+
+    private void initStatus(OrderDB orderDB) {
+        labelStatus.setText(Defines.orderStatuses.get(orderDB.getStatus()));
+        labelStatus.getStyleClass().add("labelStatus");
     }
 
     public void setParentStage(Stage parentStage) {
