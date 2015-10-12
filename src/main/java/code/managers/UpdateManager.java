@@ -1,5 +1,6 @@
-package code;
+package code.managers;
 
+import code.Defines;
 import code.ftp.FtpManager;
 import code.ftp.FtpSettings;
 import code.utils.LoggerManager;

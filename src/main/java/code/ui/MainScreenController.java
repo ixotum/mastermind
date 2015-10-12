@@ -1,13 +1,14 @@
 package code.ui;
 
 import code.Defines;
-import code.UpdateManager;
+import code.Main;
+import code.managers.OrderManager;
+import code.managers.UpdateManager;
 import code.bus.BusEvent;
 import code.bus.BusEventType;
 import code.bus.BusEventListener;
 import code.bus.BusEventManager;
 import code.db.OrderDB;
-import code.db.OrdersJDBCTemplate;
 import code.utils.LoggerManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,8 +21,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.IOException;
 import java.net.URL;
@@ -59,7 +58,7 @@ public class MainScreenController implements Initializable, BusEventListener {
     }
 
     private void initGridOrders() {
-        List<OrderCardController> cardList = createOrderCardsFromDB();
+        List<OrderCardController> cardList = createOrderCards();
         sortByOrderId(cardList);
         gridOrdersScrollPane.widthProperty().addListener((observable, oldValue, newValue) -> gridOrdersScrollPaneWidthChanged(newValue, cardList));
         gridOrdersScrollPane.heightProperty().addListener((observable, oldValue, newValue) -> gridOrdersScrollPaneHeightChanged());
@@ -81,8 +80,9 @@ public class MainScreenController implements Initializable, BusEventListener {
         }
     }
 
-    private List<OrderCardController> createOrderCardsFromDB() {
-        List<OrderDB> orderDBList = readAllOrdersFromDB();
+    private List<OrderCardController> createOrderCards() {
+        OrderManager orderManager = Main.getOrderManager();
+        List<OrderDB> orderDBList = orderManager.getOrders();
         List<OrderCardController> orderCardList = new ArrayList<>();
 
         for (OrderDB orderDB : orderDBList) {
@@ -95,11 +95,7 @@ public class MainScreenController implements Initializable, BusEventListener {
         return orderCardList;
     }
 
-    private static List<OrderDB> readAllOrdersFromDB() {
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(Defines.BEANS_CONFIG);
-        OrdersJDBCTemplate ordersJDBCTemplate = (OrdersJDBCTemplate) applicationContext.getBean("ordersJDBCTemplateId");
-        return ordersJDBCTemplate.readAllOrders();
-    }
+
 
     private static int fillGrid(GridPane gridOrders, List<OrderCardController> cardList, int countInRow) {
         int gridRowCount = 0;
@@ -188,7 +184,7 @@ public class MainScreenController implements Initializable, BusEventListener {
     }
 
     private void redrawGridOrders() {
-        List<OrderCardController> cardList = createOrderCardsFromDB();
+        List<OrderCardController> cardList = createOrderCards();
         sortByOrderId(cardList);
         fillGrid(gridOrders, cardList, previousCountInRow);
     }

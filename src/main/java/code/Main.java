@@ -1,6 +1,7 @@
 package code;
 
 import code.db.SettingsJDBCTemplate;
+import code.managers.OrderManager;
 import code.ui.MainScreenController;
 import code.utils.LoggerManager;
 import javafx.application.Application;
@@ -23,6 +24,7 @@ import java.util.logging.Logger;
 public class Main extends Application {
 
     private static final Logger logger = LoggerManager.getLoggerInstance();
+    private static OrderManager orderManager;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -40,7 +42,12 @@ public class Main extends Application {
     public static void main(String[] args) {
         processArguments(args);
         checkMigration();
+        initManagers();
         launch(args);
+    }
+
+    private static void initManagers() {
+        orderManager = new OrderManager();
     }
 
     private static void checkMigration() {
@@ -83,5 +90,9 @@ public class Main extends Application {
         }
 
         return Defines.ApplicationMode.GENERAL;
+    }
+
+    public static OrderManager getOrderManager() {
+        return orderManager;
     }
 }
