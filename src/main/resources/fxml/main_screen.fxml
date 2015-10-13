@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import jfxtras.scene.control.LocalDatePicker?>
+<?import java.net.URL?>
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.ui.MainScreenController">
     <children>
         <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS">
@@ -38,4 +39,7 @@
             </VBox.margin>
         </HBox>
     </children>
+    <stylesheets>
+        <URL value="@/styles/main_screen.css"/>
+    </stylesheets>
 </VBox>
