@@ -1,22 +1,15 @@
 package code.ui;
 
-import code.Defines;
-import code.Main;
-import code.managers.OrderManager;
-import code.managers.UpdateManager;
 import code.bus.BusEvent;
 import code.bus.BusEventType;
 import code.bus.BusEventListener;
 import code.bus.BusEventManager;
-import code.db.OrderDB;
 import code.ui.models.MainScreenModel;
 import code.utils.LoggerManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -31,7 +24,6 @@ import java.util.logging.Logger;
 
 public class MainScreenController implements Initializable, BusEventListener {
     private final static Logger logger = LoggerManager.getLoggerInstance();
-    private int gridOrdersRowCount;
 
     @FXML
     private LocalDatePicker calendar;
@@ -41,113 +33,17 @@ public class MainScreenController implements Initializable, BusEventListener {
     public ScrollPane gridOrdersScrollPane;
 
     private Stage parentStage;
-    private int previousCountInRow = 0;
-    private double standardOrderCardWidth;
-    private double standardOrderCardHeight;
+    private final MainScreenModel model;
+
+    public MainScreenController() {
+        model = new MainScreenModel(this);
+    }
 
     public void initialize(URL location, ResourceBundle resources) {
-        checkForUpdates();
+        MainScreenModel.checkForUpdates();
         MainScreenModel.initCalendar(calendar);
-        calculateGridParameters();
-        initGridOrders();
+        model.initGridOrders();
         BusEventManager.addListener(this, BusEventType.ORDER_UPDATED);
-    }
-
-    private void calculateGridParameters() {
-        final OrderCardController standardOrderCard = new OrderCardController();
-        standardOrderCardWidth = standardOrderCard.getCardWidth();
-        standardOrderCardHeight = standardOrderCard.getCardHeight();
-    }
-
-    private void initGridOrders() {
-        List<OrderCardController> cardList = createOrderCards();
-        sortByOrderId(cardList);
-        gridOrdersScrollPane.widthProperty().addListener((observable, oldValue, newValue) -> gridOrdersScrollPaneWidthChanged(newValue, cardList));
-        gridOrdersScrollPane.heightProperty().addListener((observable, oldValue, newValue) -> gridOrdersScrollPaneHeightChanged());
-    }
-
-    private void gridOrdersScrollPaneHeightChanged() {
-        gridOrders.setPrefHeight((standardOrderCardHeight + gridOrders.getVgap()) * gridOrdersRowCount);
-    }
-
-    private void gridOrdersScrollPaneWidthChanged(Number newScrollPaneWidth, List<OrderCardController> cardList) {
-        gridOrders.setPrefWidth(newScrollPaneWidth.doubleValue());
-        gridOrders.setPrefHeight((standardOrderCardHeight + gridOrders.getVgap()) * gridOrdersRowCount);
-
-        final int countInRow = (int) (newScrollPaneWidth.intValue() / standardOrderCardWidth);
-
-        if (previousCountInRow != countInRow) {
-            gridOrdersRowCount = fillGrid(gridOrders, cardList, countInRow);
-            previousCountInRow = countInRow;
-        }
-    }
-
-    private List<OrderCardController> createOrderCards() {
-        OrderManager orderManager = Main.getOrderManager();
-        List<OrderDB> orderDBList = orderManager.getOrders();
-        List<OrderCardController> orderCardList = new ArrayList<>();
-
-        for (OrderDB orderDB : orderDBList) {
-            OrderCardController orderCard = new OrderCardController();
-            orderCard.init(orderDB);
-            orderCard.setParentStage(parentStage);
-            orderCardList.add(orderCard);
-        }
-
-        return orderCardList;
-    }
-
-
-
-    private static int fillGrid(GridPane gridOrders, List<OrderCardController> cardList, int countInRow) {
-        int gridRowCount = 0;
-
-        if (countInRow == 0) {
-            return gridRowCount;
-        }
-
-        gridOrders.getChildren().clear();
-
-        int column = 0;
-        int row = 0;
-        for (OrderCardController orderCard : cardList) {
-            gridOrders.add(orderCard, column, row);
-            ++column;
-
-            if ((column % countInRow) == 0) {
-                column = 0;
-                ++row;
-            }
-        }
-
-        gridRowCount = row + 1;
-        return gridRowCount;
-    }
-
-    private void checkForUpdates() {
-        logger.info("checking for updates...");
-        UpdateManager updateManager = new UpdateManager();
-        if (updateManager.isNewVersionAvailable()) {
-            logger.info("new version was found");
-            showUpdateQuestionPopup(updateManager);
-        } else {
-            logger.info("new version not found");
-        }
-    }
-
-    private static void showUpdateQuestionPopup(UpdateManager updateManager) {
-        Alert questionDialog = new Alert(Alert.AlertType.CONFIRMATION);
-        questionDialog.setTitle(Defines.UPDATE_APP_TITLE);
-        questionDialog.setHeaderText(Defines.UPDATE_HEADER_TEXT);
-        String contentText = "Current version is: " + Defines.APP_VERSION +
-                "\nAvailable version is: " + updateManager.getNewVersion() + "\n" +
-                Defines.UPDATE_CONTENT_TEXT;
-        questionDialog.setContentText(contentText);
-        Optional<ButtonType> result = questionDialog.showAndWait();
-
-        if (result.get() == ButtonType.OK) {
-            updateManager.updateToNewest();
-        }
     }
 
     @FXML
@@ -181,24 +77,19 @@ public class MainScreenController implements Initializable, BusEventListener {
     @Override
     public void busEventDispatch(BusEvent busEvent) {
         if (busEvent.getType() == BusEventType.ORDER_UPDATED) {
-            redrawGridOrders();
+            model.redrawGridOrders();
         }
     }
 
-    private void redrawGridOrders() {
-        List<OrderCardController> cardList = createOrderCards();
-        sortByOrderId(cardList);
-        fillGrid(gridOrders, cardList, previousCountInRow);
+    public Stage getParentStage() {
+        return parentStage;
     }
 
-    private static void sortByOrderId(List<OrderCardController> cardList) {
-        cardList.sort(MainScreenController::orderIdComparator);
+    public GridPane getGridPane() {
+        return gridOrders;
     }
 
-    private static int orderIdComparator(OrderCardController o1, OrderCardController o2) {
-        if (o1.getOrderDB().getOrderId() > o2.getOrderDB().getOrderId()) {
-            return 1;
-        }
-        return -1;
+    public ScrollPane getScrollPane() {
+        return gridOrdersScrollPane;
     }
 }
