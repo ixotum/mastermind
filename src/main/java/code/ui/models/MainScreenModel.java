@@ -39,14 +39,25 @@ public class MainScreenModel {
         this.controller = controller;
     }
 
-    public static void initCalendar(LocalDatePicker calendar) {
+    public void initCalendar() {
+        LocalDatePicker calendar = controller.getCalendar();
+        calendar.localDateProperty().addListener(observable -> dateChanged());
+        redrawHighLights(calendar);
+    }
+
+    public static void redrawHighLights(LocalDatePicker calendar) {
         List<Date> dates = extractDates();
         highlightDates(dates, calendar);
+    }
+
+    private void dateChanged() {
+        redrawGridOrders();
     }
 
     private static void highlightDates(List<Date> dates, LocalDatePicker calendar) {
         List<LocalDate> localDates = dates.stream().map(MainScreenModel::convertToLocalDate).collect(Collectors.toList());
         ObservableList<LocalDate> obsLocalDates = FXCollections.observableArrayList(localDates);
+        calendar.highlightedLocalDates().clear();
         calendar.highlightedLocalDates().setAll(obsLocalDates);
     }
 
@@ -125,10 +136,11 @@ public class MainScreenModel {
     private List<OrderCardController> createOrderCards() {
         OrderManager orderManager = Main.getOrderManager();
         List<OrderDB> orderDBList = orderManager.getOrders();
+        List<OrderDB> filteredOrders = filterOrders(orderDBList);
         List<OrderCardController> orderCardList = new ArrayList<>();
         Stage parentStage = controller.getParentStage();
 
-        for (OrderDB orderDB : orderDBList) {
+        for (OrderDB orderDB : filteredOrders) {
             OrderCardController orderCard = new OrderCardController();
             orderCard.init(orderDB);
             orderCard.setParentStage(parentStage);
@@ -136,6 +148,30 @@ public class MainScreenModel {
         }
 
         return orderCardList;
+    }
+
+    private List<OrderDB> filterOrders(List<OrderDB> inputList) {
+        LocalDatePicker calendar = controller.getCalendar();
+        LocalDate localSelectedDate = calendar.getLocalDate();
+
+        if (localSelectedDate == null) {
+            return inputList;
+        }
+
+        List<OrderDB> outputList = new ArrayList<>();
+
+        for (OrderDB orderDB : inputList) {
+            Date dueDate = orderDB.getDueDate();
+            Date eventDate = orderDB.getEventDate();
+            LocalDate localDueDate = convertToLocalDate(dueDate);
+            LocalDate localEventDate = convertToLocalDate(eventDate);
+
+            if (localSelectedDate.equals(localDueDate) || localSelectedDate.equals(localEventDate)) {
+                outputList.add(orderDB);
+            }
+        }
+
+        return outputList;
     }
 
     private static void sortByOrderId(List<OrderCardController> cardList) {

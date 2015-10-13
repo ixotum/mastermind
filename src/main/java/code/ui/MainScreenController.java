@@ -41,7 +41,7 @@ public class MainScreenController implements Initializable, BusEventListener {
 
     public void initialize(URL location, ResourceBundle resources) {
         MainScreenModel.checkForUpdates();
-        MainScreenModel.initCalendar(calendar);
+        model.initCalendar();
         model.initGridOrders();
         BusEventManager.addListener(this, BusEventType.ORDER_UPDATED);
     }
@@ -78,6 +78,7 @@ public class MainScreenController implements Initializable, BusEventListener {
     public void busEventDispatch(BusEvent busEvent) {
         if (busEvent.getType() == BusEventType.ORDER_UPDATED) {
             model.redrawGridOrders();
+            MainScreenModel.redrawHighLights(calendar);
         }
     }
 
@@ -91,5 +92,9 @@ public class MainScreenController implements Initializable, BusEventListener {
 
     public ScrollPane getScrollPane() {
         return gridOrdersScrollPane;
+    }
+
+    public LocalDatePicker getCalendar() {
+        return calendar;
     }
 }
