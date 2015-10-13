@@ -9,6 +9,7 @@ import code.bus.BusEventType;
 import code.bus.BusEventListener;
 import code.bus.BusEventManager;
 import code.db.OrderDB;
+import code.ui.models.MainScreenModel;
 import code.utils.LoggerManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,19 +22,19 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import jfxtras.scene.control.LocalDatePicker;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.logging.Logger;
 
 public class MainScreenController implements Initializable, BusEventListener {
     private final static Logger logger = LoggerManager.getLoggerInstance();
     private int gridOrdersRowCount;
 
+    @FXML
+    private LocalDatePicker calendar;
     @FXML
     public GridPane gridOrders;
     @FXML
@@ -46,6 +47,7 @@ public class MainScreenController implements Initializable, BusEventListener {
 
     public void initialize(URL location, ResourceBundle resources) {
         checkForUpdates();
+        MainScreenModel.initCalendar(calendar);
         calculateGridParameters();
         initGridOrders();
         BusEventManager.addListener(this, BusEventType.ORDER_UPDATED);

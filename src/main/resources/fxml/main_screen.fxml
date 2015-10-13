@@ -5,32 +5,37 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.ui.MainScreenController">
-   <children>
-      <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS">
-         <children>
-            <VBox>
-               <children>
-                  <Button fx:id="buttonNewOrder" minWidth="88.0" mnemonicParsing="false" onAction="#onClickNewOrder" text="New Order" />
-               </children>
-            </VBox>
-            <VBox HBox.hgrow="ALWAYS">
-               <children>
-                  <ScrollPane fx:id="gridOrdersScrollPane" hbarPolicy="NEVER" VBox.vgrow="ALWAYS">
-                     <content>
-                        <GridPane fx:id="gridOrders" hgap="1.0" vgap="1.0">
-                  </GridPane>
-                     </content>
-                  </ScrollPane>
-               </children>
-               <HBox.margin>
-                  <Insets left="25.0" />
-               </HBox.margin>
-            </VBox>
-         </children>
-         <VBox.margin>
-            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
-         </VBox.margin>
-      </HBox>
-   </children>
+<?import jfxtras.scene.control.LocalDatePicker?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.ui.MainScreenController">
+    <children>
+        <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS">
+            <children>
+                <VBox prefWidth="300.0">
+                    <children>
+                        <Button fx:id="buttonNewOrder" minWidth="88.0" mnemonicParsing="false" onAction="#onClickNewOrder" text="New Order" />
+                        <LocalDatePicker fx:id="calendar">
+                            <VBox.margin>
+                                <Insets top="25.0" />
+                            </VBox.margin>
+                        </LocalDatePicker>
+                    </children>
+                </VBox>
+                <VBox HBox.hgrow="ALWAYS">
+                    <children>
+                        <ScrollPane fx:id="gridOrdersScrollPane" hbarPolicy="NEVER" VBox.vgrow="ALWAYS">
+                            <content>
+                                <GridPane fx:id="gridOrders" hgap="1.0" vgap="1.0" />
+                            </content>
+                        </ScrollPane>
+                    </children>
+                    <HBox.margin>
+                        <Insets left="25.0" />
+                    </HBox.margin>
+                </VBox>
+            </children>
+            <VBox.margin>
+                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+            </VBox.margin>
+        </HBox>
+    </children>
 </VBox>
