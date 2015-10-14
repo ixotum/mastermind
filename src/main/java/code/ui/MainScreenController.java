@@ -97,4 +97,9 @@ public class MainScreenController implements Initializable, BusEventListener {
     public LocalDatePicker getCalendar() {
         return calendar;
     }
+
+    @FXML
+    public void onClickResetDate() {
+        calendar.setLocalDate(null);
+    }
 }

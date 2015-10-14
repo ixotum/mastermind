@@ -7,18 +7,22 @@
 
 <?import jfxtras.scene.control.LocalDatePicker?>
 <?import java.net.URL?>
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.ui.MainScreenController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.ui.MainScreenController">
     <children>
         <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS">
             <children>
-                <VBox prefWidth="300.0">
+                <VBox prefWidth="350.0">
                     <children>
                         <Button fx:id="buttonNewOrder" minWidth="88.0" mnemonicParsing="false" onAction="#onClickNewOrder" text="New Order" />
-                        <LocalDatePicker fx:id="calendar">
+                        <AnchorPane fx:id="anchorCalendar">
+                            <children>
+                                <LocalDatePicker fx:id="calendar" AnchorPane.leftAnchor="12" AnchorPane.topAnchor="12" prefWidth="325" />
+                                <Button text="Reset" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="212" AnchorPane.bottomAnchor="12" onAction="#onClickResetDate"/>
+                            </children>
                             <VBox.margin>
                                 <Insets top="25.0" />
                             </VBox.margin>
-                        </LocalDatePicker>
+                        </AnchorPane>
                     </children>
                 </VBox>
                 <VBox HBox.hgrow="ALWAYS">
