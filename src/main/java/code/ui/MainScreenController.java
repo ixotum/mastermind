@@ -75,7 +75,7 @@ public class MainScreenController implements Initializable, BusEventListener {
     }
 
     @Override
-    public void busEventDispatch(BusEvent busEvent) {
+    public void busEventDispatched(BusEvent busEvent) {
         if (busEvent.getType() == BusEventType.ORDER_UPDATED) {
             model.redrawGridOrders();
             MainScreenModel.redrawHighLights(calendar);

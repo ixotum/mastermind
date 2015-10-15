@@ -11,8 +11,8 @@ import java.util.Map;
 public class BusEventManager {
     private static Map<BusEventType, List<BusEventListener>> mapListener = new HashMap<>();
 
-    public static void addListener(BusEventListener listener, BusEventType event) {
-        List<BusEventListener> listeners = mapListener.get(event);
+    public static void addListener(BusEventListener listener, BusEventType eventType) {
+        List<BusEventListener> listeners = mapListener.get(eventType);
 
         if (listeners == null) {
             listeners = new ArrayList<>();
@@ -22,7 +22,7 @@ public class BusEventManager {
             listeners.add(listener);
         }
 
-        mapListener.put(event, listeners);
+        mapListener.put(eventType, listeners);
     }
 
     public static void dispatch(BusEvent busEvent) {
@@ -33,7 +33,7 @@ public class BusEventManager {
         }
 
         for (BusEventListener listener : listeners) {
-            listener.busEventDispatch(busEvent);
+            listener.busEventDispatched(busEvent);
         }
     }
 }

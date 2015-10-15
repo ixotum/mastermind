@@ -26,7 +26,7 @@ public class OrderStructureComponentModel {
         table.getItems().add(new RowData());
     }
 
-    protected static void initTableHandlers(final TableView<RowData> table) {
+    protected void initTableHandlers(final TableView<RowData> table) {
         table.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (table.getEditingCell() == null) {
                 KeyCode keyCode = event.getCode();
@@ -39,8 +39,13 @@ public class OrderStructureComponentModel {
         });
 
         table.addEventFilter(KeyEvent.KEY_RELEASED, event -> {
-            if (event.getCode() == KeyCode.ENTER) {
+            KeyCode keyCode = event.getCode();
+            if (keyCode == KeyCode.ENTER) {
                 selectNextCell(table);
+            }
+            else if (keyCode == KeyCode.ESCAPE) {
+                BusEvent busEvent = new BusEvent(BusEventType.ESC_PRESSED, null);
+                BusEventManager.dispatch(busEvent);
             }
         });
     }

@@ -2,6 +2,7 @@ package code.ui.models;
 
 import code.Defines;
 import code.bus.BusEvent;
+import code.bus.BusEventListener;
 import code.bus.BusEventManager;
 import code.bus.BusEventType;
 import code.db.OrderDB;
@@ -21,7 +22,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.logging.Logger;
 
-public class NewOrderScreenModel {
+public class NewOrderScreenModel implements BusEventListener {
     private final Logger logger = LoggerManager.getLoggerInstance();
     private final NewOrderScreenController controller;
     private SettingsJDBCTemplate settingsJDBCTemplate;
@@ -80,5 +81,17 @@ public class NewOrderScreenModel {
         ++lastOrderId;
         OrderComponentController orderComponent = controller.getOrderComponent();
         orderComponent.getLabelOrderId().setText(String.valueOf(lastOrderId));
+    }
+
+    public void initListener() {
+        BusEventManager.addListener(this, BusEventType.ESC_PRESSED);
+    }
+
+    @Override
+    public void busEventDispatched(BusEvent busEvent) {
+        BusEventType busEventType = busEvent.getType();
+        if (busEventType == BusEventType.ESC_PRESSED) {
+            controller.hide();
+        }
     }
 }

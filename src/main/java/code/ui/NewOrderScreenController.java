@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 /**
  * Created by ixotum on 7/5/15
  */
-public class NewOrderScreenController implements Initializable {
+public class NewOrderScreenController implements Initializable{
     private final Logger logger = LoggerManager.getLoggerInstance();
     private Stage stage;
     private NewOrderScreenModel model;
@@ -27,11 +27,12 @@ public class NewOrderScreenController implements Initializable {
 
     public void onClickNewOrderDoneButton() {
         model.saveOrderComponent();
-        stage.hide();
+        hide();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        model.initListener();
         model.initOrderId();
         initComboStatus();
     }
@@ -43,7 +44,7 @@ public class NewOrderScreenController implements Initializable {
     @FXML
     public void onClickCancelButton() {
         logger.info("Cancel saving order");
-        stage.hide();
+        hide();
 
     }
 
@@ -53,5 +54,9 @@ public class NewOrderScreenController implements Initializable {
 
     public OrderComponentController getOrderComponent() {
         return orderComponent;
+    }
+
+    public void hide() {
+        stage.hide();
     }
 }

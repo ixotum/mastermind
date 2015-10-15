@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -84,11 +85,21 @@ public class PaymentComponentModel implements BusEventListener {
     }
 
     protected void initTable() {
+        initTableHandlers();
         ObservableList<PaymentRowData> observableList = FXCollections.observableArrayList();
         TableView<PaymentRowData> table = controller.getTable();
         table.setItems(observableList);
 
         initColumns();
+    }
+
+    private void initTableHandlers() {
+        TableView<PaymentRowData> table = controller.getTable();
+        table.setOnKeyReleased(event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                BusEventManager.dispatch(new BusEvent(BusEventType.ESC_PRESSED, null));
+            }
+        });
     }
 
     private void initColumns() {
@@ -132,7 +143,7 @@ public class PaymentComponentModel implements BusEventListener {
     }
 
     @Override
-    public void busEventDispatch(BusEvent busEvent) {
+    public void busEventDispatched(BusEvent busEvent) {
         BusEventType busEventType = busEvent.getType();
         if (busEventType != BusEventType.TOTAL_UPDATED) {
             return;

@@ -58,7 +58,7 @@ public class OrderStructureComponentController extends AnchorPane implements Ini
         table.getSelectionModel().setCellSelectionEnabled(true);
         table.getSelectionModel().selectFirst();
 
-        OrderStructureComponentModel.initTableHandlers(table);
+        model.initTableHandlers(table);
     }
 
     private void initColumns() {

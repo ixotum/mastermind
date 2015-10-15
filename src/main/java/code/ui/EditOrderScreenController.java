@@ -8,24 +8,29 @@ import code.db.OrderDB;
 import code.db.OrdersJDBCTemplate;
 import code.db.order_structure_component.OrderStructureComponentDB;
 import code.db.payment_component.PaymentComponentDB;
+import code.ui.models.EditOrderScreenModel;
 import code.ui.models.OrderComponentModel;
 import code.ui.order_structure_component.OrderStructureComponentController;
 import code.ui.payment_component.PaymentComponentController;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.net.URL;
 import java.sql.Date;
+import java.util.ResourceBundle;
 
 /**
  * Created by ixotum on 7/12/15
  */
-public class EditOrderScreenController {
+public class EditOrderScreenController implements Initializable {
     @FXML
     public OrderComponentController orderComponent;
     private Stage stage;
     private OrderDB orderDB;
+    private EditOrderScreenModel model;
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -57,6 +62,10 @@ public class EditOrderScreenController {
     }
 
     public void onClickCancelButton() {
+        hide();
+    }
+
+    public void hide() {
         stage.hide();
     }
 
@@ -68,7 +77,7 @@ public class EditOrderScreenController {
 
         BusEvent busEvent = new BusEvent(BusEventType.ORDER_UPDATED, null);
         BusEventManager.dispatch(busEvent);
-        stage.hide();
+        hide();
     }
 
     private static void updateOrderDB(OrderComponentController orderComponent, OrderDB orderDB) {
@@ -92,5 +101,11 @@ public class EditOrderScreenController {
 
         int orderStatus = OrderComponentModel.getOrderStatus(orderComponent.getComboBoxStatus().getValue());
         orderDB.setStatus(orderStatus);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        model = new EditOrderScreenModel(this);
+        model.initListeners();
     }
 }

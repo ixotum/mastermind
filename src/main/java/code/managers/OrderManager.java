@@ -35,7 +35,7 @@ public class OrderManager implements BusEventListener {
     }
 
     @Override
-    public void busEventDispatch(BusEvent busEvent) {
+    public void busEventDispatched(BusEvent busEvent) {
         updateOrders();
     }
 
