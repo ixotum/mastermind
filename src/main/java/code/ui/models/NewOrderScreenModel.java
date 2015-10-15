@@ -1,18 +1,31 @@
 package code.ui.models;
 
+import code.Defines;
+import code.bus.BusEvent;
+import code.bus.BusEventManager;
+import code.bus.BusEventType;
 import code.db.OrderDB;
+import code.db.OrdersJDBCTemplate;
+import code.db.SettingsJDBCTemplate;
 import code.db.order_structure_component.OrderStructureComponentDB;
 import code.db.payment_component.PaymentComponentDB;
 import code.ui.NewOrderScreenController;
 import code.ui.OrderComponentController;
 import code.ui.order_structure_component.OrderStructureComponentController;
 import code.ui.payment_component.PaymentComponentController;
+import code.utils.LoggerManager;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.logging.Logger;
 
 public class NewOrderScreenModel {
+    private final Logger logger = LoggerManager.getLoggerInstance();
     private final NewOrderScreenController controller;
+    private SettingsJDBCTemplate settingsJDBCTemplate;
+    private final ApplicationContext applicationContext = new ClassPathXmlApplicationContext(Defines.BEANS_CONFIG);
 
     public NewOrderScreenModel(NewOrderScreenController newOrderScreenController) {
         this.controller = newOrderScreenController;
@@ -45,5 +58,27 @@ public class NewOrderScreenModel {
         orderDB.setStatus(orderStatus);
 
         return orderDB;
+    }
+
+    public void saveOrderComponent() {
+        OrderComponentController orderComponent = controller.getOrderComponent();
+        int orderId = Integer.parseInt(orderComponent.getLabelOrderId().getText());
+        logger.info("Saving order with number: " + orderId);
+        settingsJDBCTemplate.saveLastOrderId(orderId);
+
+        OrdersJDBCTemplate ordersJDBCTemplate = (OrdersJDBCTemplate) applicationContext.getBean("ordersJDBCTemplateId");
+        OrderDB orderDB = createOrderDB(orderId);
+        ordersJDBCTemplate.saveNewOrder(orderDB);
+
+        BusEvent busEvent = new BusEvent(BusEventType.ORDER_UPDATED, null);
+        BusEventManager.dispatch(busEvent);
+    }
+
+    public void initOrderId() {
+        settingsJDBCTemplate = (SettingsJDBCTemplate) applicationContext.getBean("settingsJDBCTemplateId");
+        int lastOrderId = settingsJDBCTemplate.readLastOrderId();
+        ++lastOrderId;
+        OrderComponentController orderComponent = controller.getOrderComponent();
+        orderComponent.getLabelOrderId().setText(String.valueOf(lastOrderId));
     }
 }
