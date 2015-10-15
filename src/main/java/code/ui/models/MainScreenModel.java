@@ -14,7 +14,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 import jfxtras.scene.control.LocalDatePicker;
 
 import java.time.LocalDate;
@@ -138,12 +137,11 @@ public class MainScreenModel {
         List<OrderDB> orderDBList = orderManager.getOrders();
         List<OrderDB> filteredOrders = filterOrders(orderDBList);
         List<OrderCardController> orderCardList = new ArrayList<>();
-        Stage parentStage = controller.getParentStage();
 
         for (OrderDB orderDB : filteredOrders) {
             OrderCardController orderCard = new OrderCardController();
             orderCard.init(orderDB);
-            orderCard.setParentStage(parentStage);
+            orderCard.setMainScreenController(controller);
             orderCardList.add(orderCard);
         }
 

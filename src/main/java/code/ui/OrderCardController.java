@@ -32,7 +32,7 @@ public class OrderCardController extends VBox {
     private Label labelStatus;
 
     private OrderDB orderDB;
-    private Stage parentStage;
+    private MainScreenController mainScreenController;
 
     public OrderCardController() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/order_card.fxml"));
@@ -55,6 +55,7 @@ public class OrderCardController extends VBox {
             Stage stage = new Stage();
             stage.resizableProperty().setValue(false);
             stage.initModality(Modality.WINDOW_MODAL);
+            Stage parentStage = mainScreenController.getParentStage();
             stage.initOwner(parentStage);
             stage.setScene(scene);
             EditOrderScreenController editOrderScreenController = fxmlLoader.getController();
@@ -86,11 +87,12 @@ public class OrderCardController extends VBox {
         labelStatus.getStyleClass().add("labelStatus");
     }
 
-    public void setParentStage(Stage parentStage) {
-        this.parentStage = parentStage;
-    }
 
     public OrderDB getOrderDB() {
         return orderDB;
+    }
+
+    public void setMainScreenController(MainScreenController controller) {
+        this.mainScreenController = controller;
     }
 }
