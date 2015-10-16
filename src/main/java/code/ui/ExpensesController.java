@@ -40,4 +40,13 @@ public class ExpensesController implements Initializable {
     public TableView getTable() {
         return table;
     }
+
+    @FXML
+    public void onClickCancelButton() {
+        close();
+    }
+
+    public void close() {
+        stage.hide();
+    }
 }
