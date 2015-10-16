@@ -6,3 +6,7 @@
     -fx-border-color: #bababa;
     -fx-border-radius: 3px;
 }
+
+#reportBar {
+    -fx-border-color: #bababa;
+}

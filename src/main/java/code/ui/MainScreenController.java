@@ -49,15 +49,44 @@ public class MainScreenController implements Initializable, BusEventListener {
     @FXML
     public void onClickNewOrder() {
         logger.info("Creating new order");
-        createNewOrderScreen();
+        showNewOrderScreen();
     }
 
-    private void createNewOrderScreen() {
+    @FXML
+    public void onClickResetDate() {
+        calendar.setLocalDate(null);
+    }
+
+    @FXML
+    public void onClickExpenses() {
+        showExpensesScreen();
+    }
+
+    private void showExpensesScreen() {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/expenses_screen.fxml"));
+        try {
+            Pane pane = fxmlLoader.load();
+            Scene scene = new Scene(pane);
+            Stage stage = new Stage();
+            stage.setTitle("Expenses");
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(parentStage);
+            stage.setScene(scene);
+            ExpensesController expensesController = fxmlLoader.getController();
+            expensesController.setStage(stage);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showNewOrderScreen() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/new_order_screen.fxml"));
         try {
             Pane pane = fxmlLoader.load();
             Scene scene = new Scene(pane);
             Stage stage = new Stage();
+            stage.setTitle("Creating New Order");
             stage.resizableProperty().setValue(Boolean.FALSE);
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(parentStage);
@@ -96,10 +125,5 @@ public class MainScreenController implements Initializable, BusEventListener {
 
     public LocalDatePicker getCalendar() {
         return calendar;
-    }
-
-    @FXML
-    public void onClickResetDate() {
-        calendar.setLocalDate(null);
     }
 }

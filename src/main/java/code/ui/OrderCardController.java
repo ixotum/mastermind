@@ -53,6 +53,7 @@ public class OrderCardController extends VBox {
             Pane pane = fxmlLoader.load();
             Scene scene = new Scene(pane);
             Stage stage = new Stage();
+            stage.setTitle("Editing Order");
             stage.resizableProperty().setValue(false);
             stage.initModality(Modality.WINDOW_MODAL);
             Stage parentStage = mainScreenController.getParentStage();

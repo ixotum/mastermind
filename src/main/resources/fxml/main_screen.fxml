@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <?import jfxtras.scene.control.LocalDatePicker?>
+
 <?import java.net.URL?>
+
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.ui.MainScreenController">
     <children>
         <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="ALWAYS">
@@ -16,8 +19,8 @@
                         <Button fx:id="buttonNewOrder" minWidth="88.0" mnemonicParsing="false" onAction="#onClickNewOrder" text="New Order" />
                         <AnchorPane fx:id="anchorCalendar">
                             <children>
-                                <LocalDatePicker fx:id="calendar" AnchorPane.leftAnchor="12" AnchorPane.topAnchor="12" prefWidth="325" />
-                                <Button text="Reset" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="212" AnchorPane.bottomAnchor="12" onAction="#onClickResetDate"/>
+                                <LocalDatePicker fx:id="calendar" prefWidth="325" AnchorPane.leftAnchor="12" AnchorPane.topAnchor="12" />
+                                <Button onAction="#onClickResetDate" text="Reset" AnchorPane.bottomAnchor="12" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="212" />
                             </children>
                             <VBox.margin>
                                 <Insets top="25.0" />
@@ -32,6 +35,18 @@
                                 <GridPane fx:id="gridOrders" hgap="1.0" vgap="1.0" />
                             </content>
                         </ScrollPane>
+                        <HBox fx:id="reportBar" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <VBox>
+                                    <children>
+                                        <Button mnemonicParsing="false" onAction="#onClickExpenses" text="Expenses" />
+                                    </children>
+                                    <HBox.margin>
+                                        <Insets left="12.0" top="12.0" />
+                                    </HBox.margin>
+                                </VBox>
+                            </children>
+                        </HBox>
                     </children>
                     <HBox.margin>
                         <Insets left="25.0" />
@@ -44,6 +59,6 @@
         </HBox>
     </children>
     <stylesheets>
-        <URL value="@/styles/main_screen.css"/>
+        <URL value="@/styles/main_screen.css" />
     </stylesheets>
 </VBox>
