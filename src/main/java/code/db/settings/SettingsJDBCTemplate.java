@@ -1,5 +1,7 @@
-package code.db;
+package code.db.settings;
 
+import code.db.settings.SettingsDB;
+import code.db.settings.SettingsDBMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 

@@ -2,11 +2,16 @@ package code.ui;
 
 import code.ui.models.ExpensesModel;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -29,6 +34,42 @@ public class ExpensesController implements Initializable {
         model.initTable();
     }
 
+    @FXML
+    public void onClickCancelButton() {
+        close();
+    }
+
+    @FXML
+    public void onClickAddButton() {
+        showEditExpenseDialog(true);
+    }
+
+    private void showEditExpenseDialog(boolean createNew) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/expenses/expense_edit.fxml"));
+        try {
+            Pane pane = fxmlLoader.load();
+            Scene scene = new Scene(pane);
+            Stage newStage = new Stage();
+
+            if (createNew) {
+                newStage.setTitle("Add New Expense");
+            } else {
+                newStage.setTitle("Edit Expense");
+            }
+
+            newStage.setResizable(false);
+            newStage.initModality(Modality.WINDOW_MODAL);
+            newStage.initOwner(stage);
+            newStage.setScene(scene);
+            ExpenseEditController expenseEditController = fxmlLoader.getController();
+            expenseEditController.setStage(newStage);
+            expenseEditController.setCreateNew(createNew);
+            newStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void setStage(Stage stage) {
         this.stage = stage;
     }
@@ -39,11 +80,6 @@ public class ExpensesController implements Initializable {
 
     public TableView getTable() {
         return table;
-    }
-
-    @FXML
-    public void onClickCancelButton() {
-        close();
     }
 
     public void close() {

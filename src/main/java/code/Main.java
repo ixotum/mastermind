@@ -1,6 +1,6 @@
 package code;
 
-import code.db.SettingsJDBCTemplate;
+import code.db.settings.SettingsJDBCTemplate;
 import code.managers.OrderManager;
 import code.ui.MainScreenController;
 import code.utils.LoggerManager;

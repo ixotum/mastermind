@@ -10,11 +10,15 @@
         <property name="password" value="123" />
     </bean>
 
-    <bean id="settingsJDBCTemplateId" class="code.db.SettingsJDBCTemplate">
+    <bean id="settingsJDBCTemplateId" class="code.db.settings.SettingsJDBCTemplate">
         <property name="dataSource" ref="dbSettings" />
     </bean>
 
-    <bean id="ordersJDBCTemplateId" class="code.db.OrdersJDBCTemplate">
+    <bean id="ordersJDBCTemplateId" class="code.db.order.OrdersJDBCTemplate">
+        <property name="dataSource" ref="dbSettings" />
+    </bean>
+
+    <bean id="expenseJDBCTemplateId" class="code.db.expenses.ExpenseJDBCTemplate">
         <property name="dataSource" ref="dbSettings" />
     </bean>
 

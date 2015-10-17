@@ -1,5 +1,6 @@
-package code.db;
+package code.db.settings;
 
+import code.db.settings.SettingsDB;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

@@ -1,6 +1,6 @@
 package code.ui.order_structure_component;
 
-import code.db.order_structure_component.OrderStructureComponentDB;
+import code.db.order.order_structure_component.OrderStructureComponentDB;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

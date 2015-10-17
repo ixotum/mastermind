@@ -1,10 +1,10 @@
 package code.ui.models;
 
 import code.Defines;
-import code.db.order_structure_component.OrderStructureComponentDB;
-import code.db.order_structure_component.OrderStructureComponentRowDB;
-import code.db.payment_component.PaymentComponentDB;
-import code.db.payment_component.PaymentDB;
+import code.db.order.order_structure_component.OrderStructureComponentDB;
+import code.db.order.order_structure_component.OrderStructureComponentRowDB;
+import code.db.order.payment_component.PaymentComponentDB;
+import code.db.order.payment_component.PaymentDB;
 import code.ui.order_structure_component.OrderStructureComponentController;
 import code.ui.order_structure_component.RowData;
 import code.ui.payment_component.PaymentComponentController;

@@ -1,4 +1,4 @@
-package code.db.payment_component;
+package code.db.order.payment_component;
 
 import java.math.BigDecimal;
 import java.sql.Date;

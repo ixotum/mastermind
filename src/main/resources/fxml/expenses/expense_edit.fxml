@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.ui.ExpenseEditController">
+    <children>
+        <AnchorPane>
+            <children>
+                <Label text="Date" AnchorPane.topAnchor="4.0" />
+                <DatePicker fx:id="datePicker" editable="false" AnchorPane.leftAnchor="50.0" />
+            </children>
+            <VBox.margin>
+                <Insets left="12.0" top="12.0" />
+            </VBox.margin>
+        </AnchorPane>
+        <HBox alignment="TOP_RIGHT">
+            <children>
+            <Button defaultButton="true" mnemonicParsing="false" prefWidth="64.0" text="OK" onAction="#onClickOkButton">
+               <HBox.margin>
+                  <Insets right="12.0" />
+               </HBox.margin>
+            </Button>
+                <Button cancelButton="true" mnemonicParsing="false" onAction="#onClickCancelButton" text="Cancel" />
+            </children>
+            <VBox.margin>
+                <Insets right="12.0" top="12.0" />
+            </VBox.margin>
+        </HBox>
+    </children>
+</VBox>

@@ -1,5 +1,6 @@
-package code.db;
+package code.db.order;
 
+import code.db.order.OrderDB;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

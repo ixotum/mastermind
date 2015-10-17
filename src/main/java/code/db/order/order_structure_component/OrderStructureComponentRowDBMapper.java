@@ -1,4 +1,4 @@
-package code.db.order_structure_component;
+package code.db.order.order_structure_component;
 
 import org.springframework.jdbc.core.RowMapper;
 

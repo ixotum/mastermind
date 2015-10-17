@@ -5,8 +5,8 @@ import code.bus.BusEvent;
 import code.bus.BusEventListener;
 import code.bus.BusEventManager;
 import code.bus.BusEventType;
-import code.db.OrderDB;
-import code.db.OrdersJDBCTemplate;
+import code.db.order.OrderDB;
+import code.db.order.OrdersJDBCTemplate;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

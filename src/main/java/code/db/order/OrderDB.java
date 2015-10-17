@@ -1,7 +1,7 @@
-package code.db;
+package code.db.order;
 
-import code.db.order_structure_component.OrderStructureComponentDB;
-import code.db.payment_component.PaymentComponentDB;
+import code.db.order.order_structure_component.OrderStructureComponentDB;
+import code.db.order.payment_component.PaymentComponentDB;
 
 import java.sql.Date;
 

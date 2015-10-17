@@ -1,4 +1,4 @@
-package code.db;
+package code.db.settings;
 
 /**
  * Created by ixotum on 7/6/15

@@ -1,7 +1,7 @@
 package code.ui;
 
 import code.Defines;
-import code.db.OrderDB;
+import code.db.order.OrderDB;
 import code.utils.LoggerManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

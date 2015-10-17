@@ -1,11 +1,11 @@
-package code.db;
+package code.db.order;
 
-import code.db.order_structure_component.OrderStructureComponentDB;
-import code.db.order_structure_component.OrderStructureComponentRowDB;
-import code.db.order_structure_component.OrderStructureComponentRowDBMapper;
-import code.db.payment_component.PaymentComponentDB;
-import code.db.payment_component.PaymentDB;
-import code.db.payment_component.PaymentDBMapper;
+import code.db.order.order_structure_component.OrderStructureComponentDB;
+import code.db.order.order_structure_component.OrderStructureComponentRowDB;
+import code.db.order.order_structure_component.OrderStructureComponentRowDBMapper;
+import code.db.order.payment_component.PaymentComponentDB;
+import code.db.order.payment_component.PaymentDB;
+import code.db.order.payment_component.PaymentDBMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;

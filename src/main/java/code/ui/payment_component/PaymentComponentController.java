@@ -1,6 +1,6 @@
 package code.ui.payment_component;
 
-import code.db.payment_component.PaymentComponentDB;
+import code.db.order.payment_component.PaymentComponentDB;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

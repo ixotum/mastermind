@@ -1,8 +1,8 @@
 package code.ui;
 
 import code.Defines;
-import code.db.order_structure_component.OrderStructureComponentDB;
-import code.db.payment_component.PaymentComponentDB;
+import code.db.order.order_structure_component.OrderStructureComponentDB;
+import code.db.order.payment_component.PaymentComponentDB;
 import code.ui.order_structure_component.OrderStructureComponentController;
 import code.ui.payment_component.PaymentComponentController;
 import code.utils.UITools;

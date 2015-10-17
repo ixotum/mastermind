@@ -21,15 +21,6 @@ public class NewOrderScreenController implements Initializable{
     @FXML
     private OrderComponentController orderComponent;
 
-    public NewOrderScreenController() {
-        model = new NewOrderScreenModel(this);
-    }
-
-    public void onClickNewOrderDoneButton() {
-        model.saveOrderComponent();
-        hide();
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         model.initListener();
@@ -37,8 +28,10 @@ public class NewOrderScreenController implements Initializable{
         initComboStatus();
     }
 
-    private void initComboStatus() {
-        orderComponent.setOrderStatus(0);
+    @FXML
+    public void onClickNewOrderDoneButton() {
+        model.saveOrderComponent();
+        hide();
     }
 
     @FXML
@@ -46,6 +39,14 @@ public class NewOrderScreenController implements Initializable{
         logger.info("Cancel saving order");
         hide();
 
+    }
+
+    public NewOrderScreenController() {
+        model = new NewOrderScreenModel(this);
+    }
+
+    private void initComboStatus() {
+        orderComponent.setOrderStatus(0);
     }
 
     public void setStage(Stage stage) {
