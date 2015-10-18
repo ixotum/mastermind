@@ -1,5 +1,6 @@
 package code.db.expenses;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 /**
@@ -10,6 +11,7 @@ public class ExpenseDB {
     private String type;
     private String description;
     private String note;
+    private BigDecimal amount;
 
     public void setDate(Date date) {
         this.date = date;
@@ -41,5 +43,13 @@ public class ExpenseDB {
 
     public String getNote() {
         return note;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
     }
 }

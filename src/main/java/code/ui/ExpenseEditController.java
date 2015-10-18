@@ -23,6 +23,8 @@ public class ExpenseEditController implements Initializable {
     private TextField textFieldDescription;
     @FXML
     private TextField textFieldNote;
+    @FXML
+    private TextField textFieldAmount;
 
     private Stage stage;
     private ExpenseEditModel model;
@@ -70,5 +72,9 @@ public class ExpenseEditController implements Initializable {
 
     public TextField getTextFieldNote() {
         return textFieldNote;
+    }
+
+    public TextField getTextFieldAmount() {
+        return textFieldAmount;
     }
 }

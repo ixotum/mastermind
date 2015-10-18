@@ -109,5 +109,11 @@ public class ExpensesController implements Initializable {
         return columnDescription;
     }
 
-    public TableColumn<ExpenseRowData, String> getColumnNote() { return columnNote; }
+    public TableColumn<ExpenseRowData, String> getColumnNote() {
+        return columnNote;
+    }
+
+    public TableColumn<ExpenseRowData, String> getColumnAmount() {
+        return columnAmount;
+    }
 }

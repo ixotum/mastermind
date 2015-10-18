@@ -1,5 +1,6 @@
 package code.ui.expenses;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
@@ -10,6 +11,7 @@ public class ExpenseRowData {
     private String type;
     private String description;
     private String note;
+    private BigDecimal amount;
 
     public String getDate() {
         return localDate.toString();
@@ -41,5 +43,13 @@ public class ExpenseRowData {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getAmount() {
+        return amount.toString();
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 }

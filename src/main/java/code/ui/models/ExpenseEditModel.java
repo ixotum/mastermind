@@ -15,6 +15,7 @@ import javafx.scene.control.DatePicker;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -62,6 +63,9 @@ public class ExpenseEditModel {
         expenseDB.setType(controller.getComboType().getValue());
         expenseDB.setDescription(controller.getTextFieldDescription().getText());
         expenseDB.setNote(controller.getTextFieldNote().getText());
+
+        BigDecimal amount = new BigDecimal(controller.getTextFieldAmount().getText());
+        expenseDB.setAmount(amount);
 
         return expenseDB;
     }

@@ -43,6 +43,15 @@
                 <TextField fx:id="textFieldNote" AnchorPane.leftAnchor="100.0" />
             </children>
         </AnchorPane>
+        <AnchorPane>
+            <VBox.margin>
+                <Insets left="12.0" top="12.0" />
+            </VBox.margin>
+            <children>
+                <Label text="Amount" AnchorPane.topAnchor="4.0" />
+                <TextField fx:id="textFieldAmount" AnchorPane.leftAnchor="100.0" />
+            </children>
+        </AnchorPane>
         <HBox alignment="TOP_RIGHT">
             <children>
                 <Button defaultButton="true" mnemonicParsing="false" onAction="#onClickOkButton" prefWidth="64.0" text="OK">
