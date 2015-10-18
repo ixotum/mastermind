@@ -89,7 +89,7 @@ public class ExpensesController implements Initializable {
         return scrollPane;
     }
 
-    public TableView getTable() {
+    public TableView<ExpenseRowData> getTable() {
         return table;
     }
 
@@ -103,5 +103,9 @@ public class ExpensesController implements Initializable {
 
     public TableColumn<ExpenseRowData, String> getColumnType() {
         return columnType;
+    }
+
+    public TableColumn<ExpenseRowData, String> getColumnDescription() {
+        return columnDescription;
     }
 }

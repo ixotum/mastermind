@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -18,6 +19,8 @@ public class ExpenseEditController implements Initializable {
     private DatePicker datePicker;
     @FXML
     private ComboBox<String> comboType;
+    @FXML
+    private TextField textFieldDescription;
 
     private Stage stage;
     private ExpenseEditModel model;
@@ -57,5 +60,9 @@ public class ExpenseEditController implements Initializable {
 
     public ComboBox<String> getComboType() {
         return comboType;
+    }
+
+    public TextField getTextFieldDescription() {
+        return textFieldDescription;
     }
 }

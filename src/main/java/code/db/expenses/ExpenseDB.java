@@ -8,6 +8,7 @@ import java.sql.Date;
 public class ExpenseDB {
     private Date date;
     private String type;
+    private String description;
 
     public void setDate(Date date) {
         this.date = date;
@@ -23,5 +24,13 @@ public class ExpenseDB {
 
     public String getType() {
         return type;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }
