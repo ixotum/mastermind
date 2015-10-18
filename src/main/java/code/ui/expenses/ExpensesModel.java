@@ -48,6 +48,9 @@ public class ExpensesModel implements BusEventListener {
 
         TableColumn<ExpenseRowData, String> columnDescription = controller.getColumnDescription();
         columnDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+
+        TableColumn<ExpenseRowData, String> columnNote = controller.getColumnNote();
+        columnNote.setCellValueFactory(new PropertyValueFactory<>("note"));
     }
 
     private void updateContent() {
@@ -66,6 +69,7 @@ public class ExpensesModel implements BusEventListener {
             expenseRowData.setDate(expenseDB.getDate().toLocalDate());
             expenseRowData.setType(expenseDB.getType());
             expenseRowData.setDescription(expenseDB.getDescription());
+            expenseRowData.setNote(expenseDB.getNote());
 
             expenseRowDataList.add(expenseRowData);
         }

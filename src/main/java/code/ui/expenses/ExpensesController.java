@@ -35,7 +35,7 @@ public class ExpensesController implements Initializable {
     @FXML
     private TableColumn<ExpenseRowData, String> columnDescription;
     @FXML
-    private TableColumn<ExpenseRowData, String> columnNotes;
+    private TableColumn<ExpenseRowData, String> columnNote;
     @FXML
     private TableColumn<ExpenseRowData, String> columnAmount;
 
@@ -108,4 +108,6 @@ public class ExpensesController implements Initializable {
     public TableColumn<ExpenseRowData, String> getColumnDescription() {
         return columnDescription;
     }
+
+    public TableColumn<ExpenseRowData, String> getColumnNote() { return columnNote; }
 }

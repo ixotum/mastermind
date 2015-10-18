@@ -14,7 +14,7 @@
                         <TableColumn fx:id="columnDate" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Date" />
                         <TableColumn fx:id="columnType" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" text="Type" />
                         <TableColumn fx:id="columnDescription" prefWidth="75.0" text="Description" />
-                        <TableColumn fx:id="columnNotes" prefWidth="75.0" text="Notes" />
+                        <TableColumn fx:id="columnNote" prefWidth="75.0" text="Notes" />
                         <TableColumn fx:id="columnAmount" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Amount" />
                     </columns>
                     <columnResizePolicy>

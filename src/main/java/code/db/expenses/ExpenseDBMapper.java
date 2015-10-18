@@ -16,6 +16,7 @@ public class ExpenseDBMapper implements RowMapper {
         expenseDB.setDate(rs.getDate("DATE"));
         expenseDB.setType(rs.getString("TYPE"));
         expenseDB.setDescription(rs.getString("DESCRIPTION"));
+        expenseDB.setNote(rs.getString("NOTE"));
 
         return expenseDB;
     }

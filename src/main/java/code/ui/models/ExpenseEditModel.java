@@ -61,6 +61,7 @@ public class ExpenseEditModel {
         expenseDB.setDate(java.sql.Date.valueOf(localDate));
         expenseDB.setType(controller.getComboType().getValue());
         expenseDB.setDescription(controller.getTextFieldDescription().getText());
+        expenseDB.setNote(controller.getTextFieldNote().getText());
 
         return expenseDB;
     }

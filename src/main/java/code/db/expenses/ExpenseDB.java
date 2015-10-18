@@ -9,6 +9,7 @@ public class ExpenseDB {
     private Date date;
     private String type;
     private String description;
+    private String note;
 
     public void setDate(Date date) {
         this.date = date;
@@ -32,5 +33,13 @@ public class ExpenseDB {
 
     public String getDescription() {
         return description;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public String getNote() {
+        return note;
     }
 }

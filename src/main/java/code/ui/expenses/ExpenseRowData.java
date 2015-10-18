@@ -9,6 +9,7 @@ public class ExpenseRowData {
     private LocalDate localDate;
     private String type;
     private String description;
+    private String note;
 
     public String getDate() {
         return localDate.toString();
@@ -32,5 +33,13 @@ public class ExpenseRowData {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }
