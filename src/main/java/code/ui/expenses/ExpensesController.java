@@ -1,11 +1,12 @@
-package code.ui;
+package code.ui.expenses;
 
-import code.ui.models.ExpensesModel;
+import code.ui.ExpenseEditController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -26,7 +27,17 @@ public class ExpensesController implements Initializable {
     private ScrollPane scrollPane;
 
     @FXML
-    private TableView table;
+    private TableView<ExpenseRowData> table;
+    @FXML
+    private TableColumn<ExpenseRowData, String> columnDate;
+    @FXML
+    private TableColumn<ExpenseRowData, String> columnType;
+    @FXML
+    private TableColumn<ExpenseRowData, String> columnDescription;
+    @FXML
+    private TableColumn<ExpenseRowData, String> columnNotes;
+    @FXML
+    private TableColumn<ExpenseRowData, String> columnAmount;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -84,5 +95,9 @@ public class ExpensesController implements Initializable {
 
     public void close() {
         stage.hide();
+    }
+
+    public TableColumn<ExpenseRowData, String> getColumnDate() {
+        return columnDate;
     }
 }

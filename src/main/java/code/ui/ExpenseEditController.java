@@ -39,7 +39,7 @@ public class ExpenseEditController implements Initializable {
         this.stage = stage;
     }
 
-    private void close() {
+    public void close() {
         stage.close();
     }
 

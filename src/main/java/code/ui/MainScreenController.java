@@ -4,6 +4,7 @@ import code.bus.BusEvent;
 import code.bus.BusEventType;
 import code.bus.BusEventListener;
 import code.bus.BusEventManager;
+import code.ui.expenses.ExpensesController;
 import code.ui.models.MainScreenModel;
 import code.utils.LoggerManager;
 import javafx.fxml.FXML;

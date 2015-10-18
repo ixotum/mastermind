@@ -5,17 +5,17 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.ui.ExpensesController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.ui.expenses.ExpensesController">
     <children>
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" VBox.vgrow="ALWAYS">
             <content>
                 <TableView fx:id="table">
                     <columns>
-                        <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Date" />
-                        <TableColumn maxWidth="200.0" minWidth="200.0" prefWidth="200.0" text="Type" />
-                        <TableColumn prefWidth="75.0" text="Description" />
-                        <TableColumn prefWidth="75.0" text="Notes" />
-                        <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Amount" />
+                        <TableColumn fx:id="columnDate" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Date" />
+                        <TableColumn fx:id="columnType" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" text="Type" />
+                        <TableColumn fx:id="columnDescription" prefWidth="75.0" text="Description" />
+                        <TableColumn fx:id="columnNotes" prefWidth="75.0" text="Notes" />
+                        <TableColumn fx:id="columnAmount" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Amount" />
                     </columns>
                     <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

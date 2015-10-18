@@ -3,6 +3,7 @@ package code.db.expenses;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 /**
  * Created by ixotum on 17.10.15
@@ -18,5 +19,11 @@ public class ExpenseJDBCTemplate {
         String sql = "INSERT INTO EXPENSE(DATE) " +
                 "VALUES (?)";
         jdbcTemplate.update(sql, expenseDB.getDate());
+    }
+
+    public List<ExpenseDB> readAllExpenses() {
+        String sql = "SELECT * FROM EXPENSE";
+        List<ExpenseDB> expenseDBList = jdbcTemplate.query(sql, new ExpenseDBMapper());
+        return expenseDBList;
     }
 }

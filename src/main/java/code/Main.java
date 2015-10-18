@@ -1,6 +1,7 @@
 package code;
 
 import code.db.settings.SettingsJDBCTemplate;
+import code.managers.ExpenseManager;
 import code.managers.OrderManager;
 import code.ui.MainScreenController;
 import code.utils.LoggerManager;
@@ -25,6 +26,11 @@ public class Main extends Application {
 
     private static final Logger logger = LoggerManager.getLoggerInstance();
     private static OrderManager orderManager;
+    private static ExpenseManager expenseManager;
+
+    public static ExpenseManager getExpenseManager() {
+        return expenseManager;
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -48,6 +54,7 @@ public class Main extends Application {
 
     private static void initManagers() {
         orderManager = new OrderManager();
+        expenseManager = new ExpenseManager();
     }
 
     private static void checkMigration() {

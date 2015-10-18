@@ -36,7 +36,9 @@ public class OrderManager implements BusEventListener {
 
     @Override
     public void busEventDispatched(BusEvent busEvent) {
-        updateOrders();
+        if (busEvent.getType() == BusEventType.ORDER_UPDATED) {
+            updateOrders();
+        }
     }
 
     private void updateOrders() {

@@ -1,6 +1,9 @@
 package code.ui.models;
 
 import code.Defines;
+import code.bus.BusEvent;
+import code.bus.BusEventManager;
+import code.bus.BusEventType;
 import code.db.expenses.ExpenseDB;
 import code.db.expenses.ExpenseJDBCTemplate;
 import code.ui.ExpenseEditController;
@@ -43,6 +46,9 @@ public class ExpenseEditModel {
             ExpenseJDBCTemplate expenseJDBCTemplate = (ExpenseJDBCTemplate) applicationContext.getBean("expenseJDBCTemplateId");
             expenseJDBCTemplate.saveNewExpense(expenseDB);
         }
+
+        BusEventManager.dispatch(new BusEvent(BusEventType.EXPENSE_UPDATED, null));
+        controller.close();
     }
 
     private ExpenseDB createExpenseDB() {
