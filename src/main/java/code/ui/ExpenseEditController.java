@@ -58,8 +58,8 @@ public class ExpenseEditController implements Initializable {
         return datePicker;
     }
 
-    public void setCreateNew(boolean createNew) {
-        model.setCreateNew(createNew);
+    public void setEntityId(Integer entityId) {
+        model.setEntityId(entityId);
     }
 
     public ComboBox<String> getComboType() {

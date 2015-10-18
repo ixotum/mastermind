@@ -69,6 +69,7 @@ public class ExpensesModel implements BusEventListener {
 
         for (ExpenseDB expenseDB : expenseDBList) {
             ExpenseRowData expenseRowData = new ExpenseRowData();
+            expenseRowData.setId(expenseDB.getId());
             expenseRowData.setDate(expenseDB.getDate().toLocalDate());
             expenseRowData.setType(expenseDB.getType());
             expenseRowData.setDescription(expenseDB.getDescription());
@@ -82,10 +83,18 @@ public class ExpensesModel implements BusEventListener {
     }
 
     private void initKeyHandlers() {
-        TableView table = controller.getTable();
+        TableView<ExpenseRowData> table = controller.getTable();
         table.setOnKeyReleased(event -> {
             if (event.getCode() == KeyCode.ESCAPE) {
                 controller.close();
+            }
+        });
+
+        table.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                controller.getButtonEdit().setDisable(false);
+            } else {
+                controller.getButtonEdit().setDisable(true);
             }
         });
     }

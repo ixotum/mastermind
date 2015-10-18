@@ -13,6 +13,7 @@ public class ExpenseDBMapper implements RowMapper {
     public Object mapRow(ResultSet rs, int rowNumber) throws SQLException {
         ExpenseDB expenseDB = new ExpenseDB();
 
+        expenseDB.setId(rs.getInt("ID"));
         expenseDB.setDate(rs.getDate("DATE"));
         expenseDB.setType(rs.getString("TYPE"));
         expenseDB.setDescription(rs.getString("DESCRIPTION"));

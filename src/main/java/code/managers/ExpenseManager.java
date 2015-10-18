@@ -44,4 +44,10 @@ public class ExpenseManager implements BusEventListener {
     public List<ExpenseDB> getExpenses() {
         return expenses;
     }
+
+    public static ExpenseDB find(Integer entityId) {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(Defines.BEANS_CONFIG);
+        ExpenseJDBCTemplate expenseJDBCTemplate = (ExpenseJDBCTemplate) applicationContext.getBean("expenseJDBCTemplateId");
+        return expenseJDBCTemplate.findById(entityId);
+    }
 }

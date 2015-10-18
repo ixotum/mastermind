@@ -22,9 +22,20 @@ public class ExpenseJDBCTemplate {
                 expenseDB.getNote(), expenseDB.getAmount());
     }
 
+    public void updateExpense(ExpenseDB expenseDB, Integer id) {
+        String sql = "UPDATE EXPENSE SET DATE=?, TYPE=?, DESCRIPTION=?, NOTE=?, AMOUNT=? WHERE ID=?";
+        jdbcTemplate.update(sql, expenseDB.getDate(), expenseDB.getType(), expenseDB.getDescription(), expenseDB.getNote(), expenseDB.getAmount(), id);
+    }
+
     public List<ExpenseDB> readAllExpenses() {
         String sql = "SELECT * FROM EXPENSE";
         List<ExpenseDB> expenseDBList = jdbcTemplate.query(sql, new ExpenseDBMapper());
         return expenseDBList;
+    }
+
+    public ExpenseDB findById(Integer id) {
+        String sql = "SELECT * FROM EXPENSE WHERE ID = ?";
+        List<ExpenseDB> list = jdbcTemplate.query(sql, new Object[]{id}, new ExpenseDBMapper());
+        return list.stream().findFirst().get();
     }
 }

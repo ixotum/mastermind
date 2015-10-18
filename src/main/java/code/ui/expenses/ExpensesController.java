@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -25,7 +26,6 @@ public class ExpensesController implements Initializable {
 
     @FXML
     private ScrollPane scrollPane;
-
     @FXML
     private TableView<ExpenseRowData> table;
     @FXML
@@ -38,6 +38,8 @@ public class ExpensesController implements Initializable {
     private TableColumn<ExpenseRowData, String> columnNote;
     @FXML
     private TableColumn<ExpenseRowData, String> columnAmount;
+    @FXML
+    private Button buttonEdit;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -52,17 +54,23 @@ public class ExpensesController implements Initializable {
 
     @FXML
     public void onClickAddButton() {
-        showEditExpenseDialog(true);
+        showEditExpenseDialog(null);
     }
 
-    private void showEditExpenseDialog(boolean createNew) {
+    @FXML
+    public void onClickEditButton() {
+        int id = table.getSelectionModel().getSelectedItem().getId();
+        showEditExpenseDialog(id);
+    }
+
+    private void showEditExpenseDialog(Integer entityId) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/expenses/expense_edit.fxml"));
         try {
             Pane pane = fxmlLoader.load();
             Scene scene = new Scene(pane);
             Stage newStage = new Stage();
 
-            if (createNew) {
+            if (entityId == null) {
                 newStage.setTitle("Add New Expense");
             } else {
                 newStage.setTitle("Edit Expense");
@@ -74,7 +82,7 @@ public class ExpensesController implements Initializable {
             newStage.setScene(scene);
             ExpenseEditController expenseEditController = fxmlLoader.getController();
             expenseEditController.setStage(newStage);
-            expenseEditController.setCreateNew(createNew);
+            expenseEditController.setEntityId(entityId);
             newStage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -115,5 +123,9 @@ public class ExpensesController implements Initializable {
 
     public TableColumn<ExpenseRowData, String> getColumnAmount() {
         return columnAmount;
+    }
+
+    public Button getButtonEdit() {
+        return buttonEdit;
     }
 }

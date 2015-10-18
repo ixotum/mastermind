@@ -7,11 +7,20 @@ import java.sql.Date;
  * Created by ixotum on 17.10.15
  */
 public class ExpenseDB {
+    private int id;
     private Date date;
     private String type;
     private String description;
     private String note;
     private BigDecimal amount;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
 
     public void setDate(Date date) {
         this.date = date;

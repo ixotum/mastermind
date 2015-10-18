@@ -1,11 +1,13 @@
 package code.ui.models;
 
 import code.Defines;
+import code.Main;
 import code.bus.BusEvent;
 import code.bus.BusEventManager;
 import code.bus.BusEventType;
 import code.db.expenses.ExpenseDB;
 import code.db.expenses.ExpenseJDBCTemplate;
+import code.managers.ExpenseManager;
 import code.ui.ExpenseEditController;
 import code.utils.UITools;
 import javafx.collections.FXCollections;
@@ -25,8 +27,8 @@ import java.util.Date;
  */
 public class ExpenseEditModel {
     private final ExpenseEditController controller;
-    private boolean createNew;
     private final ApplicationContext applicationContext = new ClassPathXmlApplicationContext(Defines.BEANS_CONFIG);
+    private Integer entityId;
 
     public ExpenseEditModel(ExpenseEditController controller) {
         this.controller = controller;
@@ -40,15 +42,31 @@ public class ExpenseEditModel {
         datePicker.setValue(localDate);
     }
 
-    public void setCreateNew(boolean createNew) {
-        this.createNew = createNew;
+    public void setEntityId(Integer entityId) {
+        this.entityId = entityId;
+        if (entityId != null) {
+            ExpenseManager expenseManager = Main.getExpenseManager();
+            ExpenseDB expenseDB = expenseManager.find(entityId);
+            initDialog(expenseDB);
+        }
+    }
+
+    private void initDialog(ExpenseDB expenseDB) {
+        controller.getDatePicker().setValue(expenseDB.getDate().toLocalDate());
+        controller.getComboType().setValue(expenseDB.getType());
+        controller.getTextFieldDescription().setText(expenseDB.getDescription());
+        controller.getTextFieldNote().setText(expenseDB.getNote());
+        controller.getTextFieldAmount().setText(expenseDB.getAmount().toString());
     }
 
     public void processExpense() {
-        if (createNew) {
-            ExpenseDB expenseDB = createExpenseDB();
-            ExpenseJDBCTemplate expenseJDBCTemplate = (ExpenseJDBCTemplate) applicationContext.getBean("expenseJDBCTemplateId");
+        ExpenseJDBCTemplate expenseJDBCTemplate = (ExpenseJDBCTemplate) applicationContext.getBean("expenseJDBCTemplateId");
+        ExpenseDB expenseDB = createExpenseDB();
+
+        if (entityId == null) {
             expenseJDBCTemplate.saveNewExpense(expenseDB);
+        } else {
+            expenseJDBCTemplate.updateExpense(expenseDB, entityId);
         }
 
         BusEventManager.dispatch(new BusEvent(BusEventType.EXPENSE_UPDATED, null));

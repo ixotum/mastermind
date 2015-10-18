@@ -7,11 +7,20 @@ import java.time.LocalDate;
  * Created by ixotum on 18.10.15
  */
 public class ExpenseRowData {
+    private int id;
     private LocalDate localDate;
     private String type;
     private String description;
     private String note;
     private BigDecimal amount;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
 
     public String getDate() {
         return localDate.toString();
