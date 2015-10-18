@@ -3,6 +3,7 @@ package code.ui;
 import code.ui.models.ExpenseEditModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -25,6 +26,8 @@ public class ExpenseEditController implements Initializable {
     private TextField textFieldNote;
     @FXML
     private TextField textFieldAmount;
+    @FXML
+    private Button buttonOK;
 
     private Stage stage;
     private ExpenseEditModel model;
@@ -34,6 +37,7 @@ public class ExpenseEditController implements Initializable {
         model = new ExpenseEditModel(this);
         model.initDatePicker();
         model.initComboType();
+        model.initTextFieldAmount();
     }
 
     @FXML
@@ -76,5 +80,9 @@ public class ExpenseEditController implements Initializable {
 
     public TextField getTextFieldAmount() {
         return textFieldAmount;
+    }
+
+    public Button getButtonOK() {
+        return buttonOK;
     }
 }

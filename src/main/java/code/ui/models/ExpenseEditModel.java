@@ -1,7 +1,6 @@
 package code.ui.models;
 
 import code.Defines;
-import code.Main;
 import code.bus.BusEvent;
 import code.bus.BusEventManager;
 import code.bus.BusEventType;
@@ -12,8 +11,10 @@ import code.ui.ExpenseEditController;
 import code.utils.UITools;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -45,8 +46,7 @@ public class ExpenseEditModel {
     public void setEntityId(Integer entityId) {
         this.entityId = entityId;
         if (entityId != null) {
-            ExpenseManager expenseManager = Main.getExpenseManager();
-            ExpenseDB expenseDB = expenseManager.find(entityId);
+            ExpenseDB expenseDB = ExpenseManager.find(entityId);
             initDialog(expenseDB);
         }
     }
@@ -93,5 +93,19 @@ public class ExpenseEditModel {
         ObservableList<String> expenseTypes = FXCollections.observableArrayList(Defines.expenseTypes);
         comboType.setItems(expenseTypes);
         comboType.setValue(expenseTypes.get(expenseTypes.size() - 1));
+    }
+
+    public void initTextFieldAmount() {
+        TextField textFieldAmount = controller.getTextFieldAmount();
+        Button buttonOK = controller.getButtonOK();
+        textFieldAmount.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (UITools.isCurrency(newValue)) {
+                textFieldAmount.getStyleClass().removeAll("textFieldCurrencyError");
+                buttonOK.setDisable(false);
+            } else {
+                textFieldAmount.getStyleClass().add("textFieldCurrencyError");
+                buttonOK.setDisable(true);
+            }
+        });
     }
 }

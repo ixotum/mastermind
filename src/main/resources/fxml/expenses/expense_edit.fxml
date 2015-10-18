@@ -5,12 +5,13 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.ui.ExpenseEditController">
+<?import java.net.URL?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="384.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.ui.ExpenseEditController">
     <children>
         <AnchorPane>
             <children>
                 <Label text="Date" AnchorPane.topAnchor="4.0" />
-                <DatePicker fx:id="datePicker" editable="false" AnchorPane.leftAnchor="100.0" />
+                <DatePicker fx:id="datePicker" editable="false" prefWidth="125.0" AnchorPane.leftAnchor="100.0" />
             </children>
             <VBox.margin>
                 <Insets left="12.0" top="12.0" />
@@ -19,7 +20,7 @@
         <AnchorPane>
             <children>
                 <Label text="Type" AnchorPane.topAnchor="4.0" />
-                <ComboBox fx:id="comboType" prefWidth="150.0" AnchorPane.leftAnchor="100.0" />
+                <ComboBox fx:id="comboType" prefHeight="25.0" prefWidth="241.0" AnchorPane.leftAnchor="100.0" />
             </children>
             <VBox.margin>
                 <Insets left="12.0" top="12.0" />
@@ -28,7 +29,7 @@
         <AnchorPane>
             <children>
                 <Label text="Description" AnchorPane.topAnchor="4.0" />
-                <TextField fx:id="textFieldDescription" AnchorPane.leftAnchor="100.0" />
+                <TextField fx:id="textFieldDescription" prefHeight="25.0" prefWidth="241.0" AnchorPane.leftAnchor="100.0" />
             </children>
             <VBox.margin>
                 <Insets left="12.0" top="12.0" />
@@ -40,7 +41,7 @@
             </VBox.margin>
             <children>
                 <Label text="Note" AnchorPane.topAnchor="4.0" />
-                <TextField fx:id="textFieldNote" AnchorPane.leftAnchor="100.0" />
+                <TextField fx:id="textFieldNote" prefHeight="25.0" prefWidth="241.0" AnchorPane.leftAnchor="100.0" />
             </children>
         </AnchorPane>
         <AnchorPane>
@@ -49,12 +50,12 @@
             </VBox.margin>
             <children>
                 <Label text="Amount" AnchorPane.topAnchor="4.0" />
-                <TextField fx:id="textFieldAmount" AnchorPane.leftAnchor="100.0" />
+                <TextField fx:id="textFieldAmount" prefHeight="25.0" prefWidth="90.0" AnchorPane.leftAnchor="100.0" />
             </children>
         </AnchorPane>
         <HBox alignment="TOP_RIGHT">
             <children>
-                <Button defaultButton="true" mnemonicParsing="false" onAction="#onClickOkButton" prefWidth="64.0" text="OK">
+                <Button fx:id="buttonOK" defaultButton="true" mnemonicParsing="false" onAction="#onClickOkButton" prefWidth="64.0" text="OK">
                     <HBox.margin>
                         <Insets right="12.0" />
                     </HBox.margin>
@@ -66,4 +67,7 @@
             </VBox.margin>
         </HBox>
     </children>
+    <stylesheets>
+        <URL value="@/styles/common.css"/>
+    </stylesheets>
 </VBox>

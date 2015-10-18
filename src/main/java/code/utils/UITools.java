@@ -3,6 +3,7 @@ package code.utils;
 import javafx.scene.control.DatePicker;
 import javafx.util.StringConverter;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -29,5 +30,24 @@ public class UITools {
             }
         };
         datePicker.setConverter(converter);
+    }
+
+    public static boolean isCurrency(String value) {
+        if (value.isEmpty()) {
+            return true;
+        }
+
+        BigDecimal bigDecimal;
+        try {
+            bigDecimal = new BigDecimal(value);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+        BigDecimal fraction = bigDecimal.remainder(BigDecimal.ONE);
+        String fractionStr = fraction.toString();
+        fractionStr = fractionStr.replace("0.", "");
+
+        return fractionStr.length() <= 2;
     }
 }
