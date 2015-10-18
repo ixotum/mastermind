@@ -48,7 +48,7 @@ public class ExpensesController implements Initializable {
     }
 
     @FXML
-    public void onClickCancelButton() {
+    public void onClickOKButton() {
         close();
     }
 

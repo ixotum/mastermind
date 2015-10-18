@@ -82,7 +82,14 @@ public class ExpenseEditModel {
         expenseDB.setDescription(controller.getTextFieldDescription().getText());
         expenseDB.setNote(controller.getTextFieldNote().getText());
 
-        BigDecimal amount = new BigDecimal(controller.getTextFieldAmount().getText());
+        String amountString = controller.getTextFieldAmount().getText();
+        BigDecimal amount;
+        if (amountString.isEmpty()) {
+            amount = BigDecimal.ZERO;
+        } else {
+            amount = new BigDecimal(amountString);
+        }
+
         expenseDB.setAmount(amount);
 
         return expenseDB;
