@@ -39,6 +39,13 @@ public class ExpensesModel implements BusEventListener {
         updateContent();
     }
 
+    private void applySortOrder() {
+        TableView<ExpenseRowData> tableView = controller.getTable();
+        TableColumn<ExpenseRowData, String> columnDate = controller.getColumnDate();
+        columnDate.setSortType(TableColumn.SortType.DESCENDING);
+        tableView.getSortOrder().add(columnDate);
+    }
+
     private void initBusListener() {
         BusEventManager.addListener(this, BusEventType.EXPENSE_UPDATED);
     }
@@ -66,6 +73,7 @@ public class ExpensesModel implements BusEventListener {
         TableView<ExpenseRowData> table = controller.getTable();
         ObservableList<ExpenseRowData> tableRows = createExpensesRows(expenseDBList);
         table.getItems().setAll(tableRows);
+        applySortOrder();
     }
 
     private ObservableList<ExpenseRowData> createExpensesRows(List<ExpenseDB> expenseDBList) {
