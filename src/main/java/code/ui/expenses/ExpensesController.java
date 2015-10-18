@@ -5,16 +5,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -40,6 +38,8 @@ public class ExpensesController implements Initializable {
     private TableColumn<ExpenseRowData, String> columnAmount;
     @FXML
     private Button buttonEdit;
+    @FXML
+    private Button buttonDelete;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -61,6 +61,19 @@ public class ExpensesController implements Initializable {
     public void onClickEditButton() {
         int id = table.getSelectionModel().getSelectedItem().getId();
         showEditExpenseDialog(id);
+    }
+
+    @FXML
+    public void onClickDeleteButton() {
+        Alert questionDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        questionDialog.setTitle("Deleting expense");
+        questionDialog.setContentText("Are you sure?");
+        Optional<ButtonType> result = questionDialog.showAndWait();
+
+        if (result.get() == ButtonType.OK) {
+            int id = table.getSelectionModel().getSelectedItem().getId();
+            model.deleteSelectedExpense(id);
+        }
     }
 
     private void showEditExpenseDialog(Integer entityId) {
@@ -127,5 +140,9 @@ public class ExpensesController implements Initializable {
 
     public Button getButtonEdit() {
         return buttonEdit;
+    }
+
+    public Button getButtonDelete() {
+        return buttonDelete;
     }
 }

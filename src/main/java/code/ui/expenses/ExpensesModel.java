@@ -1,11 +1,13 @@
 package code.ui.expenses;
 
+import code.Defines;
 import code.Main;
 import code.bus.BusEvent;
 import code.bus.BusEventListener;
 import code.bus.BusEventManager;
 import code.bus.BusEventType;
 import code.db.expenses.ExpenseDB;
+import code.db.expenses.ExpenseJDBCTemplate;
 import code.managers.ExpenseManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +16,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
 
@@ -93,8 +97,10 @@ public class ExpensesModel implements BusEventListener {
         table.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 controller.getButtonEdit().setDisable(false);
+                controller.getButtonDelete().setDisable(false);
             } else {
                 controller.getButtonEdit().setDisable(true);
+                controller.getButtonDelete().setDisable(true);
             }
         });
     }
@@ -118,5 +124,12 @@ public class ExpensesModel implements BusEventListener {
     @Override
     public void busEventDispatched(BusEvent busEvent) {
         updateContent();
+    }
+
+    public void deleteSelectedExpense(int expenseId) {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(Defines.BEANS_CONFIG);
+        ExpenseJDBCTemplate expenseJDBCTemplate = (ExpenseJDBCTemplate) applicationContext.getBean("expenseJDBCTemplateId");
+        expenseJDBCTemplate.delete(expenseId);
+        BusEventManager.dispatch(new BusEvent(BusEventType.EXPENSE_UPDATED, null));
     }
 }

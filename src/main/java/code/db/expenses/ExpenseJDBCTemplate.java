@@ -38,4 +38,9 @@ public class ExpenseJDBCTemplate {
         List<ExpenseDB> list = jdbcTemplate.query(sql, new Object[]{id}, new ExpenseDBMapper());
         return list.stream().findFirst().get();
     }
+
+    public void delete(int expenseId) {
+        String sql = "DELETE FROM EXPENSE WHERE ID = ?";
+        jdbcTemplate.update(sql, expenseId);
+    }
 }

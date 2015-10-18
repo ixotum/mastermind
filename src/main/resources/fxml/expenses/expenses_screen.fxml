@@ -28,7 +28,12 @@
                 <HBox>
                     <children>
                         <Button mnemonicParsing="false" onAction="#onClickAddButton" prefWidth="64" text="Add" />
-                        <Button fx:id="buttonEdit" disable="true" mnemonicParsing="false" prefWidth="64.0" text="Edit" onAction="#onClickEditButton">
+                        <Button fx:id="buttonEdit" disable="true" mnemonicParsing="false" onAction="#onClickEditButton" prefWidth="64.0" text="Edit">
+                            <HBox.margin>
+                                <Insets left="12.0" />
+                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="buttonDelete" disable="true" mnemonicParsing="false" text="Delete" onAction="#onClickDeleteButton">
                             <HBox.margin>
                                 <Insets left="12.0" />
                             </HBox.margin>
