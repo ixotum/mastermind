@@ -7,6 +7,7 @@ import java.time.LocalDate;
  */
 public class ExpenseRowData {
     private LocalDate localDate;
+    private String type;
 
     public String getDate() {
         return localDate.toString();
@@ -14,5 +15,13 @@ public class ExpenseRowData {
 
     public void setDate(LocalDate localDate) {
         this.localDate = localDate;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

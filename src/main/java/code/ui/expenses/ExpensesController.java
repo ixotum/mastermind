@@ -100,4 +100,8 @@ public class ExpensesController implements Initializable {
     public TableColumn<ExpenseRowData, String> getColumnDate() {
         return columnDate;
     }
+
+    public TableColumn<ExpenseRowData, String> getColumnType() {
+        return columnType;
+    }
 }

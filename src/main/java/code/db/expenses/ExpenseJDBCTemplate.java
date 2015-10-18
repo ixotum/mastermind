@@ -16,9 +16,9 @@ public class ExpenseJDBCTemplate {
     }
 
     public void saveNewExpense(ExpenseDB expenseDB) {
-        String sql = "INSERT INTO EXPENSE(DATE) " +
-                "VALUES (?)";
-        jdbcTemplate.update(sql, expenseDB.getDate());
+        String sql = "INSERT INTO EXPENSE(DATE, TYPE) " +
+                "VALUES (?, ?)";
+        jdbcTemplate.update(sql, expenseDB.getDate(), expenseDB.getType());
     }
 
     public List<ExpenseDB> readAllExpenses() {

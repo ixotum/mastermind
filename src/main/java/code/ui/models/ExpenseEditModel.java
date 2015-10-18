@@ -8,6 +8,9 @@ import code.db.expenses.ExpenseDB;
 import code.db.expenses.ExpenseJDBCTemplate;
 import code.ui.ExpenseEditController;
 import code.utils.UITools;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -56,7 +59,15 @@ public class ExpenseEditModel {
 
         LocalDate localDate = controller.getDatePicker().getValue();
         expenseDB.setDate(java.sql.Date.valueOf(localDate));
+        expenseDB.setType(controller.getComboType().getValue());
 
         return expenseDB;
+    }
+
+    public void initComboType() {
+        ComboBox<String> comboType = controller.getComboType();
+        ObservableList<String> expenseTypes = FXCollections.observableArrayList(Defines.expenseTypes);
+        comboType.setItems(expenseTypes);
+        comboType.setValue(expenseTypes.get(expenseTypes.size() - 1));
     }
 }

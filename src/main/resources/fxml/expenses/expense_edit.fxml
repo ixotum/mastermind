@@ -16,9 +16,18 @@
                 <Insets left="12.0" top="12.0" />
             </VBox.margin>
         </AnchorPane>
+      <AnchorPane>
+         <children>
+            <Label text="Type" AnchorPane.topAnchor="4.0" />
+            <ComboBox fx:id="comboType" prefWidth="150.0" AnchorPane.leftAnchor="50.0" />
+         </children>
+         <VBox.margin>
+            <Insets left="12.0" top="12.0" />
+         </VBox.margin>
+      </AnchorPane>
         <HBox alignment="TOP_RIGHT">
             <children>
-            <Button defaultButton="true" mnemonicParsing="false" prefWidth="64.0" text="OK" onAction="#onClickOkButton">
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#onClickOkButton" prefWidth="64.0" text="OK">
                <HBox.margin>
                   <Insets right="12.0" />
                </HBox.margin>

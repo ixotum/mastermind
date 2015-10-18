@@ -27,4 +27,5 @@ public class Defines {
     public enum ApplicationMode {GENERAL, VERSION}
 
     public static List<String> orderStatuses = new ArrayList<>(Arrays.asList("NEW", "IN PROGRESS", "COMPLETED", "SHIPPED", "CLOSED", "CANCELED"));
+    public static List<String> expenseTypes = new ArrayList<>(Arrays.asList("MATERIALS", "PRINTING", "PROMOTION", "TOOL", "OTHER"));
 }
