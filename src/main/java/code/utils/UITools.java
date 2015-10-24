@@ -6,6 +6,8 @@ import javafx.util.StringConverter;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 
 public class UITools {
     public static void initDatePicker(DatePicker datePicker) {
@@ -49,5 +51,13 @@ public class UITools {
         fractionStr = fractionStr.replace("0.", "");
 
         return fractionStr.length() <= 2;
+    }
+
+    public static LocalDate convertToLocalDate(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return LocalDate.of(calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH) + 1,
+                calendar.get(Calendar.DAY_OF_MONTH));
     }
 }

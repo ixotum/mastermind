@@ -11,6 +11,7 @@ import code.db.expenses.ExpenseJDBCTemplate;
 import code.managers.ExpenseManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -19,6 +20,7 @@ import javafx.scene.input.KeyCode;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -26,6 +28,7 @@ import java.util.List;
  */
 public class ExpensesModel implements BusEventListener {
     private final ExpensesController controller;
+    private List<String> dateIntervals = Arrays.asList("Month", "All Time");
 
     public ExpensesModel(ExpensesController expensesController) {
         this.controller = expensesController;
@@ -70,10 +73,24 @@ public class ExpensesModel implements BusEventListener {
     private void updateContent() {
         ExpenseManager expenseManager = Main.getExpenseManager();
         List<ExpenseDB> expenseDBList = expenseManager.getExpenses();
+        ExpensesFilter expensesFilter = createExpensesFilter();
+        List<ExpenseDB> expenseDBListFiltered = expensesFilter.filter(expenseDBList);
         TableView<ExpenseRowData> table = controller.getTable();
-        ObservableList<ExpenseRowData> tableRows = createExpensesRows(expenseDBList);
+        ObservableList<ExpenseRowData> tableRows = createExpensesRows(expenseDBListFiltered);
         table.getItems().setAll(tableRows);
         applySortOrder();
+    }
+
+    private ExpensesFilter createExpensesFilter() {
+        String dateInterval = controller.getComboShowFor().getValue();
+
+        if (dateInterval == null) {
+            dateInterval = dateIntervals.get(0);
+        }
+
+        ExpensesFilter expensesFilter = new ExpensesFilter();
+        expensesFilter.initDateInterval(dateInterval);
+        return expensesFilter;
     }
 
     private ObservableList<ExpenseRowData> createExpensesRows(List<ExpenseDB> expenseDBList) {
@@ -139,5 +156,12 @@ public class ExpensesModel implements BusEventListener {
         ExpenseJDBCTemplate expenseJDBCTemplate = (ExpenseJDBCTemplate) applicationContext.getBean("expenseJDBCTemplateId");
         expenseJDBCTemplate.delete(expenseId);
         BusEventManager.dispatch(new BusEvent(BusEventType.EXPENSE_UPDATED, null));
+    }
+
+    public void initComboShowFor() {
+        ComboBox<String> comboShowFor = controller.getComboShowFor();
+        comboShowFor.setItems(FXCollections.observableArrayList(dateIntervals));
+        comboShowFor.setValue(dateIntervals.get(0));
+        comboShowFor.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> updateContent());
     }
 }

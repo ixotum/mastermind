@@ -40,11 +40,14 @@ public class ExpensesController implements Initializable {
     private Button buttonEdit;
     @FXML
     private Button buttonDelete;
+    @FXML
+    private ComboBox<String> comboShowFor;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         model = new ExpensesModel(this);
         model.initTable();
+        model.initComboShowFor();
     }
 
     @FXML
@@ -144,5 +147,9 @@ public class ExpensesController implements Initializable {
 
     public Button getButtonDelete() {
         return buttonDelete;
+    }
+
+    public ComboBox<String> getComboShowFor() {
+        return comboShowFor;
     }
 }

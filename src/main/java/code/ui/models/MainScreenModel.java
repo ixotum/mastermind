@@ -8,6 +8,7 @@ import code.managers.UpdateManager;
 import code.ui.MainScreenController;
 import code.ui.OrderCardController;
 import code.utils.LoggerManager;
+import code.utils.UITools;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
@@ -54,18 +55,10 @@ public class MainScreenModel {
     }
 
     private static void highlightDates(List<Date> dates, LocalDatePicker calendar) {
-        List<LocalDate> localDates = dates.stream().map(MainScreenModel::convertToLocalDate).collect(Collectors.toList());
+        List<LocalDate> localDates = dates.stream().map(UITools::convertToLocalDate).collect(Collectors.toList());
         ObservableList<LocalDate> obsLocalDates = FXCollections.observableArrayList(localDates);
         calendar.highlightedLocalDates().clear();
         calendar.highlightedLocalDates().setAll(obsLocalDates);
-    }
-
-    private static LocalDate convertToLocalDate(Date date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        return LocalDate.of(calendar.get(Calendar.YEAR),
-                            calendar.get(Calendar.MONTH) + 1,
-                            calendar.get(Calendar.DAY_OF_MONTH));
     }
 
     private static List<Date> extractDates() {
@@ -161,8 +154,8 @@ public class MainScreenModel {
         for (OrderDB orderDB : inputList) {
             Date dueDate = orderDB.getDueDate();
             Date eventDate = orderDB.getEventDate();
-            LocalDate localDueDate = convertToLocalDate(dueDate);
-            LocalDate localEventDate = convertToLocalDate(eventDate);
+            LocalDate localDueDate = UITools.convertToLocalDate(dueDate);
+            LocalDate localEventDate = UITools.convertToLocalDate(eventDate);
 
             if (localSelectedDate.equals(localDueDate) || localSelectedDate.equals(localEventDate)) {
                 outputList.add(orderDB);

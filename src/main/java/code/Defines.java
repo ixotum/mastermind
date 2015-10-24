@@ -1,6 +1,5 @@
 package code;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,6 +25,6 @@ public class Defines {
 
     public enum ApplicationMode {GENERAL, VERSION}
 
-    public static List<String> orderStatuses = new ArrayList<>(Arrays.asList("NEW", "IN PROGRESS", "COMPLETED", "SHIPPED", "CLOSED", "CANCELED"));
-    public static List<String> expenseTypes = new ArrayList<>(Arrays.asList("MATERIALS", "PRINTING", "PROMOTION", "TOOL", "OTHER"));
+    public static List<String> orderStatuses = Arrays.asList("NEW", "IN PROGRESS", "COMPLETED", "SHIPPED", "CLOSED", "CANCELED");
+    public static List<String> expenseTypes = Arrays.asList("MATERIALS", "PRINTING", "PROMOTION", "TOOL", "OTHER");
 }
