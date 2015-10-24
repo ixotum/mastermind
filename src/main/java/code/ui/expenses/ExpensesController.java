@@ -42,6 +42,8 @@ public class ExpensesController implements Initializable {
     private Button buttonDelete;
     @FXML
     private ComboBox<String> comboShowFor;
+    @FXML
+    private Label labelTotal;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -151,5 +153,9 @@ public class ExpensesController implements Initializable {
 
     public ComboBox<String> getComboShowFor() {
         return comboShowFor;
+    }
+
+    public Label getLabelTotal() {
+        return labelTotal;
     }
 }

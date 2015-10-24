@@ -20,6 +20,7 @@ import javafx.scene.input.KeyCode;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -79,6 +80,18 @@ public class ExpensesModel implements BusEventListener {
         ObservableList<ExpenseRowData> tableRows = createExpensesRows(expenseDBListFiltered);
         table.getItems().setAll(tableRows);
         applySortOrder();
+        updateTotal();
+    }
+
+    private void updateTotal() {
+        TableView<ExpenseRowData> table = controller.getTable();
+        ObservableList<ExpenseRowData> rows = table.getItems();
+        BigDecimal total = calculateTotal(rows);
+        controller.getLabelTotal().setText(total.toString());
+    }
+
+    private static BigDecimal calculateTotal(ObservableList<ExpenseRowData> rows) {
+        return rows.stream().map(row -> new BigDecimal(row.getAmount())).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     private ExpensesFilter createExpensesFilter() {
@@ -148,7 +161,9 @@ public class ExpensesModel implements BusEventListener {
 
     @Override
     public void busEventDispatched(BusEvent busEvent) {
-        updateContent();
+        if (busEvent.getType() == BusEventType.EXPENSE_UPDATED) {
+            updateContent();
+        }
     }
 
     public void deleteSelectedExpense(int expenseId) {
