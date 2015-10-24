@@ -129,6 +129,12 @@ public class PaymentComponentModel implements BusEventListener {
 
             buttonAdd.setDisable(true);
         });
+
+        textFieldPayment.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER && !textFieldPayment.getText().isEmpty()) {
+                addRow();
+            }
+        });
     }
 
     public void removeSelectedRow() {
