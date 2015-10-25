@@ -6,6 +6,7 @@ import code.bus.BusEventListener;
 import code.bus.BusEventManager;
 import code.ui.expenses.ExpensesController;
 import code.ui.models.MainScreenModel;
+import code.ui.payments.PaymentsController;
 import code.utils.LoggerManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,6 +62,29 @@ public class MainScreenController implements Initializable, BusEventListener {
     @FXML
     public void onClickExpenses() {
         showExpensesScreen();
+    }
+
+    @FXML
+    public void onClickPayments() {
+        showPaymentsScreen();
+    }
+
+    private void showPaymentsScreen() {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/payments/payments_screen.fxml"));
+        try {
+            Pane pane = fxmlLoader.load();
+            Scene scene = new Scene(pane);
+            Stage stage = new Stage();
+            stage.setTitle("Payments");
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(parentStage);
+            stage.setScene(scene);
+            PaymentsController paymentsController = fxmlLoader.getController();
+            paymentsController.setStage(stage);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void showExpensesScreen() {
@@ -127,4 +151,5 @@ public class MainScreenController implements Initializable, BusEventListener {
     public LocalDatePicker getCalendar() {
         return calendar;
     }
+
 }
