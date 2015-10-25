@@ -1,26 +1,14 @@
 package code.ui;
 
-import code.Defines;
-import code.bus.BusEvent;
-import code.bus.BusEventType;
-import code.bus.BusEventManager;
-import code.db.order.OrderDB;
-import code.db.order.OrdersJDBCTemplate;
-import code.db.order.order_structure_component.OrderStructureComponentDB;
-import code.db.order.payment_component.PaymentComponentDB;
-import code.ui.models.EditOrderScreenModel;
-import code.ui.models.OrderComponentModel;
-import code.ui.order_structure_component.OrderStructureComponentController;
-import code.ui.payment_component.PaymentComponentController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.net.URL;
-import java.sql.Date;
 import java.util.ResourceBundle;
+
+import code.db.order.OrderDB;
+import code.ui.models.EditOrderScreenModel;
 
 /**
  * Created by ixotum on 7/12/15
@@ -29,83 +17,39 @@ public class EditOrderScreenController implements Initializable {
     @FXML
     public OrderComponentController orderComponent;
     private Stage stage;
-    private OrderDB orderDB;
     private EditOrderScreenModel model;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        model = new EditOrderScreenModel(this);
+        model.initListeners();
+    }
 
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
     public void init(OrderDB orderDB) {
-        this.orderDB = orderDB;
-        orderComponent.getLabelOrderId().setText(String.valueOf(orderDB.getOrderId()));
-        orderComponent.getTextFieldName().setText(orderDB.getName());
-        orderComponent.initOrderStructureComponentController(orderDB.getOrderStructureComponentDB());
-        orderComponent.getTextAreaCustomer().setText(orderDB.getCustomer());
-        orderComponent.getTextAreaAddress().setText(orderDB.getAddress());
-        orderComponent.getTextFieldVK().setText(orderDB.getVk());
-
-        Date dueDate = orderDB.getDueDate();
-        if (dueDate != null) {
-            orderComponent.getDatePickerDueDate().setValue(dueDate.toLocalDate());
-        }
-
-        Date eventDate = orderDB.getEventDate();
-        if (eventDate != null) {
-            orderComponent.getDatePickerEventDate().setValue(eventDate.toLocalDate());
-        }
-
-        orderComponent.getTextAreaDescription().setText(orderDB.getDescription());
-        orderComponent.getTextAreaNotes().setText(orderDB.getNotes());
-        orderComponent.initPaymentComponentController(orderDB.getPaymentComponentDB());
-        orderComponent.setOrderStatus(orderDB.getStatus());
+        model.init(orderDB);
     }
 
     public void onClickCancelButton() {
-        hide();
-    }
-
-    public void hide() {
-        stage.hide();
+        close();
     }
 
     public void onClickEditOrderDoneButton() {
-        updateOrderDB(orderComponent, orderDB);
-        final ApplicationContext applicationContext = new ClassPathXmlApplicationContext(Defines.BEANS_CONFIG);
-        OrdersJDBCTemplate ordersJDBCTemplate = (OrdersJDBCTemplate) applicationContext.getBean("ordersJDBCTemplateId");
-        ordersJDBCTemplate.updateExistedOrder(orderDB);
-
-        BusEvent busEvent = new BusEvent(BusEventType.ORDER_UPDATED, null);
-        BusEventManager.dispatch(busEvent);
-        hide();
+        model.updateOrder();
     }
 
-    private static void updateOrderDB(OrderComponentController orderComponent, OrderDB orderDB) {
-        orderDB.setName(orderComponent.getTextFieldName().getText());
-
-        OrderStructureComponentController orderStructureComponentController = orderComponent.getOrderStructureComponentController();
-        OrderStructureComponentDB orderStructureComponentDB = OrderComponentModel.createOrderStructureComponentDB(orderStructureComponentController);
-        orderDB.setOrderStructureComponentDB(orderStructureComponentDB);
-
-        orderDB.setCustomer(orderComponent.getTextAreaCustomer().getText());
-        orderDB.setAddress(orderComponent.getTextAreaAddress().getText());
-        orderDB.setVK(orderComponent.getTextFieldVK().getText());
-        orderDB.setDueDate(Date.valueOf(orderComponent.getDatePickerDueDate().getValue()));
-        orderDB.setEventDate(Date.valueOf(orderComponent.getDatePickerEventDate().getValue()));
-        orderDB.setDescription(orderComponent.getTextAreaDescription().getText());
-        orderDB.setNotes(orderComponent.getTextAreaNotes().getText());
-
-        PaymentComponentController paymentComponentController = orderComponent.getPaymentComponentController();
-        PaymentComponentDB paymentComponentDB = OrderComponentModel.createPaymentComponentDB(paymentComponentController);
-        orderDB.setPaymentComponentDB(paymentComponentDB);
-
-        int orderStatus = OrderComponentModel.getOrderStatus(orderComponent.getComboBoxStatus().getValue());
-        orderDB.setStatus(orderStatus);
+    public OrderComponentController getOrderComponent() {
+        return orderComponent;
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        model = new EditOrderScreenModel(this);
-        model.initListeners();
+    public void close() {
+        stage.close();
+    }
+
+    public void setTitleAsterisk() {
+        stage.setTitle(stage.getTitle() + " *");
     }
 }
