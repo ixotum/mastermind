@@ -100,7 +100,6 @@ public class EditOrderScreenModel implements BusEventListener {
 
         BusEvent busEvent = new BusEvent(BusEventType.ORDER_UPDATED, null);
         BusEventManager.dispatch(busEvent);
-        controller.close();
     }
 
     private static void updateOrderDB(OrderComponentController orderComponent, OrderDB orderDB) {
@@ -124,5 +123,13 @@ public class EditOrderScreenModel implements BusEventListener {
 
         int orderStatus = OrderComponentModel.getOrderStatus(orderComponent.getComboBoxStatus().getValue());
         orderDB.setStatus(orderStatus);
+    }
+
+    public boolean isChanging() {
+        return orderChanging;
+    }
+
+    public void setChanging(boolean changing) {
+        this.orderChanging = changing;
     }
 }

@@ -2,9 +2,12 @@ package code.ui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import code.db.order.OrderDB;
@@ -25,6 +28,11 @@ public class EditOrderScreenController implements Initializable {
         model.initListeners();
     }
 
+    @FXML
+    public void onClickCancelButton() {
+        close();
+    }
+
     public void setStage(Stage stage) {
         this.stage = stage;
     }
@@ -33,12 +41,9 @@ public class EditOrderScreenController implements Initializable {
         model.init(orderDB);
     }
 
-    public void onClickCancelButton() {
-        close();
-    }
-
     public void onClickEditOrderDoneButton() {
         model.updateOrder();
+        close();
     }
 
     public OrderComponentController getOrderComponent() {
@@ -46,7 +51,30 @@ public class EditOrderScreenController implements Initializable {
     }
 
     public void close() {
-        stage.close();
+        if (model.isChanging()) {
+            Alert questionDialog = new Alert(Alert.AlertType.CONFIRMATION);
+            questionDialog.setTitle("Order changed");
+            questionDialog.setHeaderText("The order was changed");
+            questionDialog.setContentText("What would you like to do?");
+
+            ButtonType typeSave = new ButtonType("Save");
+            ButtonType typeDontSave = new ButtonType("Don't save");
+            ButtonType typeCancel = new ButtonType("Cancel");
+            questionDialog.getButtonTypes().setAll(typeSave, typeDontSave, typeCancel);
+
+            Optional<ButtonType> result = questionDialog.showAndWait();
+            ButtonType resultType = result.get();
+            if (resultType == typeSave) {
+                model.updateOrder();
+                model.setChanging(false);
+                stage.close();
+            } else if (resultType == typeDontSave) {
+                model.setChanging(false);
+                stage.close();
+            }
+        } else {
+            stage.close();
+        }
     }
 
     public void setTitleAsterisk() {
