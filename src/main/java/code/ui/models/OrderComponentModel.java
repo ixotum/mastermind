@@ -1,5 +1,11 @@
 package code.ui.models;
 
+import java.math.BigDecimal;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import code.Defines;
 import code.db.order.order_structure_component.OrderStructureComponentDB;
 import code.db.order.order_structure_component.OrderStructureComponentRowDB;
@@ -8,13 +14,7 @@ import code.db.order.payment_component.PaymentDB;
 import code.ui.order_structure_component.OrderStructureComponentController;
 import code.ui.order_structure_component.RowData;
 import code.ui.payment_component.PaymentComponentController;
-import code.ui.payment_component.PaymentRowData;
-
-import java.math.BigDecimal;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import code.ui.payment_component.PaymentComponentRowData;
 
 public class OrderComponentModel {
     public static OrderStructureComponentDB createOrderStructureComponentDB(OrderStructureComponentController orderStructureComponentController) {
@@ -54,8 +54,8 @@ public class OrderComponentModel {
         List<PaymentDB> paymentDBList = new ArrayList<>();
 
         for (int paymentIndex = 0; paymentIndex < paymentsSize; ++paymentIndex) {
-            PaymentRowData paymentRowData = paymentComponentController.getPayment(paymentIndex);
-            PaymentDB paymentDB = createPaymentDB(paymentRowData);
+            PaymentComponentRowData paymentComponentRowData = paymentComponentController.getPayment(paymentIndex);
+            PaymentDB paymentDB = createPaymentDB(paymentComponentRowData);
             paymentDBList.add(paymentDB);
         }
 
@@ -64,12 +64,12 @@ public class OrderComponentModel {
         return paymentComponentDB;
     }
 
-    private static PaymentDB createPaymentDB(PaymentRowData paymentRowData) {
+    private static PaymentDB createPaymentDB(PaymentComponentRowData paymentComponentRowData) {
         PaymentDB paymentDB = new PaymentDB();
-        LocalDate localDate = paymentRowData.getLocalDate();
+        LocalDate localDate = paymentComponentRowData.getLocalDate();
         Date date = Date.valueOf(localDate);
         paymentDB.setDate(date);
-        paymentDB.setPayment(paymentRowData.getPaymentData());
+        paymentDB.setPayment(paymentComponentRowData.getPaymentData());
 
         return paymentDB;
     }

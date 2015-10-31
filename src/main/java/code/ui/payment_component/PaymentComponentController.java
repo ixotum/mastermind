@@ -1,25 +1,26 @@
 package code.ui.payment_component;
 
-import code.db.order.payment_component.PaymentComponentDB;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+import code.db.order.payment_component.PaymentComponentDB;
 
 public class PaymentComponentController extends AnchorPane implements Initializable {
     private final PaymentComponentModel model;
 
     @FXML
-    private TableView<PaymentRowData> table;
+    private TableView<PaymentComponentRowData> table;
     @FXML
-    private TableColumn<PaymentRowData, String> columnDate;
+    private TableColumn<PaymentComponentRowData, String> columnDate;
     @FXML
-    private TableColumn<PaymentRowData, String> columnPayment;
+    private TableColumn<PaymentComponentRowData, String> columnPayment;
     @FXML
     private DatePicker datePicker;
     @FXML
@@ -66,11 +67,11 @@ public class PaymentComponentController extends AnchorPane implements Initializa
         model.removeSelectedRow();
     }
 
-    public TableView<PaymentRowData> getTable() {
+    public TableView<PaymentComponentRowData> getTable() {
         return table;
     }
 
-    public TableColumn<PaymentRowData, String> getColumnDate() {
+    public TableColumn<PaymentComponentRowData, String> getColumnDate() {
         return columnDate;
     }
 
@@ -82,7 +83,7 @@ public class PaymentComponentController extends AnchorPane implements Initializa
         return textFieldPayment;
     }
 
-    public TableColumn<PaymentRowData, String> getColumnPayment() {
+    public TableColumn<PaymentComponentRowData, String> getColumnPayment() {
         return columnPayment;
     }
 
@@ -110,7 +111,7 @@ public class PaymentComponentController extends AnchorPane implements Initializa
         return table.getItems().size();
     }
 
-    public PaymentRowData getPayment(int paymentIndex) {
+    public PaymentComponentRowData getPayment(int paymentIndex) {
         return table.getItems().get(paymentIndex);
     }
 

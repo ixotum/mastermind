@@ -1,13 +1,10 @@
 package code.ui;
 
-import code.bus.BusEvent;
-import code.bus.BusEventType;
-import code.bus.BusEventListener;
-import code.bus.BusEventManager;
-import code.ui.expenses.ExpensesController;
-import code.ui.models.MainScreenModel;
-import code.ui.payments.PaymentsController;
-import code.utils.LoggerManager;
+import java.io.IOException;
+import java.net.URL;
+import java.util.*;
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,10 +16,14 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import jfxtras.scene.control.LocalDatePicker;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.*;
-import java.util.logging.Logger;
+import code.bus.BusEvent;
+import code.bus.BusEventType;
+import code.bus.BusEventListener;
+import code.bus.BusEventManager;
+import code.ui.expenses.ExpensesController;
+import code.ui.models.MainScreenModel;
+import code.ui.payment_report.PaymentReportController;
+import code.utils.LoggerManager;
 
 public class MainScreenController implements Initializable, BusEventListener {
     private final static Logger logger = LoggerManager.getLoggerInstance();
@@ -70,7 +71,7 @@ public class MainScreenController implements Initializable, BusEventListener {
     }
 
     private void showPaymentsScreen() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/payments/payments_screen.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/payments/payments_report_screen.fxml"));
         try {
             Pane pane = fxmlLoader.load();
             Scene scene = new Scene(pane);
@@ -79,8 +80,8 @@ public class MainScreenController implements Initializable, BusEventListener {
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(parentStage);
             stage.setScene(scene);
-            PaymentsController paymentsController = fxmlLoader.getController();
-            paymentsController.setStage(stage);
+            PaymentReportController paymentReportController = fxmlLoader.getController();
+            paymentReportController.setStage(stage);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

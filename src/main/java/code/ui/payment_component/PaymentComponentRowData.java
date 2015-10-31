@@ -3,7 +3,7 @@ package code.ui.payment_component;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class PaymentRowData {
+public class PaymentComponentRowData {
     private LocalDate localDate;
     private BigDecimal payment = BigDecimal.ZERO;
 
