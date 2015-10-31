@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.FXCollections;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 
@@ -57,6 +59,15 @@ public class PaymentReportModel {
         }
 
         controller.getTable().setItems(FXCollections.observableArrayList(paymentReportRows));
+
+        applySortOrder();
+    }
+
+    private void applySortOrder() {
+        TableView<PaymentReportRowData> tableView = controller.getTable();
+        TableColumn<PaymentReportRowData, String> columnDate = controller.getColumnDate();
+        columnDate.setSortType(TableColumn.SortType.DESCENDING);
+        tableView.getSortOrder().add(columnDate);
     }
 
     private void initKeyHandler() {
