@@ -1,5 +1,6 @@
 package code.db.order.order_structure_component;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class OrderStructureComponentDB {
@@ -23,5 +24,9 @@ public class OrderStructureComponentDB {
 
     public List<OrderStructureComponentRowDB> getComponentRowList() {
         return componentRowList;
+    }
+
+    public BigDecimal getTotal() {
+        return componentRowList.stream().map(OrderStructureComponentRowDB::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }

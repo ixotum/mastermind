@@ -1,5 +1,6 @@
 package code.db.order.payment_component;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -26,5 +27,9 @@ public class PaymentComponentDB {
 
     public int getOrderId() {
         return paymentDBList.get(0).getOrderId();
+    }
+
+    public BigDecimal getPaid() {
+        return paymentDBList.stream().map(PaymentDB::getPayment).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }

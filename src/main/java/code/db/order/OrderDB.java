@@ -1,9 +1,10 @@
 package code.db.order;
 
+import java.math.BigDecimal;
+import java.sql.Date;
+
 import code.db.order.order_structure_component.OrderStructureComponentDB;
 import code.db.order.payment_component.PaymentComponentDB;
-
-import java.sql.Date;
 
 /**
  * Created by ixotum on 7/7/15
@@ -116,5 +117,13 @@ public class OrderDB {
 
     public int getStatus() {
         return status;
+    }
+
+    public BigDecimal getTotal() {
+        return orderStructureComponentDB.getTotal();
+    }
+
+    public BigDecimal getPaid() {
+        return paymentComponentDB.getPaid();
     }
 }

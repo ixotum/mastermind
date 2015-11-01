@@ -1,12 +1,13 @@
 package code.ui.orders_report;
 
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.TableView;
-import javafx.stage.Stage;
-
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
 /**
  * Created by ixotum on 01.11.15
@@ -14,6 +15,16 @@ import java.util.ResourceBundle;
 public class OrdersReportController implements Initializable {
     @FXML
     private TableView<OrdersReportRowData> table;
+    @FXML
+    private TableColumn<OrdersReportRowData, String> columnId;
+    @FXML
+    private TableColumn<OrdersReportRowData, String> columnName;
+    @FXML
+    private TableColumn<OrdersReportRowData, String> columnTotal;
+    @FXML
+    private TableColumn<OrdersReportRowData, String> columnPaid;
+    @FXML
+    private TableColumn<OrdersReportRowData, String> columnDue;
 
     private Stage stage;
     private OrdersReportModel model;
@@ -35,5 +46,25 @@ public class OrdersReportController implements Initializable {
 
     public void close() {
         stage.close();
+    }
+
+    public TableColumn<OrdersReportRowData, String> getColumnId() {
+        return columnId;
+    }
+
+    public TableColumn<OrdersReportRowData, String> getColumnName() {
+        return columnName;
+    }
+
+    public TableColumn<OrdersReportRowData, String> getColumnTotal() {
+        return columnTotal;
+    }
+
+    public TableColumn<OrdersReportRowData, String> getColumnPaid() {
+        return columnPaid;
+    }
+
+    public TableColumn<OrdersReportRowData, String> getColumnDue() {
+        return columnDue;
     }
 }
