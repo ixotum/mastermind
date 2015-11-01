@@ -1,12 +1,13 @@
 package code.ui.payment_report;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import code.utils.UITools;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
@@ -19,6 +20,7 @@ import code.db.order.OrderDB;
 import code.db.order.payment_component.PaymentComponentDB;
 import code.db.order.payment_component.PaymentDB;
 import code.managers.OrderManager;
+import code.utils.UITools;
 
 /**
  * Created by ixotum on 25.10.15
@@ -110,6 +112,13 @@ public class PaymentReportModel {
         controller.getTable().setItems(FXCollections.observableArrayList(filteredPaymentReportRows));
 
         applySortOrder();
+        updateLabelAllPayments();
+    }
+
+    private void updateLabelAllPayments() {
+        ObservableList<PaymentReportRowData> payments = controller.getTable().getItems();
+        BigDecimal allPayments = payments.stream().map(paymentRowData -> new BigDecimal(paymentRowData.getPayment())).reduce(BigDecimal.ZERO, BigDecimal::add);
+        controller.getLabelAllPayments().setText(allPayments.toString());
     }
 
     private PaymentReportFilter createFilter() {

@@ -33,6 +33,8 @@ public class PaymentReportController implements Initializable {
     private DatePicker datePickerFrom;
     @FXML
     private DatePicker datePickerTo;
+    @FXML
+    private Label labelAllPayments;
 
     private Stage stage;
 
@@ -89,5 +91,9 @@ public class PaymentReportController implements Initializable {
 
     public DatePicker getDatePickerTo() {
         return datePickerTo;
+    }
+
+    public Label getLabelAllPayments() {
+        return labelAllPayments;
     }
 }
