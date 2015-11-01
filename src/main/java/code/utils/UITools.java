@@ -1,18 +1,18 @@
 package code.utils;
 
-import javafx.scene.control.DatePicker;
-import javafx.util.StringConverter;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
+import javafx.scene.control.DatePicker;
+import javafx.util.StringConverter;
+
 public class UITools {
     public static void initDatePicker(DatePicker datePicker) {
         StringConverter<LocalDate> converter = new StringConverter<LocalDate>() {
-            String pattern = "dd/MM/yyyy";
+            String pattern = "yyyy/MM/dd";
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
             @Override
             public String toString(LocalDate date) {

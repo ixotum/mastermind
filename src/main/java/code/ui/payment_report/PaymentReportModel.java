@@ -1,9 +1,14 @@
 package code.ui.payment_report;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import code.utils.UITools;
 import javafx.collections.FXCollections;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -20,6 +25,7 @@ import code.managers.OrderManager;
  */
 public class PaymentReportModel {
     private final PaymentReportController controller;
+    private final List<String> periods = Arrays.asList("Month", "Year", "All Time");
 
     public PaymentReportModel(PaymentReportController paymentReportController) {
         this.controller = paymentReportController;
@@ -29,6 +35,46 @@ public class PaymentReportModel {
         initKeyHandler();
         initColumns();
         updateContent();
+    }
+
+    public void initFilterBar() {
+        initRadio();
+        initComboPeriod();
+        initDatePickers();
+    }
+
+    private void initDatePickers() {
+        DatePicker datePickerFrom = controller.getDatePickerFrom();
+        UITools.initDatePicker(datePickerFrom);
+        datePickerFrom.setValue(LocalDate.now().withDayOfMonth(1));
+        datePickerFrom.valueProperty().addListener(observable -> updateContent());
+
+        DatePicker datePickerTo = controller.getDatePickerTo();
+        UITools.initDatePicker(datePickerTo);
+        datePickerTo.setValue(LocalDate.now());
+        datePickerTo.valueProperty().addListener(observable -> updateContent());
+    }
+
+    private void initComboPeriod() {
+        ComboBox<String> comboPeriod = controller.getComboPeriod();
+        comboPeriod.setItems(FXCollections.observableArrayList(periods));
+        comboPeriod.setValue(periods.get(0));
+        comboPeriod.valueProperty().addListener(observable -> updateContent());
+    }
+
+    private void initRadio() {
+        controller.getComboPeriod().setDisable(false);
+        controller.getAnchorDates().setDisable(true);
+
+        controller.getRadioPeriod().selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                controller.getComboPeriod().setDisable(false);
+                controller.getAnchorDates().setDisable(true);
+            } else {
+                controller.getComboPeriod().setDisable(true);
+                controller.getAnchorDates().setDisable(false);
+            }
+        });
     }
 
     private void initColumns() {
@@ -58,9 +104,27 @@ public class PaymentReportModel {
             }
         }
 
-        controller.getTable().setItems(FXCollections.observableArrayList(paymentReportRows));
+        PaymentReportFilter paymentReportFilter = createFilter();
+        List<PaymentReportRowData> filteredPaymentReportRows = paymentReportFilter.filter(paymentReportRows);
+
+        controller.getTable().setItems(FXCollections.observableArrayList(filteredPaymentReportRows));
 
         applySortOrder();
+    }
+
+    private PaymentReportFilter createFilter() {
+        PaymentReportFilter paymentReportFilter = new PaymentReportFilter();
+
+        if (controller.getRadioPeriod().isSelected()) {
+            String period = controller.getComboPeriod().getValue();
+            paymentReportFilter.initPeriod(period);
+        } else {
+            LocalDate localDateFrom = controller.getDatePickerFrom().getValue();
+            LocalDate localDateTo = controller.getDatePickerTo().getValue();
+            paymentReportFilter.setDates(localDateFrom, localDateTo);
+        }
+
+        return paymentReportFilter;
     }
 
     private void applySortOrder() {

@@ -10,118 +10,118 @@
 
 <fx:root type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-      <HBox>
-         <children>
-            <VBox>
-               <children>
-                    <AnchorPane>
-                        <children>
-                            <Label text="Order #" />
-                            <Label fx:id="labelOrderId" text="-1" AnchorPane.leftAnchor="75.0" />
-                        </children>
-                        <VBox.margin>
-                            <Insets left="12.0" right="12.0" top="12.0" />
-                        </VBox.margin>
-                    </AnchorPane>
-                    <AnchorPane>
-                        <VBox.margin>
-                            <Insets left="12.0" right="12.0" top="12.0" />
-                        </VBox.margin>
-                        <children>
-                            <Label text="Name" />
-                            <TextField fx:id="textFieldName" focusTraversable="false" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="0.0" />
-                        </children>
-                    </AnchorPane>
-                    <AnchorPane>
-                        <VBox.margin>
-                            <Insets left="12.0" right="12.0" top="12.0" />
-                        </VBox.margin>
-                        <children>
-                            <Label text="Structure" />
-                            <OrderStructureComponentController fx:id="orderStructureComponentController" prefHeight="237.0" prefWidth="400.0" stylesheets="@../styles/order_structure_component.css" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="0.0" />
-                        </children>
-                    </AnchorPane>
-                    <AnchorPane>
-                        <VBox.margin>
-                            <Insets left="12.0" right="12.0" top="12.0" />
-                        </VBox.margin>
-                        <children>
-                            <Label text="Customer" />
-                            <TextArea fx:id="textAreaCustomer" prefHeight="100.0" prefWidth="400.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="0.0" />
-                        </children>
-                    </AnchorPane>
-                    <AnchorPane>
-                        <VBox.margin>
-                            <Insets left="12.0" right="12.0" top="12.0" />
-                        </VBox.margin>
-                        <children>
-                            <Label text="Address" />
-                            <TextArea fx:id="textAreaAddress" prefHeight="100.0" prefWidth="400.0" AnchorPane.leftAnchor="85.0" />
-                        </children>
-                    </AnchorPane>
-                    <AnchorPane>
-                        <VBox.margin>
-                            <Insets left="12.0" right="12.0" top="12.0" />
-                        </VBox.margin>
-                        <children>
-                            <Label text="VK" />
-                            <TextField fx:id="textFieldVK" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="0.0" />
-                        </children>
-                    </AnchorPane>
-                    <AnchorPane>
-                        <VBox.margin>
-                            <Insets left="12.0" right="12.0" top="12.0" />
-                        </VBox.margin>
-                        <children>
-                            <Label text="Due Date" />
-                            <DatePicker fx:id="datePickerDueDate" editable="false" prefWidth="125.0" AnchorPane.leftAnchor="85.0" />
-                            <Label text="Event Date" AnchorPane.leftAnchor="260.0" />
-                            <DatePicker fx:id="datePickerEventDate" editable="false" prefWidth="125.0" AnchorPane.rightAnchor="0.0" />
-                        </children>
-                    </AnchorPane>
-                    <AnchorPane>
-                        <children>
-                            <Label text="Description" />
-                            <TextArea fx:id="textAreaDescription" prefHeight="100.0" prefWidth="400.0" AnchorPane.leftAnchor="85.0" />
-                        </children>
-                        <VBox.margin>
-                            <Insets left="12.0" right="12.0" top="12.0" />
-                        </VBox.margin>
-                    </AnchorPane>
-                    <AnchorPane>
-                        <VBox.margin>
-                            <Insets left="12.0" right="12.0" top="12.0" />
-                        </VBox.margin>
-                        <children>
-                            <Label text="Notes" />
-                            <TextArea fx:id="textAreaNotes" prefHeight="100.0" prefWidth="400.0" AnchorPane.leftAnchor="85.0" />
-                        </children>
-                    </AnchorPane>
-               </children>
-            </VBox>
-            <VBox>
-               <children>
-                   <AnchorPane>
-                       <VBox.margin>
-                           <Insets left="12.0" right="12.0" top="40.0" />
-                       </VBox.margin>
-                       <children>
-                           <Label text="Payments" />
-                           <PaymentComponentController fx:id="paymentComponentController" prefHeight="237.0" prefWidth="400.0" stylesheets="@../styles/order_structure_component.css" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="0.0" />
-                       </children>
-                   </AnchorPane>
-                  <AnchorPane>
-                     <children>
-                        <Label text="Status" />
-                        <ComboBox fx:id="comboBoxStatus" prefWidth="150.0" AnchorPane.leftAnchor="85.0" />
-                     </children>
-                     <VBox.margin>
-                        <Insets left="12.0" right="12.0" top="75.0" />
-                     </VBox.margin>
-                  </AnchorPane>
-               </children>
-            </VBox>
-         </children>
-      </HBox>
+        <HBox>
+            <children>
+                <VBox>
+                    <children>
+                        <AnchorPane>
+                            <children>
+                                <Label text="Order #" />
+                                <Label fx:id="labelOrderId" text="-1" AnchorPane.leftAnchor="75.0" />
+                            </children>
+                            <VBox.margin>
+                                <Insets left="12.0" right="12.0" top="12.0" />
+                            </VBox.margin>
+                        </AnchorPane>
+                        <AnchorPane>
+                            <VBox.margin>
+                                <Insets left="12.0" right="12.0" top="12.0" />
+                            </VBox.margin>
+                            <children>
+                                <Label text="Name" />
+                                <TextField fx:id="textFieldName" focusTraversable="false" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="0.0" />
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                            <VBox.margin>
+                                <Insets left="12.0" right="12.0" top="12.0" />
+                            </VBox.margin>
+                            <children>
+                                <Label text="Structure" />
+                                <OrderStructureComponentController fx:id="orderStructureComponentController" prefHeight="237.0" prefWidth="400.0" stylesheets="@../styles/order_structure_component.css" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="0.0" />
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                            <VBox.margin>
+                                <Insets left="12.0" right="12.0" top="12.0" />
+                            </VBox.margin>
+                            <children>
+                                <Label text="Customer" />
+                                <TextArea fx:id="textAreaCustomer" prefHeight="100.0" prefWidth="400.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="0.0" />
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                            <VBox.margin>
+                                <Insets left="12.0" right="12.0" top="12.0" />
+                            </VBox.margin>
+                            <children>
+                                <Label text="Address" />
+                                <TextArea fx:id="textAreaAddress" prefHeight="100.0" prefWidth="400.0" AnchorPane.leftAnchor="85.0" />
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                            <VBox.margin>
+                                <Insets left="12.0" right="12.0" top="12.0" />
+                            </VBox.margin>
+                            <children>
+                                <Label text="VK" />
+                                <TextField fx:id="textFieldVK" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="0.0" />
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                            <VBox.margin>
+                                <Insets left="12.0" right="12.0" top="12.0" />
+                            </VBox.margin>
+                            <children>
+                                <Label text="Due Date" />
+                                <DatePicker fx:id="datePickerDueDate" editable="false" prefWidth="125.0" AnchorPane.leftAnchor="85.0" />
+                                <Label text="Event Date" AnchorPane.leftAnchor="260.0" />
+                                <DatePicker fx:id="datePickerEventDate" editable="false" prefWidth="125.0" AnchorPane.rightAnchor="0.0" />
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                            <children>
+                                <Label text="Description" />
+                                <TextArea fx:id="textAreaDescription" prefHeight="100.0" prefWidth="400.0" AnchorPane.leftAnchor="85.0" />
+                            </children>
+                            <VBox.margin>
+                                <Insets left="12.0" right="12.0" top="12.0" />
+                            </VBox.margin>
+                        </AnchorPane>
+                        <AnchorPane>
+                            <VBox.margin>
+                                <Insets left="12.0" right="12.0" top="12.0" />
+                            </VBox.margin>
+                            <children>
+                                <Label text="Notes" />
+                                <TextArea fx:id="textAreaNotes" prefHeight="100.0" prefWidth="400.0" AnchorPane.leftAnchor="85.0" />
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </VBox>
+                <VBox>
+                    <children>
+                        <AnchorPane>
+                            <VBox.margin>
+                                <Insets left="12.0" right="12.0" top="40.0" />
+                            </VBox.margin>
+                            <children>
+                                <Label text="Payments" />
+                                <PaymentComponentController fx:id="paymentComponentController" prefHeight="237.0" prefWidth="400.0" stylesheets="@../styles/order_structure_component.css" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="0.0" />
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane>
+                            <children>
+                                <Label text="Status" />
+                                <ComboBox fx:id="comboBoxStatus" prefWidth="150.0" AnchorPane.leftAnchor="85.0" />
+                            </children>
+                            <VBox.margin>
+                                <Insets left="12.0" right="12.0" top="75.0" />
+                            </VBox.margin>
+                        </AnchorPane>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
     </children>
 </fx:root>

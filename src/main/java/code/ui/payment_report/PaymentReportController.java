@@ -5,8 +5,8 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -23,12 +23,23 @@ public class PaymentReportController implements Initializable {
     private TableColumn<PaymentReportRowData, String> columnName;
     @FXML
     private TableColumn<PaymentReportRowData, String> columnPayment;
+    @FXML
+    private RadioButton radioPeriod;
+    @FXML
+    private ComboBox<String> comboPeriod;
+    @FXML
+    private AnchorPane anchorDates;
+    @FXML
+    private DatePicker datePickerFrom;
+    @FXML
+    private DatePicker datePickerTo;
 
     private Stage stage;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         PaymentReportModel model = new PaymentReportModel(this);
+        model.initFilterBar();
         model.initTable();
     }
 
@@ -58,5 +69,25 @@ public class PaymentReportController implements Initializable {
 
     public TableColumn<PaymentReportRowData, String> getColumnPayment() {
         return columnPayment;
+    }
+
+    public RadioButton getRadioPeriod() {
+        return radioPeriod;
+    }
+
+    public ComboBox<String> getComboPeriod() {
+        return comboPeriod;
+    }
+
+    public AnchorPane getAnchorDates() {
+        return anchorDates;
+    }
+
+    public DatePicker getDatePickerFrom() {
+        return datePickerFrom;
+    }
+
+    public DatePicker getDatePickerTo() {
+        return datePickerTo;
     }
 }

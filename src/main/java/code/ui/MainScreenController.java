@@ -71,7 +71,7 @@ public class MainScreenController implements Initializable, BusEventListener {
     }
 
     private void showPaymentsScreen() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/payments/payments_report_screen.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/payments_report_screen.fxml"));
         try {
             Pane pane = fxmlLoader.load();
             Scene scene = new Scene(pane);
