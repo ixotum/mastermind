@@ -20,10 +20,11 @@ import code.bus.BusEvent;
 import code.bus.BusEventType;
 import code.bus.BusEventListener;
 import code.bus.BusEventManager;
-import code.ui.expenses.ExpensesController;
-import code.ui.models.MainScreenModel;
-import code.ui.payment_report.PaymentReportController;
 import code.utils.LoggerManager;
+import code.ui.models.MainScreenModel;
+import code.ui.expenses.ExpensesController;
+import code.ui.payment_report.PaymentReportController;
+import code.ui.orders_report.OrdersReportController;
 
 public class MainScreenController implements Initializable, BusEventListener {
     private final static Logger logger = LoggerManager.getLoggerInstance();
@@ -68,6 +69,29 @@ public class MainScreenController implements Initializable, BusEventListener {
     @FXML
     public void onClickPayments() {
         showPaymentsScreen();
+    }
+
+    @FXML
+    public void onClickOrders() {
+        showOrdersScreen();
+    }
+
+    private void showOrdersScreen() {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/orders_report_screen.fxml"));
+        try {
+            Pane pane = fxmlLoader.load();
+            Scene scene = new Scene(pane);
+            Stage stage = new Stage();
+            stage.setTitle("Orders");
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(parentStage);
+            stage.setScene(scene);
+            OrdersReportController ordersReportController = fxmlLoader.getController();
+            ordersReportController.setStage(stage);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void showPaymentsScreen() {
