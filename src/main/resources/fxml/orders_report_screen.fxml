@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -9,6 +10,7 @@
         <TableView fx:id="table" VBox.vgrow="ALWAYS">
             <columns>
                 <TableColumn fx:id="columnId" prefWidth="75.0" text="Id" />
+                <TableColumn fx:id="columnDueDate" prefWidth="75.0" text="Due Date" />
                 <TableColumn fx:id="columnName" prefWidth="75.0" text="Name" />
                 <TableColumn fx:id="columnTotal" prefWidth="75.0" text="Total" />
                 <TableColumn fx:id="columnPaid" prefWidth="75.0" text="Paid" />
@@ -18,5 +20,36 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
+        <VBox>
+            <children>
+                <HBox>
+                    <children>
+                        <Label text="From:">
+                            <HBox.margin>
+                                <Insets top="4.0" />
+                            </HBox.margin>
+                        </Label>
+                        <DatePicker fx:id="datePickerFrom" prefWidth="125.0" editable="false">
+                            <HBox.margin>
+                                <Insets left="12.0" />
+                            </HBox.margin>
+                        </DatePicker>
+                        <Label text="To:">
+                            <HBox.margin>
+                                <Insets left="12.0" top="4.0" />
+                            </HBox.margin>
+                        </Label>
+                        <DatePicker fx:id="datePickerTo" prefWidth="125.0">
+                            <HBox.margin>
+                                <Insets left="12.0" />
+                            </HBox.margin>
+                        </DatePicker>
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="12.0" left="12.0" top="12.0" />
+                    </VBox.margin>
+                </HBox>
+            </children>
+        </VBox>
     </children>
 </VBox>

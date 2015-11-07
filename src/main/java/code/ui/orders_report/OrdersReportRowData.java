@@ -1,12 +1,14 @@
 package code.ui.orders_report;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 
 /**
  * Created by ixotum on 01.11.15
  */
 public class OrdersReportRowData {
     private int id;
+    private Date dueDate;
     private String name;
     private BigDecimal total;
     private BigDecimal paid;
@@ -18,6 +20,14 @@ public class OrdersReportRowData {
 
     public String getId() {
         return String.valueOf(id);
+    }
+
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public String getDueDate() {
+        return dueDate.toString();
     }
 
     public void setName(String name) {

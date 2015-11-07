@@ -124,6 +124,6 @@ public class OrderDB {
     }
 
     public BigDecimal getPaid() {
-        return paymentComponentDB.getPaid();
+        return paymentComponentDB == null ? BigDecimal.ZERO : paymentComponentDB.getPaid();
     }
 }

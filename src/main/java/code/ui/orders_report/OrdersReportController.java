@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
@@ -18,6 +19,8 @@ public class OrdersReportController implements Initializable {
     @FXML
     private TableColumn<OrdersReportRowData, String> columnId;
     @FXML
+    private TableColumn<OrdersReportRowData, String> columnDueDate;
+    @FXML
     private TableColumn<OrdersReportRowData, String> columnName;
     @FXML
     private TableColumn<OrdersReportRowData, String> columnTotal;
@@ -25,6 +28,10 @@ public class OrdersReportController implements Initializable {
     private TableColumn<OrdersReportRowData, String> columnPaid;
     @FXML
     private TableColumn<OrdersReportRowData, String> columnDue;
+    @FXML
+    private DatePicker datePickerFrom;
+    @FXML
+    private DatePicker datePickerTo;
 
     private Stage stage;
     private OrdersReportModel model;
@@ -34,6 +41,7 @@ public class OrdersReportController implements Initializable {
         model = new OrdersReportModel(this);
 
         model.initTable();
+        model.initFilterBar();
     }
 
     public void setStage(Stage stage) {
@@ -52,6 +60,10 @@ public class OrdersReportController implements Initializable {
         return columnId;
     }
 
+    public TableColumn<OrdersReportRowData, String> getColumnDueDate() {
+        return columnDueDate;
+    }
+
     public TableColumn<OrdersReportRowData, String> getColumnName() {
         return columnName;
     }
@@ -66,5 +78,13 @@ public class OrdersReportController implements Initializable {
 
     public TableColumn<OrdersReportRowData, String> getColumnDue() {
         return columnDue;
+    }
+
+    public DatePicker getDatePickerFrom() {
+        return datePickerFrom;
+    }
+
+    public DatePicker getDatePickerTo() {
+        return datePickerTo;
     }
 }
