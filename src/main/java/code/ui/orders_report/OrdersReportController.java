@@ -23,6 +23,8 @@ public class OrdersReportController implements Initializable {
     @FXML
     private TableColumn<OrdersReportRowData, String> columnName;
     @FXML
+    private TableColumn<OrdersReportRowData, String> columnOrderStatus;
+    @FXML
     private TableColumn<OrdersReportRowData, String> columnTotal;
     @FXML
     private TableColumn<OrdersReportRowData, String> columnPaid;
@@ -68,6 +70,10 @@ public class OrdersReportController implements Initializable {
 
     public TableColumn<OrdersReportRowData, String> getColumnName() {
         return columnName;
+    }
+
+    public TableColumn<OrdersReportRowData, String> getColumnOrderStatus() {
+        return columnOrderStatus;
     }
 
     public TableColumn<OrdersReportRowData, String> getColumnTotal() {

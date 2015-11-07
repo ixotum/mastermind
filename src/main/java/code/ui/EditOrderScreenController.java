@@ -1,14 +1,14 @@
 package code.ui;
 
+import java.net.URL;
+import java.util.Optional;
+import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
-
-import java.net.URL;
-import java.util.Optional;
-import java.util.ResourceBundle;
 
 import code.db.order.OrderDB;
 import code.ui.models.EditOrderScreenModel;
@@ -30,7 +30,7 @@ public class EditOrderScreenController implements Initializable {
 
     @FXML
     public void onClickCancelButton() {
-        close();
+        askAction();
     }
 
     public void setStage(Stage stage) {
@@ -42,15 +42,14 @@ public class EditOrderScreenController implements Initializable {
     }
 
     public void onClickEditOrderDoneButton() {
-        model.updateOrder();
-        close();
+        askAction();
     }
 
     public OrderComponentController getOrderComponent() {
         return orderComponent;
     }
 
-    public void close() {
+    public void askAction() {
         if (model.isChanging()) {
             Alert questionDialog = new Alert(Alert.AlertType.CONFIRMATION);
             questionDialog.setTitle("Order changed");

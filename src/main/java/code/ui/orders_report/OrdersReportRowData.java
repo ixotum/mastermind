@@ -14,6 +14,7 @@ public class OrdersReportRowData {
     private BigDecimal paid;
     private BigDecimal due;
     private String paymentStatus;
+    private String orderStatus;
 
     public void setId(int id) {
         this.id = id;
@@ -41,6 +42,14 @@ public class OrdersReportRowData {
 
     public String getName() {
         return name;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public String getOrderStatus() {
+        return orderStatus;
     }
 
     public void setTotal(BigDecimal total) {

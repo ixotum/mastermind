@@ -28,6 +28,7 @@ import code.bus.BusEventListener;
 import code.bus.BusEventManager;
 import code.bus.BusEventType;
 import code.ui.EditOrderScreenController;
+import code.Defines;
 
 /**
  * Created by ixotum on 01.11.15
@@ -70,6 +71,7 @@ public class OrdersReportModel implements BusEventListener {
         controller.getColumnId().setCellValueFactory(new PropertyValueFactory<>("id"));
         controller.getColumnDueDate().setCellValueFactory(new PropertyValueFactory<>("dueDate"));
         controller.getColumnName().setCellValueFactory(new PropertyValueFactory<>("name"));
+        controller.getColumnOrderStatus().setCellValueFactory(new PropertyValueFactory<>("orderStatus"));
         controller.getColumnTotal().setCellValueFactory(new PropertyValueFactory<>("total"));
         controller.getColumnPaid().setCellValueFactory(new PropertyValueFactory<>("paid"));
         controller.getColumnDue().setCellValueFactory(new PropertyValueFactory<>("due"));
@@ -87,6 +89,7 @@ public class OrdersReportModel implements BusEventListener {
             ordersReportRowData.setId(orderDB.getOrderId());
             ordersReportRowData.setDueDate(orderDB.getDueDate());
             ordersReportRowData.setName(orderDB.getName());
+            ordersReportRowData.setOrderStatus(Defines.orderStatuses.get(orderDB.getStatus()));
             BigDecimal total = orderDB.getTotal();
             ordersReportRowData.setTotal(total);
             BigDecimal paid = orderDB.getPaid();

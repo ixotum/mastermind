@@ -1,9 +1,9 @@
 package code.ui.models;
 
+import java.sql.Date;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import java.sql.Date;
 
 import code.Defines;
 import code.bus.BusEvent;
@@ -87,7 +87,7 @@ public class EditOrderScreenModel implements BusEventListener {
     public void busEventDispatched(BusEvent busEvent) {
         BusEventType busEventType = busEvent.getType();
         if (busEventType == BusEventType.ESC_PRESSED) {
-            controller.close();
+            controller.askAction();
         }
     }
 

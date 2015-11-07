@@ -12,6 +12,7 @@
                 <TableColumn fx:id="columnId" prefWidth="75.0" text="Id" />
                 <TableColumn fx:id="columnDueDate" prefWidth="75.0" text="Due Date" />
                 <TableColumn fx:id="columnName" prefWidth="75.0" text="Name" />
+                <TableColumn fx:id="columnOrderStatus" prefWidth="75.0" text="Order Status" />
                 <TableColumn fx:id="columnTotal" prefWidth="75.0" text="Total" />
                 <TableColumn fx:id="columnPaid" prefWidth="75.0" text="Paid" />
                 <TableColumn fx:id="columnDue" prefWidth="75.0" text="Due" />
