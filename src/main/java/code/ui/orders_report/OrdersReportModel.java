@@ -54,6 +54,7 @@ public class OrdersReportModel {
         controller.getColumnTotal().setCellValueFactory(new PropertyValueFactory<>("total"));
         controller.getColumnPaid().setCellValueFactory(new PropertyValueFactory<>("paid"));
         controller.getColumnDue().setCellValueFactory(new PropertyValueFactory<>("due"));
+        controller.getColumnPaymentStatus().setCellValueFactory(new PropertyValueFactory<>("paymentStatus"));
     }
 
     private void updateContent() {
@@ -73,6 +74,8 @@ public class OrdersReportModel {
             ordersReportRowData.setPaid(paid);
             BigDecimal due = total.subtract(paid);
             ordersReportRowData.setDue(due);
+            String paymentStatus = UITools.getPaymentStatus(total, due);
+            ordersReportRowData.setPaymentStatus(paymentStatus);
 
             tableRows.add(ordersReportRowData);
         }

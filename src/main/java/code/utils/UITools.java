@@ -60,4 +60,18 @@ public class UITools {
                 calendar.get(Calendar.MONTH) + 1,
                 calendar.get(Calendar.DAY_OF_MONTH));
     }
+
+    public static String getPaymentStatus(BigDecimal total, BigDecimal due) {
+        String status = "UNPAID";
+
+        if (due.compareTo(total) < 0 && due.compareTo(BigDecimal.ZERO) > 0) {
+            status = "PARTIALLY PAID";
+        } else if (due.compareTo(BigDecimal.ZERO) == 0) {
+            status = "PAID";
+        } else if (due.compareTo(BigDecimal.ZERO) < 0) {
+            status = "OVERPAID";
+        }
+
+        return status;
+    }
 }

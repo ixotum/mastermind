@@ -29,6 +29,8 @@ public class OrdersReportController implements Initializable {
     @FXML
     private TableColumn<OrdersReportRowData, String> columnDue;
     @FXML
+    private TableColumn<OrdersReportRowData, String> columnPaymentStatus;
+    @FXML
     private DatePicker datePickerFrom;
     @FXML
     private DatePicker datePickerTo;
@@ -78,6 +80,10 @@ public class OrdersReportController implements Initializable {
 
     public TableColumn<OrdersReportRowData, String> getColumnDue() {
         return columnDue;
+    }
+
+    public TableColumn<OrdersReportRowData, String> getColumnPaymentStatus() {
+        return columnPaymentStatus;
     }
 
     public DatePicker getDatePickerFrom() {
