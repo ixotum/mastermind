@@ -23,6 +23,10 @@ public class OrdersReportRowData {
         return String.valueOf(id);
     }
 
+    public int getIdNumeric() {
+        return id;
+    }
+
     public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
     }

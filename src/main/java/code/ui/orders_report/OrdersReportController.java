@@ -93,4 +93,8 @@ public class OrdersReportController implements Initializable {
     public DatePicker getDatePickerTo() {
         return datePickerTo;
     }
+
+    public Stage getStage() {
+        return stage;
+    }
 }

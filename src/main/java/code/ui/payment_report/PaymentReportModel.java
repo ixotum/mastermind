@@ -93,6 +93,10 @@ public class PaymentReportModel {
 
         for (OrderDB orderDB : orders) {
             PaymentComponentDB paymentComponentDB = orderDB.getPaymentComponentDB();
+            if (paymentComponentDB == null) {
+                continue;
+            }
+
             List<PaymentDB> paymentDBList = paymentComponentDB.getPaymentDBList();
 
             for (PaymentDB paymentDB : paymentDBList) {
