@@ -76,6 +76,11 @@ public class MainScreenController implements Initializable, BusEventListener {
         showOrdersScreen();
     }
 
+    @FXML
+    public void onSearchButton() {
+
+    }
+
     private void showOrdersScreen() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/orders_report_screen.fxml"));
         try {
@@ -176,5 +181,4 @@ public class MainScreenController implements Initializable, BusEventListener {
     public LocalDatePicker getCalendar() {
         return calendar;
     }
-
 }

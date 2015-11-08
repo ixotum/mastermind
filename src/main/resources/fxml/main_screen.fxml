@@ -17,6 +17,19 @@
                 <VBox prefWidth="350.0">
                     <children>
                         <Button fx:id="buttonNewOrder" minWidth="88.0" mnemonicParsing="false" onAction="#onClickNewOrder" text="New Order" />
+                        <HBox>
+                            <VBox.margin>
+                                <Insets top="12.0" />
+                            </VBox.margin>
+                            <children>
+                                <TextField prefWidth="275.0" />
+                                <Button mnemonicParsing="false" text="Search" onAction="#onSearchButton">
+                                    <HBox.margin>
+                                        <Insets left="12.0" />
+                                    </HBox.margin>
+                                </Button>
+                            </children>
+                        </HBox>
                         <AnchorPane fx:id="anchorCalendar">
                             <children>
                                 <LocalDatePicker fx:id="calendar" prefWidth="325" AnchorPane.leftAnchor="12" AnchorPane.topAnchor="12" />
@@ -52,7 +65,7 @@
                                 </VBox>
                                 <VBox>
                                     <children>
-                                        <Button mnemonicParsing="false" prefWidth="83.0" text="Orders" onAction="#onClickOrders"/>
+                                        <Button mnemonicParsing="false" onAction="#onClickOrders" prefWidth="83.0" text="Orders" />
                                     </children>
                                     <HBox.margin>
                                         <Insets left="12.0" top="12.0" />
