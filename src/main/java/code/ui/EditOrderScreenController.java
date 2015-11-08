@@ -42,7 +42,9 @@ public class EditOrderScreenController implements Initializable {
     }
 
     public void onClickEditOrderDoneButton() {
-        askAction();
+        model.updateOrder();
+        model.setChanging(false);
+        stage.close();
     }
 
     public OrderComponentController getOrderComponent() {

@@ -1,26 +1,35 @@
 package code.ui.models;
 
-import code.Defines;
-import code.Main;
-import code.db.order.OrderDB;
-import code.managers.OrderManager;
-import code.managers.UpdateManager;
-import code.ui.MainScreenController;
-import code.ui.OrderCardController;
-import code.utils.LoggerManager;
-import code.utils.UITools;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.GridPane;
-import jfxtras.scene.control.LocalDatePicker;
-
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import jfxtras.scene.control.LocalDatePicker;
+
+import code.Defines;
+import code.Main;
+import code.db.order.OrderDB;
+import code.managers.OrderManager;
+import code.managers.SearchManager;
+import code.managers.UpdateManager;
+import code.ui.MainScreenController;
+import code.ui.OrderCardController;
+import code.ui.SearchResultController;
+import code.utils.LoggerManager;
+import code.utils.UITools;
 
 /**
  * Created by ixotum on 13.10.15
@@ -224,5 +233,39 @@ public class MainScreenModel {
         sortByOrderId(cardList);
         GridPane gridOrders = controller.getGridPane();
         fillGrid(gridOrders, cardList, previousCountInRow);
+    }
+
+    public void search() {
+        String searchText = controller.getTextFieldSearch().getText();
+        List<OrderDB> orders = Main.getOrderManager().getOrders();
+        List<OrderDB> foundOrders = SearchManager.search(searchText, orders);
+
+        if (foundOrders.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Info");
+            alert.setHeaderText("Nothing Found!");
+            alert.showAndWait();
+        } else {
+            showSearchResultScreen(foundOrders);
+        }
+    }
+
+    private void showSearchResultScreen(List<OrderDB> foundOrders) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/search_result_screen.fxml"));
+        try {
+            Pane pane = fxmlLoader.load();
+            Scene scene = new Scene(pane);
+            Stage stage = new Stage();
+            stage.setTitle("Search Result");
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(controller.getParentStage());
+            stage.setScene(scene);
+            SearchResultController searchResultController = fxmlLoader.getController();
+            searchResultController.setStage(stage);
+            searchResultController.setFoundOrders(foundOrders);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

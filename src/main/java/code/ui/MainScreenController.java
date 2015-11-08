@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -29,6 +30,8 @@ import code.ui.orders_report.OrdersReportController;
 public class MainScreenController implements Initializable, BusEventListener {
     private final static Logger logger = LoggerManager.getLoggerInstance();
 
+    @FXML
+    private TextField textFieldSearch;
     @FXML
     private LocalDatePicker calendar;
     @FXML
@@ -78,7 +81,7 @@ public class MainScreenController implements Initializable, BusEventListener {
 
     @FXML
     public void onSearchButton() {
-
+        model.search();
     }
 
     private void showOrdersScreen() {
@@ -180,5 +183,9 @@ public class MainScreenController implements Initializable, BusEventListener {
 
     public LocalDatePicker getCalendar() {
         return calendar;
+    }
+
+    public TextField getTextFieldSearch() {
+        return textFieldSearch;
     }
 }
