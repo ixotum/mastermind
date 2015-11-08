@@ -80,6 +80,29 @@ public class MainScreenController implements Initializable, BusEventListener {
     }
 
     @FXML
+    public void onClickBalance() {
+        showBalanceScreen();
+    }
+
+    private void showBalanceScreen() {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/balance_screen.fxml"));
+        try {
+            Pane pane = fxmlLoader.load();
+            Scene scene = new Scene(pane);
+            Stage stage = new Stage();
+            stage.setTitle("Balance");
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(parentStage);
+            stage.setScene(scene);
+            BalanceScreenController balanceScreenController = fxmlLoader.getController();
+            balanceScreenController.setStage(stage);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     public void onSearchButton() {
         model.search();
     }
