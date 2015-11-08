@@ -23,7 +23,7 @@
                             </VBox.margin>
                             <children>
                                 <TextField fx:id="textFieldSearch" prefWidth="275.0" />
-                                <Button mnemonicParsing="false" text="Search" onAction="#onSearchButton">
+                                <Button mnemonicParsing="false" onAction="#onSearchButton" text="Search">
                                     <HBox.margin>
                                         <Insets left="12.0" />
                                     </HBox.margin>
@@ -48,29 +48,28 @@
                                 <GridPane fx:id="gridOrders" hgap="1.0" vgap="1.0" />
                             </content>
                         </ScrollPane>
-                        <HBox fx:id="reportBar" prefHeight="100.0" prefWidth="200.0">
+                        <HBox fx:id="reportBar">
                             <children>
-                                <VBox>
+                                <HBox>
                                     <children>
-                                        <Button mnemonicParsing="false" onAction="#onClickExpenses" prefWidth="83.0" text="Expenses" />
                                         <Button mnemonicParsing="false" onAction="#onClickPayments" text="Payments">
-                                            <VBox.margin>
-                                                <Insets top="12.0" />
-                                            </VBox.margin>
+                                            <HBox.margin>
+                                                <Insets />
+                                            </HBox.margin>
                                         </Button>
+                                        <Button mnemonicParsing="false" onAction="#onClickOrders" prefWidth="83.0" text="Orders">
+                                            <HBox.margin>
+                                                <Insets left="12.0" />
+                                            </HBox.margin></Button>
+                                        <Button mnemonicParsing="false" onAction="#onClickExpenses" prefWidth="83.0" text="Expenses">
+                                            <HBox.margin>
+                                                <Insets left="12.0" />
+                                            </HBox.margin></Button>
                                     </children>
                                     <HBox.margin>
-                                        <Insets left="12.0" top="12.0" />
+                                        <Insets bottom="12.0" left="12.0" top="12.0" />
                                     </HBox.margin>
-                                </VBox>
-                                <VBox>
-                                    <children>
-                                        <Button mnemonicParsing="false" onAction="#onClickOrders" prefWidth="83.0" text="Orders" />
-                                    </children>
-                                    <HBox.margin>
-                                        <Insets left="12.0" top="12.0" />
-                                    </HBox.margin>
-                                </VBox>
+                                </HBox>
                             </children>
                         </HBox>
                     </children>
