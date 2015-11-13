@@ -47,7 +47,7 @@ public class BalanceScreenModel {
         BigDecimal totalBalance = BigDecimal.ZERO;
 
         for (int month = 1; month <= 12; ++month) {
-            BalanceRowData balanceRowData = new BalanceRowData();
+            BalanceRowData balanceRowData = new BalanceRowData(month);
             balanceRowData.setMonth(months.get(month - 1));
 
             BigDecimal income = IncomeManager.getIncome(year, month);
@@ -65,7 +65,7 @@ public class BalanceScreenModel {
             tableRows.add(balanceRowData);
         }
 
-        BalanceRowData totalRowData = new BalanceRowData();
+        BalanceRowData totalRowData = new BalanceRowData(13);
         totalRowData.setMonth("Total:");
         totalRowData.setIncome(totalIncome);
         totalRowData.setExpenses(totalExpenses);

@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
@@ -20,13 +21,13 @@ public class BalanceScreenController implements Initializable {
     @FXML
     private TableView<BalanceRowData> table;
     @FXML
-    private TableColumn<BalanceRowData, String> columnMonth;
+    private TableColumn<BalanceRowData, Label> columnMonth;
     @FXML
-    private TableColumn<BalanceRowData, String> columnIncome;
+    private TableColumn<BalanceRowData, Label> columnIncome;
     @FXML
-    private TableColumn<BalanceRowData, String> columnExpenses;
+    private TableColumn<BalanceRowData, Label> columnExpenses;
     @FXML
-    private TableColumn<BalanceRowData, String> columnBalance;
+    private TableColumn<BalanceRowData, Label> columnBalance;
     @FXML
     private ComboBox<Integer> comboYear;
 
@@ -49,19 +50,19 @@ public class BalanceScreenController implements Initializable {
         return table;
     }
 
-    public TableColumn<BalanceRowData, String> getColumnMonth() {
+    public TableColumn<BalanceRowData, Label> getColumnMonth() {
         return columnMonth;
     }
 
-    public TableColumn<BalanceRowData, String> getColumnIncome() {
+    public TableColumn<BalanceRowData, Label> getColumnIncome() {
         return columnIncome;
     }
 
-    public TableColumn<BalanceRowData, String> getColumnExpenses() {
+    public TableColumn<BalanceRowData, Label> getColumnExpenses() {
         return columnExpenses;
     }
 
-    public TableColumn<BalanceRowData, String> getColumnBalance() {
+    public TableColumn<BalanceRowData, Label> getColumnBalance() {
         return columnBalance;
     }
 
