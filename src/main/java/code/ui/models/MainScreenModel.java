@@ -120,11 +120,8 @@ public class MainScreenModel {
     public void initGridOrders() {
         calculateGridParameters();
 
-        List<OrderCardController> cardList = createOrderCards();
-        sortByOrderId(cardList);
-
         ScrollPane gridOrdersScrollPane = controller.getScrollPane();
-        gridOrdersScrollPane.widthProperty().addListener((observable, oldValue, newValue) -> gridOrdersScrollPaneWidthChanged(newValue, cardList));
+        gridOrdersScrollPane.widthProperty().addListener((observable, oldValue, newValue) -> gridOrdersScrollPaneWidthChanged(newValue));
         gridOrdersScrollPane.heightProperty().addListener((observable, oldValue, newValue) -> gridOrdersScrollPaneHeightChanged());
     }
 
@@ -190,7 +187,7 @@ public class MainScreenModel {
         gridOrders.setPrefHeight((standardOrderCardHeight + gridOrders.getVgap()) * gridOrdersRowCount);
     }
 
-    private void gridOrdersScrollPaneWidthChanged(Number newScrollPaneWidth, List<OrderCardController> cardList) {
+    private void gridOrdersScrollPaneWidthChanged(Number newScrollPaneWidth) {
         GridPane gridOrders = controller.getGridPane();
         gridOrders.setPrefWidth(newScrollPaneWidth.doubleValue());
         gridOrders.setPrefHeight((standardOrderCardHeight + gridOrders.getVgap()) * gridOrdersRowCount);
@@ -198,6 +195,9 @@ public class MainScreenModel {
         final int countInRow = (int) (newScrollPaneWidth.intValue() / standardOrderCardWidth);
 
         if (previousCountInRow != countInRow) {
+            List<OrderCardController> cardList = createOrderCards();
+            sortByOrderId(cardList);
+
             gridOrdersRowCount = fillGrid(gridOrders, cardList, countInRow);
             previousCountInRow = countInRow;
         }

@@ -8,7 +8,7 @@
 
 <fx:root type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <AnchorPane fx:id="mainAnchor" minHeight="100.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" styleClass="anchor">
+        <AnchorPane fx:id="mainAnchor" minHeight="150.0" minWidth="150.0" prefHeight="150.0" prefWidth="150.0" styleClass="anchor">
             <children>
                 <Label fx:id="labelOrderId" text="id" />
             <Label fx:id="labelStatus" text="status" AnchorPane.rightAnchor="4.0" />
