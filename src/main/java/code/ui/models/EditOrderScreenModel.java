@@ -1,6 +1,9 @@
 package code.ui.models;
 
+import java.io.File;
 import java.sql.Date;
+
+import javafx.stage.FileChooser;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -131,5 +134,19 @@ public class EditOrderScreenModel implements BusEventListener {
 
     public void setChanging(boolean changing) {
         this.orderChanging = changing;
+    }
+
+    public void exportOrder() {
+        FileChooser saveFileDialog = new FileChooser();
+        saveFileDialog.setTitle("Export order");
+        String fileName = combineName(controller);
+        saveFileDialog.setInitialFileName(fileName);
+        File file = saveFileDialog.showSaveDialog(controller.getStage());
+        OrderComponentModel.exportOrder(controller.getOrderComponent(), file);
+    }
+
+    private static String combineName(EditOrderScreenController controller) {
+        OrderComponentController orderComponent = controller.getOrderComponent();
+        return "order_" + orderComponent.getLabelOrderId().getText() + "_" + orderComponent.getTextFieldName().getText() + ".txt";
     }
 }

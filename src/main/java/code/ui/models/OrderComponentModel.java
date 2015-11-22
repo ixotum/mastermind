@@ -1,16 +1,22 @@
 package code.ui.models;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.ObservableList;
+
 import code.Defines;
 import code.db.order.order_structure_component.OrderStructureComponentDB;
 import code.db.order.order_structure_component.OrderStructureComponentRowDB;
 import code.db.order.payment_component.PaymentComponentDB;
 import code.db.order.payment_component.PaymentDB;
+import code.ui.OrderComponentController;
 import code.ui.order_structure_component.OrderStructureComponentController;
 import code.ui.order_structure_component.RowData;
 import code.ui.payment_component.PaymentComponentController;
@@ -76,5 +82,43 @@ public class OrderComponentModel {
 
     public static int getOrderStatus(String value) {
         return Defines.orderStatuses.indexOf(value);
+    }
+
+    public static void exportOrder(OrderComponentController orderComponent, File file) {
+        byte[] sequence = createSequence(orderComponent);
+
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            fileOutputStream.write(sequence);
+            fileOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static byte[] createSequence(OrderComponentController orderComponent) {
+        String sequence = "Заказ №" + orderComponent.getLabelOrderId().getText() + "\n"
+                + orderComponent.getTextFieldName().getText() + "\n"
+                + orderComponent.getTextAreaDescription().getText() + "\n";
+
+        OrderStructureComponentController orderStructureComponentController = orderComponent.getOrderStructureComponentController();
+        ObservableList<RowData> structureRows = orderStructureComponentController.getTable().getItems();
+
+        for (int rowIndex = 0; rowIndex < structureRows.size() - 1; ++rowIndex) {
+            RowData rowData = structureRows.get(rowIndex);
+            sequence += rowData.getColumnItem() + " - " + rowData.getColumnPrice() + " грн\n";
+        }
+
+        BigDecimal total = new BigDecimal(orderStructureComponentController.getLabelTotal().getText());
+        sequence += "Итоговая сумма заказа = " + total.toString() + "\n";
+
+        BigDecimal percent = new BigDecimal("0.5");
+        BigDecimal prepayment = total.multiply(percent).setScale(2, BigDecimal.ROUND_UP);
+        sequence += "Сумма предоплаты для бронирования даты 50% = " + prepayment.toString() + "грн + комиссия банка по оплате\n";
+
+        sequence += "Срок готовности " + orderComponent.getDatePickerDueDate().getValue() + "\n";
+        sequence += "Дата праздника " + orderComponent.getDatePickerEventDate().getValue();
+
+        return sequence.getBytes();
     }
 }

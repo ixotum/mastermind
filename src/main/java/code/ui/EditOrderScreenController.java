@@ -33,6 +33,11 @@ public class EditOrderScreenController implements Initializable {
         askAction();
     }
 
+    @FXML
+    public void onExportButton() {
+        model.exportOrder();
+    }
+
     public void setStage(Stage stage) {
         this.stage = stage;
     }
@@ -80,5 +85,9 @@ public class EditOrderScreenController implements Initializable {
 
     public void setTitleAsterisk() {
         stage.setTitle(stage.getTitle() + " *");
+    }
+
+    public Stage getStage() {
+        return stage;
     }
 }
