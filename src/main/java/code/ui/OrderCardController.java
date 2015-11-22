@@ -21,7 +21,6 @@ import java.util.logging.Logger;
  */
 public class OrderCardController extends VBox {
     private final static Logger logger = LoggerManager.getLoggerInstance();
-
     @FXML
     private AnchorPane mainAnchor;
     @FXML
@@ -30,6 +29,8 @@ public class OrderCardController extends VBox {
     private Label labelName;
     @FXML
     private Label labelStatus;
+    @FXML
+    private Label labelTotal;
 
     private OrderDB orderDB;
     private MainScreenController mainScreenController;
@@ -80,6 +81,7 @@ public class OrderCardController extends VBox {
         this.orderDB = orderDB;
         labelOrderId.setText(String.valueOf(orderDB.getOrderId()));
         labelName.setText(orderDB.getName());
+        labelTotal.setText(orderDB.getTotal().toString());
         initStatus(orderDB);
     }
 
