@@ -14,6 +14,7 @@
                 <Label fx:id="labelStatus" text="status" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0" />
                 <Label fx:id="labelName" alignment="TOP_LEFT" prefHeight="60.0" prefWidth="142.0" text="name" wrapText="true" AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="20.0" />
                 <Label fx:id="labelTotal" text="999.99" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" />
+                <Label fx:id="labelPaymentStatus" text="PAYM. STAT" AnchorPane.bottomAnchor="4.0" AnchorPane.rightAnchor="4.0" />
                 <Button mnemonicParsing="false" onAction="#onOrderCardClick" opacity="0.0" text="Button" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             </children>
         </AnchorPane>

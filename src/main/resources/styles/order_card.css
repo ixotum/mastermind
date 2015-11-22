@@ -5,3 +5,7 @@
 .labelStatus {
     -fx-font-size: 10px;
 }
+
+.labelPaymentStatus {
+    -fx-font-size: 10px;
+}

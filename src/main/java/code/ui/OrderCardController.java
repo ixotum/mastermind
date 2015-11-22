@@ -1,8 +1,9 @@
 package code.ui;
 
-import code.Defines;
-import code.db.order.OrderDB;
-import code.utils.LoggerManager;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,14 +14,17 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.util.logging.Logger;
+import code.Defines;
+import code.db.order.OrderDB;
+import code.utils.LoggerManager;
+import code.utils.UITools;
 
 /**
  * Created by ixotum on 7/8/15
  */
 public class OrderCardController extends VBox {
     private final static Logger logger = LoggerManager.getLoggerInstance();
+
     @FXML
     private AnchorPane mainAnchor;
     @FXML
@@ -31,6 +35,8 @@ public class OrderCardController extends VBox {
     private Label labelStatus;
     @FXML
     private Label labelTotal;
+    @FXML
+    private Label labelPaymentStatus;
 
     private OrderDB orderDB;
     private MainScreenController mainScreenController;
@@ -80,9 +86,29 @@ public class OrderCardController extends VBox {
     public void init(OrderDB orderDB) {
         this.orderDB = orderDB;
         labelOrderId.setText(String.valueOf(orderDB.getOrderId()));
-        labelName.setText(orderDB.getName());
-        labelTotal.setText(orderDB.getTotal().toString());
+
         initStatus(orderDB);
+
+        labelName.setText(orderDB.getName());
+
+        BigDecimal total = initTotal();
+
+        initPaymentStatus(orderDB, total);
+    }
+
+    private void initPaymentStatus(OrderDB orderDB, BigDecimal total) {
+        BigDecimal paid = orderDB.getPaid();
+        BigDecimal due = total.subtract(paid);
+        String paymentStatus = UITools.getPaymentStatus(total, due);
+        labelPaymentStatus.setText(paymentStatus);
+        labelPaymentStatus.getStyleClass().add("labelPaymentStatus");
+    }
+
+    private BigDecimal initTotal() {
+        BigDecimal total = orderDB.getTotal();
+        labelTotal.setText(total.toString());
+
+        return total;
     }
 
     private void initStatus(OrderDB orderDB) {
