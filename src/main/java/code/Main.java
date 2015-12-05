@@ -1,26 +1,30 @@
 package code;
 
-import code.db.settings.SettingsJDBCTemplate;
-import code.managers.ExpenseManager;
-import code.managers.OrderManager;
-import code.ui.MainScreenController;
-import code.utils.LoggerManager;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import org.flywaydb.core.Flyway;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import javax.sql.DataSource;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
+
+import javax.sql.DataSource;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+
+import org.flywaydb.core.Flyway;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import code.db.settings.SettingsJDBCTemplate;
+import code.managers.ExpenseManager;
+import code.managers.OrderManager;
+import code.ui.MainScreenController;
+import code.utils.LoggerManager;
+import code.utils.UITools;
 
 public class Main extends Application {
 
@@ -48,8 +52,16 @@ public class Main extends Application {
     public static void main(String[] args) {
         processArguments(args);
         checkMigration();
+        backupDB();
         initManagers();
         launch(args);
+    }
+
+    private static void backupDB() {
+        String dbFileName = UITools.getDbFileName();
+        String backupDbFileName = UITools.createBackupDbFileName();
+        UITools.copyFile(dbFileName, backupDbFileName);
+        UITools.removeOldestDbFiles();
     }
 
     private static void initManagers() {
