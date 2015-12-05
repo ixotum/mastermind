@@ -9,3 +9,11 @@
 .labelPaymentStatus {
     -fx-font-size: 10px;
 }
+
+.labelDueDate {
+    -fx-font-size: 10px;
+}
+
+.labelEventDate {
+    -fx-font-size: 10px;
+}

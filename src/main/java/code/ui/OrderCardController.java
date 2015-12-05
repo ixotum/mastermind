@@ -32,6 +32,10 @@ public class OrderCardController extends VBox {
     @FXML
     private Label labelName;
     @FXML
+    private Label labelDueDate;
+    @FXML
+    private Label labelEventDate;
+    @FXML
     private Label labelStatus;
     @FXML
     private Label labelTotal;
@@ -91,9 +95,20 @@ public class OrderCardController extends VBox {
 
         labelName.setText(orderDB.getName());
 
+        initDueDate(orderDB);
+        initEventDate(orderDB);
         BigDecimal total = initTotal();
-
         initPaymentStatus(orderDB, total);
+    }
+
+    private void initDueDate(OrderDB orderDB) {
+        labelDueDate.setText(orderDB.getDueDate().toString());
+        labelDueDate.getStyleClass().add("labelDueDate");
+    }
+
+    private void initEventDate(OrderDB orderDB) {
+        labelEventDate.setText(orderDB.getEventDate().toString());
+        labelEventDate.getStyleClass().add("labelEventDate");
     }
 
     private void initPaymentStatus(OrderDB orderDB, BigDecimal total) {
