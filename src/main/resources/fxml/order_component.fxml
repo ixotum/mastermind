@@ -8,6 +8,7 @@
 <?import code.ui.order_structure_component.OrderStructureComponentController?>
 <?import code.ui.payment_component.PaymentComponentController?>
 
+<?import java.net.URL?>
 <fx:root type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <HBox>
@@ -118,6 +119,45 @@
                             <VBox.margin>
                                 <Insets left="12.0" right="12.0" top="75.0" />
                             </VBox.margin>
+                        </AnchorPane>
+                        <AnchorPane>
+                            <VBox.margin>
+                                <Insets left="12.0" right="12.0" top="25.0" />
+                            </VBox.margin>
+                            <children>
+                                <Label text="Pictures" />
+                                <VBox minHeight="300" prefHeight="300.0" maxHeight="300" minWidth="370" prefWidth="370.0" maxWidth="370" style="-fx-border-color: red" AnchorPane.leftAnchor="85.0">
+                                    <children>
+                                        <GridPane fx:id="gridThumbnails" gridLinesVisible="true" minHeight="220" prefHeight="220" maxHeight="220.0" minWidth="330" prefWidth="330" maxWidth="330.0" style="-fx-border-color: deepskyblue" >
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="110.0" maxWidth="110" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="110.0" maxWidth="110"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="110.0" maxWidth="110"/>
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="110.0" maxHeight="110" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="110.0" maxHeight="110" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                            <VBox.margin>
+                                                <Insets left="20.0" top="20.0" />
+                                            </VBox.margin>
+                                        </GridPane>
+                                        <HBox alignment="TOP_CENTER">
+                                            <children>
+                                                <Button mnemonicParsing="false" prefWidth="85.0" text="Add" />
+                                                <Button mnemonicParsing="false" prefWidth="85.0" text="Delete">
+                                                    <HBox.margin>
+                                                        <Insets left="25.0" />
+                                                    </HBox.margin>
+                                                </Button>
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets left="12.0" right="12.0" top="12.0" />
+                                            </VBox.margin>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </children>
                         </AnchorPane>
                     </children>
                 </VBox>

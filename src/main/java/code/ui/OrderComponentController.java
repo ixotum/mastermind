@@ -1,24 +1,26 @@
 package code.ui;
 
-import code.Defines;
-import code.db.order.order_structure_component.OrderStructureComponentDB;
-import code.db.order.payment_component.PaymentComponentDB;
-import code.ui.order_structure_component.OrderStructureComponentController;
-import code.ui.payment_component.PaymentComponentController;
-import code.utils.UITools;
-import javafx.collections.FXCollections;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
-
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+
+import code.Defines;
+import code.db.order.order_structure_component.OrderStructureComponentDB;
+import code.db.order.payment_component.PaymentComponentDB;
+import code.ui.order_structure_component.OrderStructureComponentController;
+import code.ui.payment_component.PaymentComponentController;
+import code.utils.UITools;
 
 /**
  * Created by ixotum on 7/11/15
@@ -48,6 +50,8 @@ public class OrderComponentController extends VBox implements Initializable {
     private PaymentComponentController paymentComponentController;
     @FXML
     private ComboBox<String> comboBoxStatus;
+    @FXML
+    private GridPane gridThumbnails;
 
     public OrderComponentController() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/order_component.fxml"));
@@ -58,6 +62,49 @@ public class OrderComponentController extends VBox implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        initDatePickers();
+        initComboStatus();
+        initGridThumbnails();
+    }
+
+    private void initGridThumbnails() {
+        gridThumbnails.getChildren().clear();
+
+        final int pictureLimit = 6;
+        int allocatedPictures = 0;
+
+        while (allocatedPictures < pictureLimit) {
+            PictureCardController emptyPicture = new PictureCardController();
+            int columnIndex = allocatedPictures % 3;
+            int rowIndex = allocatedPictures / 3;
+            gridThumbnails.add(emptyPicture, columnIndex, rowIndex);
+            ++allocatedPictures;
+        }
+    }
+
+    public void initOrderStructureComponentController(OrderStructureComponentDB orderStructureComponentDB) {
+        orderStructureComponentController.setOrderStructureComponentDB(orderStructureComponentDB);
+    }
+
+    private void initComboStatus() {
+        comboBoxStatus.setItems(FXCollections.observableArrayList(Defines.orderStatuses));
+    }
+
+    private void initDatePickers() {
+        Date todayDate = new Date();
+        LocalDate localDate = todayDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        UITools.initDatePicker(datePickerDueDate);
+        UITools.initDatePicker(datePickerEventDate);
+        datePickerDueDate.setValue(localDate);
+        datePickerEventDate.setValue(localDate);
+    }
+
+    public void initPaymentComponentController(PaymentComponentDB paymentComponentDB) {
+        paymentComponentController.setPaymentComponentDB(paymentComponentDB);
     }
 
     public Label getLabelOrderId() {
@@ -92,10 +139,6 @@ public class OrderComponentController extends VBox implements Initializable {
         return textAreaDescription;
     }
 
-    public void initOrderStructureComponentController(OrderStructureComponentDB orderStructureComponentDB) {
-        orderStructureComponentController.setOrderStructureComponentDB(orderStructureComponentDB);
-    }
-
     public OrderStructureComponentController getOrderStructureComponentController() {
         return orderStructureComponentController;
     }
@@ -104,31 +147,8 @@ public class OrderComponentController extends VBox implements Initializable {
         return textAreaNotes;
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        initDatePickers();
-        initComboStatus();
-    }
-
-    private void initComboStatus() {
-        comboBoxStatus.setItems(FXCollections.observableArrayList(Defines.orderStatuses));
-    }
-
-    private void initDatePickers() {
-        Date todayDate = new Date();
-        LocalDate localDate = todayDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        UITools.initDatePicker(datePickerDueDate);
-        UITools.initDatePicker(datePickerEventDate);
-        datePickerDueDate.setValue(localDate);
-        datePickerEventDate.setValue(localDate);
-    }
-
     public PaymentComponentController getPaymentComponentController() {
         return paymentComponentController;
-    }
-
-    public void initPaymentComponentController(PaymentComponentDB paymentComponentDB) {
-        paymentComponentController.setPaymentComponentDB(paymentComponentDB);
     }
 
     public void setOrderStatus(int statusCode) {
