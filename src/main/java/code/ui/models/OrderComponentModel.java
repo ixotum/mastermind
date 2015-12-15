@@ -1,5 +1,6 @@
 package code.ui.models;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -21,6 +22,7 @@ import code.ui.order_structure_component.OrderStructureComponentController;
 import code.ui.order_structure_component.RowData;
 import code.ui.payment_component.PaymentComponentController;
 import code.ui.payment_component.PaymentComponentRowData;
+import code.utils.UITools;
 
 public class OrderComponentModel {
     public static OrderStructureComponentDB createOrderStructureComponentDB(OrderStructureComponentController orderStructureComponentController) {
@@ -120,5 +122,17 @@ public class OrderComponentModel {
         sequence += "Дата праздника " + orderComponent.getDatePickerEventDate().getValue();
 
         return sequence.getBytes();
+    }
+
+    public static String processImage(File imageFile) {
+        String imageName = UITools.createEpochFileName("_image.jpg");
+        BufferedImage scaledImage = UITools.scaleImage(imageFile, Defines.SCALE_IMAGE);
+        UITools.saveFileToMediaStorage(scaledImage, imageName);
+
+        String thumbnailName = imageName.replace("_image.jpg", "_thumbnail.jpg");
+        BufferedImage scaledThumbnail = UITools.scaleImage(imageFile, Defines.SCALE_THUMBNAIL);
+        UITools.saveFileToMediaStorage(scaledThumbnail, thumbnailName);
+
+        return thumbnailName;
     }
 }

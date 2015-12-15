@@ -142,7 +142,9 @@ public class EditOrderScreenModel implements BusEventListener {
         String fileName = combineName(controller);
         saveFileDialog.setInitialFileName(fileName);
         File file = saveFileDialog.showSaveDialog(controller.getStage());
-        OrderComponentModel.exportOrder(controller.getOrderComponent(), file);
+        if (file != null) {
+            OrderComponentModel.exportOrder(controller.getOrderComponent(), file);
+        }
     }
 
     private static String combineName(EditOrderScreenController controller) {

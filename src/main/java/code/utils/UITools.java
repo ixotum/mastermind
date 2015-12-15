@@ -1,12 +1,10 @@
 package code.utils;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
+import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -20,6 +18,9 @@ import java.util.stream.Stream;
 
 import javafx.scene.control.DatePicker;
 import javafx.util.StringConverter;
+import javax.imageio.ImageIO;
+
+import org.imgscalr.Scalr;
 
 import code.Defines;
 
@@ -167,5 +168,61 @@ public class UITools {
 
     private static BiPredicate<Path, BasicFileAttributes> getMatcher(String dbFileName) {
         return (path, basicFileAttributes) -> path.toString().contains(dbFileName);
+    }
+
+    public static BufferedImage scaleImage(File imageFile, int scaleSize) {
+        BufferedImage outputImage = null;
+
+        try {
+            BufferedImage inputImage = ImageIO.read(imageFile);
+            outputImage = Scalr.resize(inputImage, scaleSize);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return outputImage;
+    }
+
+    public static String createEpochFileName(String suffix) {
+        return System.currentTimeMillis() + suffix;
+    }
+
+    public static void saveFileToMediaStorage(BufferedImage image, String fileName) {
+        File dir = new File(Defines.MEDIA_STORAGE + "/");
+        if (!dir.exists()) {
+            if (!dir.mkdir()) {
+                return;
+            }
+        }
+
+        String path = Defines.MEDIA_STORAGE + "/" + fileName;
+        File outputFile = new File(path);
+        try {
+            ImageIO.write(image, "jpg", outputFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String findFile(String fileName) {
+        Path start = Paths.get(Defines.MEDIA_STORAGE);
+        Stream<Path> foundFiles = null;
+        String foundFile = null;
+
+        try {
+            foundFiles = Files.find(start, 1, (path, attr) -> filePredicate(path, fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (foundFiles != null) {
+            foundFile = foundFiles.findFirst().get().toFile().getAbsolutePath();
+        }
+
+        return foundFile;
+    }
+
+    private static boolean filePredicate(Path path, String fileName) {
+        return path.toString().contains(fileName);
     }
 }

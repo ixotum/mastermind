@@ -1,10 +1,12 @@
 package code.ui;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -12,8 +14,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import code.Defines;
 import code.db.order.order_structure_component.OrderStructureComponentDB;
@@ -21,6 +26,7 @@ import code.db.order.payment_component.PaymentComponentDB;
 import code.ui.order_structure_component.OrderStructureComponentController;
 import code.ui.payment_component.PaymentComponentController;
 import code.utils.UITools;
+import code.ui.models.OrderComponentModel;
 
 /**
  * Created by ixotum on 7/11/15
@@ -53,6 +59,9 @@ public class OrderComponentController extends VBox implements Initializable {
     @FXML
     private GridPane gridThumbnails;
 
+    private Stage stage;
+    private List<String> thumbnailNames = new ArrayList<>();
+
     public OrderComponentController() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/order_component.fxml"));
         fxmlLoader.setRoot(this);
@@ -68,21 +77,64 @@ public class OrderComponentController extends VBox implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         initDatePickers();
         initComboStatus();
-        initGridThumbnails();
+        updateGridThumbnails();
     }
 
-    private void initGridThumbnails() {
+    @FXML
+    public void onAddPicture() {
+        File imageFile = openPictureDialog();
+
+        if (imageFile == null) {
+            return;
+        }
+
+        String thumbnailName = OrderComponentModel.processImage(imageFile);
+        thumbnailNames.add(thumbnailName);
+        updateGridThumbnails();
+    }
+
+    private File openPictureDialog() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Picture");
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.jpg");
+        fileChooser.getExtensionFilters().add(extensionFilter);
+
+        return fileChooser.showOpenDialog(stage);
+    }
+
+    private void updateGridThumbnails() {
         gridThumbnails.getChildren().clear();
 
         final int pictureLimit = 6;
-        int allocatedPictures = 0;
+        int imageIndex = 0;
+        int thumbnailsCount = thumbnailNames.size();
 
-        while (allocatedPictures < pictureLimit) {
-            PictureCardController emptyPicture = new PictureCardController();
-            int columnIndex = allocatedPictures % 3;
-            int rowIndex = allocatedPictures / 3;
-            gridThumbnails.add(emptyPicture, columnIndex, rowIndex);
-            ++allocatedPictures;
+        while (imageIndex < pictureLimit) {
+            Image image = null;
+
+            if (imageIndex < thumbnailsCount) {
+                String thumbnailName = thumbnailNames.get(imageIndex);
+                String fileName = UITools.findFile(thumbnailName);
+
+                try {
+                    InputStream inputStream = new FileInputStream(fileName);
+                    image = new Image(inputStream);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                image = new Image("/images/empty.png");
+            }
+
+            if (image == null) {
+                continue;
+            }
+
+            PictureCardController pictureCardController = new PictureCardController(image);
+            int columnIndex = imageIndex % 3;
+            int rowIndex = imageIndex / 3;
+            gridThumbnails.add(pictureCardController, columnIndex, rowIndex);
+            ++imageIndex;
         }
     }
 
@@ -157,5 +209,9 @@ public class OrderComponentController extends VBox implements Initializable {
 
     public ComboBox<String> getComboBoxStatus() {
         return comboBoxStatus;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }

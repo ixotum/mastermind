@@ -8,7 +8,6 @@
 <?import code.ui.order_structure_component.OrderStructureComponentController?>
 <?import code.ui.payment_component.PaymentComponentController?>
 
-<?import java.net.URL?>
 <fx:root type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <HBox>
@@ -144,8 +143,8 @@
                                         </GridPane>
                                         <HBox alignment="TOP_CENTER">
                                             <children>
-                                                <Button mnemonicParsing="false" prefWidth="85.0" text="Add" />
-                                                <Button mnemonicParsing="false" prefWidth="85.0" text="Delete">
+                                                <Button mnemonicParsing="false" prefWidth="85.0" text="Add" onAction="#onAddPicture" />
+                                                <Button mnemonicParsing="false" prefWidth="85.0" text="Delete" disable="true">
                                                     <HBox.margin>
                                                         <Insets left="25.0" />
                                                     </HBox.margin>

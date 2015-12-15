@@ -1,14 +1,15 @@
 package code.ui;
 
-import code.ui.models.NewOrderScreenModel;
-import code.utils.LoggerManager;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.logging.Logger;
+import code.ui.models.NewOrderScreenModel;
+import code.utils.LoggerManager;
 
 /**
  * Created by ixotum on 7/5/15
@@ -51,6 +52,7 @@ public class NewOrderScreenController implements Initializable{
 
     public void setStage(Stage stage) {
         this.stage = stage;
+        orderComponent.setStage(stage);
     }
 
     public OrderComponentController getOrderComponent() {

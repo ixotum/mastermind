@@ -40,6 +40,7 @@ public class EditOrderScreenController implements Initializable {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+        orderComponent.setStage(stage);
     }
 
     public void init(OrderDB orderDB) {

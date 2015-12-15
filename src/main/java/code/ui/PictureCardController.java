@@ -1,12 +1,9 @@
 package code.ui;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.io.*;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -14,11 +11,11 @@ import javafx.scene.layout.VBox;
 /**
  * Created by ixotum on 08.12.15
  */
-public class PictureCardController extends VBox implements Initializable {
+public class PictureCardController extends VBox {
     @FXML
     private ImageView imageView;
 
-    public PictureCardController() {
+    public PictureCardController(Image image) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/picture_card.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -27,11 +24,7 @@ public class PictureCardController extends VBox implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        Image emptyImage = new Image("/images/empty.png");
-        imageView.setImage(emptyImage);
+        imageView.setImage(image);
     }
 }
