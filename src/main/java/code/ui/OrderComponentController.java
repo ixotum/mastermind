@@ -58,6 +58,8 @@ public class OrderComponentController extends VBox implements Initializable {
     private ComboBox<String> comboBoxStatus;
     @FXML
     private GridPane gridThumbnails;
+    @FXML
+    private Button buttonAddPicture;
 
     private Stage stage;
     private List<String> thumbnailNames = new ArrayList<>();
@@ -135,6 +137,12 @@ public class OrderComponentController extends VBox implements Initializable {
             int rowIndex = imageIndex / 3;
             gridThumbnails.add(pictureCardController, columnIndex, rowIndex);
             ++imageIndex;
+        }
+
+        if (thumbnailsCount == pictureLimit) {
+            buttonAddPicture.setDisable(true);
+        } else {
+            buttonAddPicture.setDisable(false);
         }
     }
 
