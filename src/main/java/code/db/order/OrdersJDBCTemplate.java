@@ -1,18 +1,18 @@
 package code.db.order;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
+import javax.sql.DataSource;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+
 import code.db.order.order_structure_component.OrderStructureComponentDB;
 import code.db.order.order_structure_component.OrderStructureComponentRowDB;
 import code.db.order.order_structure_component.OrderStructureComponentRowDBMapper;
 import code.db.order.payment_component.PaymentComponentDB;
 import code.db.order.payment_component.PaymentDB;
 import code.db.order.payment_component.PaymentDBMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-
-import javax.sql.DataSource;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 /**
  * Created by ixotum on 7/7/15
@@ -33,6 +33,15 @@ public class OrdersJDBCTemplate {
         int orderId = orderDB.getOrderId();
         saveNewOrderStructureComponent(orderId, orderDB.getOrderStructureComponentDB());
         saveNewPaymentComponent(orderId, orderDB.getPaymentComponentDB());
+        saveNewThumbnails(orderId, orderDB.getThumbnailNames());
+    }
+
+    private void saveNewThumbnails(int orderId, List<String> thumbnailNames) {
+        String sql = "INSERT INTO THUMBNAIL(ORDER_ID, NAME) VALUES (?, ?)";
+
+        for (String thumbnailName : thumbnailNames) {
+            jdbcTemplate.update(sql, orderId, thumbnailName);
+        }
     }
 
     private void saveNewPaymentComponent(int orderId, PaymentComponentDB paymentComponentDB) {
@@ -84,7 +93,18 @@ public class OrdersJDBCTemplate {
             }
         }
 
+        for (OrderDB orderDB : orderDBList) {
+            List<String> thumbnailNames = readThumbnailNames(orderDB.getOrderId());
+            orderDB.setThumbnailNames(thumbnailNames);
+        }
+
         return orderDBList;
+    }
+
+    private List<String> readThumbnailNames(int orderId) {
+        String sql = "SELECT * FROM THUMBNAIL WHERE ORDER_ID = ?";
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql, orderId);
+        return rows.stream().map(stringObjectMap -> String.valueOf(stringObjectMap.get("NAME"))).collect(Collectors.toList());
     }
 
     private List<PaymentComponentDB> readAllPaymentComponents(List<Integer> orderIdList) {

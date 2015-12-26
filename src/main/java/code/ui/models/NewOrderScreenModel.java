@@ -1,5 +1,12 @@
 package code.ui.models;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.logging.Logger;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import code.Defines;
 import code.bus.BusEvent;
 import code.bus.BusEventListener;
@@ -15,12 +22,6 @@ import code.ui.OrderComponentController;
 import code.ui.order_structure_component.OrderStructureComponentController;
 import code.ui.payment_component.PaymentComponentController;
 import code.utils.LoggerManager;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.logging.Logger;
 
 public class NewOrderScreenModel implements BusEventListener {
     private final Logger logger = LoggerManager.getLoggerInstance();
@@ -57,6 +58,8 @@ public class NewOrderScreenModel implements BusEventListener {
 
         int orderStatus = OrderComponentModel.getOrderStatus(orderComponent.getComboBoxStatus().getValue());
         orderDB.setStatus(orderStatus);
+
+        orderDB.setThumbnailNames(orderComponent.getThumbnailNames());
 
         return orderDB;
     }

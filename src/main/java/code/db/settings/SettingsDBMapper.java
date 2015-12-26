@@ -1,10 +1,9 @@
 package code.db.settings;
 
-import code.db.settings.SettingsDB;
-import org.springframework.jdbc.core.RowMapper;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import org.springframework.jdbc.core.RowMapper;
 
 /**
  * Created by ixotum on 7/6/15

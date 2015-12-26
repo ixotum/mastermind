@@ -222,4 +222,13 @@ public class OrderComponentController extends VBox implements Initializable {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+
+    public List<String> getThumbnailNames() {
+        return thumbnailNames;
+    }
+
+    public void initThumbnails(List<String> thumbnailNames) {
+        this.thumbnailNames = thumbnailNames;
+        updateGridThumbnails();
+    }
 }

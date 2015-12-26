@@ -63,6 +63,8 @@ public class EditOrderScreenModel implements BusEventListener {
         orderComponent.initPaymentComponentController(orderDB.getPaymentComponentDB());
         orderComponent.setOrderStatus(orderDB.getStatus());
 
+        orderComponent.initThumbnails(orderDB.getThumbnailNames());
+
         initChangeHandlers();
     }
 

@@ -2,6 +2,7 @@ package code.db.order;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.List;
 
 import code.db.order.order_structure_component.OrderStructureComponentDB;
 import code.db.order.payment_component.PaymentComponentDB;
@@ -22,6 +23,7 @@ public class OrderDB {
     private String address;
     private PaymentComponentDB paymentComponentDB;
     private int status;
+    private List<String> thumbnailNames;
 
     public OrderDB(int orderId) {
         this.orderId = orderId;
@@ -125,5 +127,13 @@ public class OrderDB {
 
     public BigDecimal getPaid() {
         return paymentComponentDB == null ? BigDecimal.ZERO : paymentComponentDB.getPaid();
+    }
+
+    public void setThumbnailNames(List<String> thumbnailNames) {
+        this.thumbnailNames = thumbnailNames;
+    }
+
+    public List<String> getThumbnailNames() {
+        return thumbnailNames;
     }
 }
