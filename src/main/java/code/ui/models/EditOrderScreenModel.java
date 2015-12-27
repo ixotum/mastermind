@@ -128,6 +128,8 @@ public class EditOrderScreenModel implements BusEventListener {
 
         int orderStatus = OrderComponentModel.getOrderStatus(orderComponent.getComboBoxStatus().getValue());
         orderDB.setStatus(orderStatus);
+
+        orderDB.setThumbnailNames(orderComponent.getThumbnailNames());
     }
 
     public boolean isChanging() {

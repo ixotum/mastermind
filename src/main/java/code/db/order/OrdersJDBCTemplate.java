@@ -163,6 +163,14 @@ public class OrdersJDBCTemplate {
 
         deletePaymentComponent(orderId);
         saveNewPaymentComponent(orderId, orderDB.getPaymentComponentDB());
+
+        deleteExistedThumbnails(orderId);
+        saveNewThumbnails(orderId, orderDB.getThumbnailNames());
+    }
+
+    private void deleteExistedThumbnails(int orderId) {
+        String sql = "DELETE FROM THUMBNAIL WHERE ORDER_ID = ?";
+        jdbcTemplate.update(sql, orderId);
     }
 
     private void deletePaymentComponent(int orderId) {
