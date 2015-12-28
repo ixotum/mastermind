@@ -125,17 +125,17 @@
                             </VBox.margin>
                             <children>
                                 <Label text="Pictures" />
-                                <VBox minHeight="300" prefHeight="300.0" maxHeight="300" minWidth="370" prefWidth="370.0" maxWidth="370" style="-fx-border-color: red" AnchorPane.leftAnchor="85.0">
+                                <VBox minHeight="330" prefHeight="330.0" maxHeight="330" minWidth="370" prefWidth="370.0" maxWidth="370" style="-fx-border-color: red" AnchorPane.leftAnchor="85.0">
                                     <children>
-                                        <GridPane fx:id="gridThumbnails" gridLinesVisible="true" minHeight="220" prefHeight="220" maxHeight="220.0" minWidth="330" prefWidth="330" maxWidth="330.0" style="-fx-border-color: deepskyblue" >
+                                        <GridPane fx:id="gridThumbnails" gridLinesVisible="true" minHeight="250" prefHeight="250" maxHeight="250.0" minWidth="330" prefWidth="330" maxWidth="330.0" style="-fx-border-color: deepskyblue" >
                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="110.0" maxWidth="110" />
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="110.0" maxWidth="110"/>
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="110.0" maxWidth="110"/>
+                                                <ColumnConstraints hgrow="ALWAYS" minWidth="110.0" prefWidth="110.0" maxWidth="110" />
+                                                <ColumnConstraints hgrow="ALWAYS" minWidth="110.0" prefWidth="110.0" maxWidth="110"/>
+                                                <ColumnConstraints hgrow="ALWAYS" minWidth="110.0" prefWidth="110.0" maxWidth="110"/>
                                             </columnConstraints>
                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="110.0" maxHeight="110" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="110.0" maxHeight="110" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="125.0" prefHeight="125.0" maxHeight="125" vgrow="ALWAYS" />
+                                                <RowConstraints minHeight="125.0" prefHeight="125.0" maxHeight="125" vgrow="ALWAYS" />
                                             </rowConstraints>
                                             <VBox.margin>
                                                 <Insets left="20.0" top="20.0" />
