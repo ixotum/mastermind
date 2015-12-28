@@ -113,6 +113,7 @@ public class OrderComponentController extends VBox implements Initializable {
 
         while (imageIndex < pictureLimit) {
             Image image = null;
+            boolean checkBoxDisabled = true;
 
             if (imageIndex < thumbnailsCount) {
                 String thumbnailName = thumbnailNames.get(imageIndex);
@@ -121,6 +122,7 @@ public class OrderComponentController extends VBox implements Initializable {
                 try {
                     InputStream inputStream = new FileInputStream(fileName);
                     image = new Image(inputStream);
+                    checkBoxDisabled = false;
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -132,7 +134,7 @@ public class OrderComponentController extends VBox implements Initializable {
                 continue;
             }
 
-            PictureCardController pictureCardController = new PictureCardController(image);
+            PictureCardController pictureCardController = new PictureCardController(image, checkBoxDisabled);
             int columnIndex = imageIndex % 3;
             int rowIndex = imageIndex / 3;
             gridThumbnails.add(pictureCardController, columnIndex, rowIndex);

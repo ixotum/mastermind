@@ -11,7 +11,7 @@
         <AnchorPane maxHeight="125.0" maxWidth="110.0" minHeight="125.0" minWidth="110.0" prefHeight="125.0" prefWidth="110.0" style="-fx-border-color: greenyellow" styleClass="anchor">
             <children>
                 <ImageView fx:id="imageView" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="5" AnchorPane.topAnchor="20.0" />
-            <CheckBox mnemonicParsing="false" />
+            <CheckBox fx:id="checkBox" mnemonicParsing="false" disable="true" />
             </children>
         </AnchorPane>
     </children>
