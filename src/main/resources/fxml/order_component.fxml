@@ -144,7 +144,7 @@
                                         <HBox alignment="TOP_CENTER">
                                             <children>
                                                 <Button fx:id="buttonAddPicture" mnemonicParsing="false" prefWidth="85.0" text="Add" onAction="#onAddPicture" />
-                                                <Button mnemonicParsing="false" prefWidth="85.0" text="Delete" disable="true">
+                                                <Button fx:id="buttonDeletePicture" mnemonicParsing="false" prefWidth="85.0" text="Delete" disable="true">
                                                     <HBox.margin>
                                                         <Insets left="25.0" />
                                                     </HBox.margin>

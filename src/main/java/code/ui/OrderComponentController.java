@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -60,7 +61,10 @@ public class OrderComponentController extends VBox implements Initializable {
     private GridPane gridThumbnails;
     @FXML
     private Button buttonAddPicture;
+    @FXML
+    private Button buttonDeletePicture;
 
+    private OrderComponentModel model;
     private Stage stage;
     private List<String> thumbnailNames = new ArrayList<>();
 
@@ -77,6 +81,8 @@ public class OrderComponentController extends VBox implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        model = new OrderComponentModel(this);
+
         initDatePickers();
         initComboStatus();
         updateGridThumbnails();
@@ -134,7 +140,7 @@ public class OrderComponentController extends VBox implements Initializable {
                 continue;
             }
 
-            PictureCardController pictureCardController = new PictureCardController(image, checkBoxDisabled);
+            PictureCardController pictureCardController = new PictureCardController(image, checkBoxDisabled, model);
             int columnIndex = imageIndex % 3;
             int rowIndex = imageIndex / 3;
             gridThumbnails.add(pictureCardController, columnIndex, rowIndex);
@@ -232,5 +238,22 @@ public class OrderComponentController extends VBox implements Initializable {
     public void initThumbnails(List<String> thumbnailNames) {
         this.thumbnailNames = thumbnailNames;
         updateGridThumbnails();
+    }
+
+    public void updateDeleteButtonState() {
+        ObservableList thumbnails = gridThumbnails.getChildren();
+
+        for (Object child : thumbnails) {
+            if (child instanceof PictureCardController) {
+                PictureCardController picture = (PictureCardController) child;
+
+                if (picture.isSelected()) {
+                    buttonDeletePicture.setDisable(false);
+                    return;
+                }
+            }
+        }
+
+        buttonDeletePicture.setDisable(true);
     }
 }

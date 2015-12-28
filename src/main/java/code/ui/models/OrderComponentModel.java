@@ -25,6 +25,12 @@ import code.ui.payment_component.PaymentComponentRowData;
 import code.utils.UITools;
 
 public class OrderComponentModel {
+    private final OrderComponentController controller;
+
+    public OrderComponentModel(OrderComponentController controller) {
+        this.controller = controller;
+    }
+
     public static OrderStructureComponentDB createOrderStructureComponentDB(OrderStructureComponentController orderStructureComponentController) {
         final int structureSize = orderStructureComponentController.getStructureSize();
         List<OrderStructureComponentRowDB> orderStructureComponentRowDBList = new ArrayList<>();
@@ -134,5 +140,9 @@ public class OrderComponentModel {
         UITools.saveFileToMediaStorage(scaledThumbnail, thumbnailName);
 
         return thumbnailName;
+    }
+
+    public void updateDeleteButtonState() {
+        controller.updateDeleteButtonState();
     }
 }
