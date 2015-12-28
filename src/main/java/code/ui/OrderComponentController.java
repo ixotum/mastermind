@@ -4,10 +4,7 @@ import java.io.*;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -64,6 +61,8 @@ public class OrderComponentController extends VBox implements Initializable {
     @FXML
     private Button buttonDeletePicture;
 
+    private static String EMPTY_IMAGE = "/images/empty.png";
+
     private OrderComponentModel model;
     private Stage stage;
     private List<String> thumbnailNames = new ArrayList<>();
@@ -101,6 +100,27 @@ public class OrderComponentController extends VBox implements Initializable {
         updateGridThumbnails();
     }
 
+    @FXML
+    public void onDeletePicture() {
+        ObservableList thumbnails = gridThumbnails.getChildren();
+        int thumbnailsCount = thumbnails.size();
+
+        for (int imageIndex = thumbnailsCount - 1; imageIndex >= 0; --imageIndex) {
+            Object child = thumbnails.get(imageIndex);
+
+            if (child instanceof PictureCardController) {
+                PictureCardController pictureCardController = (PictureCardController) child;
+
+                if (pictureCardController.isSelected()) {
+                    thumbnailNames.remove(imageIndex);
+                }
+            }
+        }
+
+        updateGridThumbnails();
+        updateDeleteButtonState();
+    }
+
     private File openPictureDialog() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Picture");
@@ -133,7 +153,7 @@ public class OrderComponentController extends VBox implements Initializable {
                     e.printStackTrace();
                 }
             } else {
-                image = new Image("/images/empty.png");
+                image = new Image(EMPTY_IMAGE);
             }
 
             if (image == null) {
@@ -236,7 +256,7 @@ public class OrderComponentController extends VBox implements Initializable {
     }
 
     public void initThumbnails(List<String> thumbnailNames) {
-        this.thumbnailNames = thumbnailNames;
+        this.thumbnailNames = new ArrayList<>(thumbnailNames);
         updateGridThumbnails();
     }
 
