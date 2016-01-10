@@ -140,10 +140,12 @@ public class OrderComponentController extends VBox implements Initializable {
         while (imageIndex < pictureLimit) {
             Image image = null;
             boolean checkBoxDisabled = true;
+            String pictureName = null;
 
             if (imageIndex < thumbnailsCount) {
                 String thumbnailName = thumbnailNames.get(imageIndex);
                 String fileName = UITools.findFile(thumbnailName);
+                pictureName = thumbnailName.replace("_thumbnail", "_image");
 
                 try {
                     InputStream inputStream = new FileInputStream(fileName);
@@ -160,7 +162,7 @@ public class OrderComponentController extends VBox implements Initializable {
                 continue;
             }
 
-            PictureCardController pictureCardController = new PictureCardController(image, checkBoxDisabled, model);
+            PictureCardController pictureCardController = new PictureCardController(image, checkBoxDisabled, model, stage, pictureName);
             int columnIndex = imageIndex % 3;
             int rowIndex = imageIndex / 3;
             gridThumbnails.add(pictureCardController, columnIndex, rowIndex);

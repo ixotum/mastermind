@@ -24,7 +24,7 @@ public class Defines {
     public static final String UPDATE_HEADER_TEXT = "New version of " + APP_NAME + " available";
     public static final String UPDATE_CONTENT_TEXT = "Would you like to update?";
     public static final String BEANS_CONFIG = "Beans.xml";
-    public static final int SCALE_IMAGE = 620;
+    public static final int SCALE_IMAGE = 1024;
     public static final int SCALE_THUMBNAIL = 100;
     public static final String MEDIA_STORAGE = "media";
 
