@@ -125,9 +125,9 @@
                             </VBox.margin>
                             <children>
                                 <Label text="Pictures" />
-                                <VBox minHeight="330" prefHeight="330.0" maxHeight="330" minWidth="370" prefWidth="370.0" maxWidth="370" style="-fx-border-color: red" AnchorPane.leftAnchor="85.0">
+                                <VBox minHeight="330" prefHeight="330.0" maxHeight="330" minWidth="370" prefWidth="370.0" maxWidth="370" style="-fx-border-color: #bababa; -fx-border-radius: 2px" AnchorPane.leftAnchor="85.0">
                                     <children>
-                                        <GridPane fx:id="gridThumbnails" gridLinesVisible="true" minHeight="250" prefHeight="250" maxHeight="250.0" minWidth="330" prefWidth="330" maxWidth="330.0" style="-fx-border-color: deepskyblue" >
+                                        <GridPane fx:id="gridThumbnails" gridLinesVisible="true" minHeight="250" prefHeight="250" maxHeight="250.0" minWidth="330" prefWidth="330" maxWidth="330.0" >
                                             <columnConstraints>
                                                 <ColumnConstraints hgrow="ALWAYS" minWidth="110.0" prefWidth="110.0" maxWidth="110" />
                                                 <ColumnConstraints hgrow="ALWAYS" minWidth="110.0" prefWidth="110.0" maxWidth="110"/>
