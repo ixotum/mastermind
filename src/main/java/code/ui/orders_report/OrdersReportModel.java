@@ -60,11 +60,21 @@ public class OrdersReportModel implements BusEventListener {
         UITools.initDatePicker(datePickerFrom);
         datePickerFrom.setValue(LocalDate.now().withDayOfMonth(1));
         datePickerFrom.valueProperty().addListener(observable -> updateContent());
+        initDatePickerKeyHandler(datePickerFrom);
 
         DatePicker datePickerTo = controller.getDatePickerTo();
         UITools.initDatePicker(datePickerTo);
         datePickerTo.setValue(LocalDate.now());
         datePickerTo.valueProperty().addListener(observable -> updateContent());
+        initDatePickerKeyHandler(datePickerTo);
+    }
+
+    private void initDatePickerKeyHandler(DatePicker datePicker) {
+        datePicker.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                controller.close();
+            }
+        });
     }
 
     private void initColumns() {
