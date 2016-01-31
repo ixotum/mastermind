@@ -76,6 +76,8 @@ public class PaymentReportModel {
                 controller.getComboPeriod().setDisable(true);
                 controller.getAnchorDates().setDisable(false);
             }
+
+            updateContent();
         });
     }
 
