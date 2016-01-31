@@ -23,7 +23,7 @@
                             </VBox.margin>
                             <children>
                                 <TextField fx:id="textFieldSearch" prefWidth="275.0" />
-                                <Button mnemonicParsing="false" onAction="#onSearchButton" text="Search">
+                                <Button mnemonicParsing="false" onAction="#onSearchButton" text="Search" prefWidth="64">
                                     <HBox.margin>
                                         <Insets left="12.0" />
                                     </HBox.margin>
