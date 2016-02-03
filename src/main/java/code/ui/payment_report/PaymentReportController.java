@@ -26,6 +26,8 @@ public class PaymentReportController implements Initializable {
     @FXML
     private RadioButton radioPeriod;
     @FXML
+    private RadioButton radioDate;
+    @FXML
     private ComboBox<String> comboPeriod;
     @FXML
     private AnchorPane anchorDates;
@@ -75,6 +77,10 @@ public class PaymentReportController implements Initializable {
 
     public RadioButton getRadioPeriod() {
         return radioPeriod;
+    }
+
+    public RadioButton getRadioDate() {
+        return radioDate;
     }
 
     public ComboBox<String> getComboPeriod() {

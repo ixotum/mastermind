@@ -8,10 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 
@@ -34,7 +31,7 @@ public class PaymentReportModel {
     }
 
     public void initTable() {
-        initKeyHandler();
+        initTableKeyHandler();
         initColumns();
         updateContent();
     }
@@ -50,11 +47,13 @@ public class PaymentReportModel {
         UITools.initDatePicker(datePickerFrom);
         datePickerFrom.setValue(LocalDate.now().withDayOfMonth(1));
         datePickerFrom.valueProperty().addListener(observable -> updateContent());
+        initDatePickerKeyHandler(datePickerFrom);
 
         DatePicker datePickerTo = controller.getDatePickerTo();
         UITools.initDatePicker(datePickerTo);
         datePickerTo.setValue(LocalDate.now());
         datePickerTo.valueProperty().addListener(observable -> updateContent());
+        initDatePickerKeyHandler(datePickerTo);
     }
 
     private void initComboPeriod() {
@@ -62,13 +61,19 @@ public class PaymentReportModel {
         comboPeriod.setItems(FXCollections.observableArrayList(periods));
         comboPeriod.setValue(periods.get(0));
         comboPeriod.valueProperty().addListener(observable -> updateContent());
+        comboPeriod.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                controller.close();
+            }
+        });
     }
 
     private void initRadio() {
         controller.getComboPeriod().setDisable(false);
         controller.getAnchorDates().setDisable(true);
 
-        controller.getRadioPeriod().selectedProperty().addListener((observable, oldValue, newValue) -> {
+        RadioButton radioPeriod = controller.getRadioPeriod();
+        radioPeriod.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 controller.getComboPeriod().setDisable(false);
                 controller.getAnchorDates().setDisable(true);
@@ -79,6 +84,9 @@ public class PaymentReportModel {
 
             updateContent();
         });
+
+        initRadioButtonKeyHandler(radioPeriod);
+        initRadioButtonKeyHandler(controller.getRadioDate());
     }
 
     private void initColumns() {
@@ -149,8 +157,24 @@ public class PaymentReportModel {
         tableView.getSortOrder().add(columnDate);
     }
 
-    private void initKeyHandler() {
+    private void initTableKeyHandler() {
         controller.getTable().setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                controller.close();
+            }
+        });
+    }
+
+    private void initDatePickerKeyHandler(DatePicker datePicker) {
+        datePicker.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                controller.close();
+            }
+        });
+    }
+
+    private void initRadioButtonKeyHandler(RadioButton radioPeriod) {
+        radioPeriod.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ESCAPE) {
                 controller.close();
             }
