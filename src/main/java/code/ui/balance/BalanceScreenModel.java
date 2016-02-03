@@ -8,6 +8,7 @@ import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 
@@ -85,7 +86,8 @@ public class BalanceScreenModel {
     }
 
     public void initCombo() {
-        controller.getComboYear().setValue(LocalDate.now().getYear());
+        ComboBox<Integer> comboYear = controller.getComboYear();
+        comboYear.setValue(LocalDate.now().getYear());
         List<Integer> incomeYears = IncomeManager.findIncomeYears();
         List<Integer> expenseYears = Main.getExpenseManager().findExpenseYears();
         List<Integer> mergedYears = mergeArrays(incomeYears, expenseYears);
@@ -96,8 +98,13 @@ public class BalanceScreenModel {
             return -1;
         });
 
-        controller.getComboYear().setItems(FXCollections.observableArrayList(mergedYears));
-        controller.getComboYear().valueProperty().addListener(observable -> updateContent());
+        comboYear.setItems(FXCollections.observableArrayList(mergedYears));
+        comboYear.valueProperty().addListener(observable -> updateContent());
+        comboYear.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                controller.close();
+            }
+        });
     }
 
     private List<Integer> mergeArrays(List<Integer> input1, List<Integer> input2) {
